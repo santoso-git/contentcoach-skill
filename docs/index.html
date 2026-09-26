@@ -117,6 +117,7 @@ section{padding-block:clamp(64px,9vw,112px)}
 .back b{font-weight:700}
 .prompt{font:400 13.5px/1.45 var(--sans);color:var(--muted);margin:0}
 .prompt span{font:700 11px/1 var(--sans);letter-spacing:.1em;text-transform:uppercase;color:var(--ink);margin-right:6px}
+.edit-head{font-size:clamp(28px,3.4vw,40px);margin-top:clamp(16px,2vw,28px)}
 .legend{margin-top:clamp(28px,3vw,40px);display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border-top:2px solid var(--ink)}
 .legend div{padding:16px 18px 0 0}
 .legend h3{font-size:26px;margin-bottom:6px}
@@ -241,7 +242,7 @@ footer .big{font:800 44px/1 var(--display);text-transform:uppercase}
         <figure class="print p1" style="--ar:16/9"><img src="examples/contentcoach-skill_cup-windowsill_1790429059_720.webp" width="720" height="402" alt=""><figcaption>No. 1 · Nano Banana 2 · 2K</figcaption></figure>
         <figure class="print p2" style="--ar:1/1"><img src="examples/contentcoach-skill_lighthouse-riso_1790429483_720.webp" width="720" height="720" alt=""><figcaption>No. 5 · Grok Imagine 2.0</figcaption></figure>
         <figure class="print p3" style="--ar:4/3"><img src="examples/contentcoach-skill_bakery-sign_1790429269_720.webp" width="720" height="540" alt=""><figcaption>No. 3 · GPT Image 2 · 2K</figcaption></figure>
-        <div class="pocket"><span>Prints enclosed<small>6 frames · 0.30 USD in all</small></span></div>
+        <div class="pocket"><span>Prints enclosed<small>7 frames · 0.35 USD in all</small></span></div>
       </div>
     </div>
   </div>
@@ -252,7 +253,7 @@ footer .big{font:800 44px/1 var(--display);text-transform:uppercase}
   <div class="wrap">
     <div class="sec-head">
       <h2>Prints from the lab</h2>
-      <p>Six images, each from a single run. Beneath each one: the model that made it, the size, what it cost, and the prompt it was given.</p>
+      <p>Seven images, each from a single run. Beneath each one: the model that made it, the size, what it cost, and the prompt it was given.</p>
     </div>
 
     <div class="prints">
@@ -283,11 +284,21 @@ footer .big{font:800 44px/1 var(--display);text-transform:uppercase}
           <figcaption><span class="back"><span>No. 2</span><span>Nano Banana 2</span><span>2K · 16:9</span><b>0.06 USD</b></span>
           <p class="prompt"><span>Prompt</span>Wide editorial blog header photograph: a small pine desk under the window of a Nordic cabin on a rainy afternoon…</p></figcaption></figure>
       </div>
+
+      <h3 class="edit-head">An edit: the same cup, a new room</h3>
+      <div class="row edit">
+        <figure class="print" style="--ar:1600/894;--k:1.79"><img src="examples/contentcoach-skill_cup-windowsill_1790429059.webp" width="1600" height="894" loading="lazy" alt="The original: the stoneware cup on the cabin windowsill.">
+          <figcaption><span class="back"><span>No. 1</span><span>Before</span></span>
+          <p class="prompt"><span>Given</span>as the reference image, uploaded by the agent</p></figcaption></figure>
+        <figure class="print" style="--ar:1600/899;--k:1.78"><img src="examples/contentcoach-skill_cup-studio-edit-gpt25_1790437004.webp" width="1600" height="899" loading="lazy" alt="The same cup, glaze and steam, now on a pale sage studio backdrop.">
+          <figcaption><span class="back"><span>No. 7</span><span>GPT Image 2.5</span><span>2K · 16:9</span><b>0.05 USD</b></span>
+          <p class="prompt"><span>Prompt</span>Edit this image. Replace the window, the birch trees and the wooden windowsill with a bright seamless studio backdrop in pale sage green… Keep everything else exactly as it is…</p></figcaption></figure>
+      </div>
     </div>
 
     <div class="legend">
       <div><h3>Nano Banana 2</h3><p>The default. Photos, scenes, products, and editing a picture you already have.</p></div>
-      <div><h3>GPT Image 2.5</h3><p>When words inside the image must be readable: signs, labels, posters. Nos. 3 and 4 were made with 2, its predecessor.</p></div>
+      <div><h3>GPT Image 2.5</h3><p>When words inside the image must be readable, and for careful edits. No. 7 is 2.5; Nos. 3 and 4 were made with 2, its predecessor.</p></div>
       <div><h3>Grok Imagine 2.0</h3><p>The cheapest, with a looser, stylised hand.</p></div>
     </div>
   </div>

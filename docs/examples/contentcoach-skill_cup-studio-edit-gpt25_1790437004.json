@@ -1,0 +1,20 @@
+{
+  "prompt": "Edit this image. Replace the window, the birch trees and the wooden windowsill with a bright seamless studio backdrop in pale sage green, the cup standing on a matching sage surface, lit by soft even studio light. Keep everything else exactly as it is: the same cup, its speckled glaze, its uneven rim, the coffee, the wisp of steam, the camera angle and the framing.",
+  "kind": "image",
+  "model": "GPT Image 2.5 via kie.ai",
+  "provider": "kie.ai",
+  "refs": [
+    "https://assets.contentcoach.se/refs/1790436994357_cup-ref.jpg"
+  ],
+  "params": {
+    "aspect_ratio": "16:9",
+    "resolution": "2K"
+  },
+  "cost_usd": 0.05,
+  "cost_source": "actual",
+  "url": "https://assets.contentcoach.se/gen/1790437004-3eb7c2_edit-this-image-replace-the-window-the-birch-tre.png",
+  "thumb": "https://assets.contentcoach.se/gen/1790437004-3eb7c2_edit-this-image-replace-the-window-the-birch-tre_t.jpg",
+  "created": "2026-09-26T15:36:44.457Z",
+  "used_on": "skill homepage No. 7",
+  "source_ref": "contentcoach-skill_cup-windowsill_1790429059 (downscaled to 2048 jpg)"
+}
