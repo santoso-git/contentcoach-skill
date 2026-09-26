@@ -39,6 +39,11 @@ agent at the skill file's URL or installs the skill folder, and asks for a pictu
 in plain words. Cheapest-first routing between Kie and fal, and a price quote
 before every clip, sit behind that.
 
+It replaces an account at a generation app such as Higgsfield or Runway: the
+same kind of models, paid per run at the provider's price. And because it is a
+skill, the agent combines it with its other skills in one task — for example a
+design skill builds a web page and this one makes its images and clips.
+
 ## Operating Context
 
 Users read the homepage in a browser, create a key at Kie AI or fal.ai, then copy

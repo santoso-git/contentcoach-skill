@@ -8,6 +8,14 @@ Seedance 2.5 for video — straight from Cursor, Codex, Claude Code or any agent
 that can run `curl`. It calls the providers **Kie AI** and **fal.ai** directly
 with your own API keys. You pay them directly; nothing goes through anyone else.
 
+**Instead of a generation app.** You don't need a subscription to Higgsfield,
+Runway or a similar app. The skill runs the same kind of models through your own
+Kie AI or fal.ai account, and you pay per image or clip at the provider's price.
+
+**Alongside your other skills.** Your agent can use it in the same task as its
+other skills. A design skill builds a landing page, and this one makes the hero
+image, the product shots and a short clip for it, saved straight into the project.
+
 ## 1. Get a key
 
 One is enough. With both, the skill falls back from one to the other.
