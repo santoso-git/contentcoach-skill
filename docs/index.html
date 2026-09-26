@@ -128,6 +128,8 @@ section{padding-block:clamp(64px,9vw,112px)}
 .slip .say{padding-right:96px}
 .slip code{font:inherit}
 .slip .copy{background:var(--ink);color:var(--env)}
+.slip .copy:hover{background:var(--ink-soft)}
+.slip .copy:active,.slip .copy.done{background:var(--lab);color:var(--paper)}
 .clip video{width:100%;height:auto;aspect-ratio:var(--ar);object-fit:cover;display:block;background:var(--ink)}
 .legend{margin-top:clamp(28px,3vw,40px);display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border-top:2px solid var(--ink)}
 .legend div{padding:16px 18px 0 0}
@@ -183,6 +185,69 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;align-ite
 footer nav{display:flex;gap:22px;flex-wrap:wrap}
 footer .big{font:800 44px/1 var(--display);text-transform:uppercase}
 
+
+/* ---------- the price list: a rate sheet pulled out of the envelope ---------- */
+.navbtn{background:none;border:0;padding:0;color:inherit;font:inherit;letter-spacing:inherit;text-transform:inherit;cursor:pointer}
+.navbtn:hover{text-decoration:underline}
+.quiet.pl{background:none;border:0;padding:0;color:var(--ink);cursor:pointer;text-decoration:underline;text-decoration-thickness:1.5px;text-underline-offset:3px}
+.rates{position:fixed;inset:0;width:100%;height:100%;max-width:none;max-height:none;margin:0;padding:0;border:0;background:transparent;overflow:hidden;color:var(--ink)}
+.rates::backdrop{background:rgba(20,19,17,.74)}
+.rates-scroll{position:absolute;inset:0;overflow-y:auto;overflow-x:hidden;overscroll-behavior:contain;padding:clamp(20px,5vh,56px) var(--gutter) 150px;scrollbar-color:var(--env) transparent}
+.sheet{position:relative;max-width:780px;margin:0 auto;background:var(--paper);border:1px solid var(--hair);padding:clamp(20px,3.4vw,40px) clamp(18px,3.4vw,44px) clamp(24px,3vw,36px);--tilt:-.6deg;transform:rotate(var(--tilt));transform-origin:50% 100%}
+.sheet-head{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;border-bottom:2px solid var(--ink);padding-bottom:14px}
+.sheet h2{font-size:clamp(46px,8vw,84px)}
+.docket{display:block;font:500 12px/1.3 var(--mono);letter-spacing:.06em;text-transform:uppercase;margin-top:10px;color:var(--ink-soft)}
+.x-close{flex:none;display:inline-flex;align-items:center;gap:8px;background:var(--ink);color:var(--env);border:2px solid var(--ink);font:700 13px/1 var(--sans);letter-spacing:.06em;text-transform:uppercase;padding:10px 12px;cursor:pointer}
+.x-close:hover{background:var(--ink-soft);border-color:var(--ink-soft)}
+.x-close:active{background:var(--lab);border-color:var(--lab);color:var(--paper)}
+.x-close svg{width:14px;height:14px}
+.sheet-intro{margin:16px 0 0;max-width:62ch;font-size:16px;color:var(--ink-soft)}
+.sheet-intro .mini{vertical-align:-1px;margin:0 2px}
+.rate{width:100%;border-collapse:collapse;margin-top:26px;font-variant-numeric:tabular-nums}
+.rate caption{text-align:left;font:800 30px/.92 var(--display);text-transform:uppercase;padding-bottom:10px}
+.rate caption small{font:600 12px/1 var(--sans);letter-spacing:.1em;margin-left:8px;color:var(--ink-soft)}
+.rate thead th{font:700 11.5px/1 var(--sans);letter-spacing:.1em;text-transform:uppercase;text-align:left;padding:10px 10px 8px;border-top:2px solid var(--ink);border-bottom:2px solid var(--ink)}
+.rate thead th:first-child{padding-left:0}
+.rate .grp th{font:800 22px/1 var(--display);text-transform:uppercase;text-align:left;padding:16px 0 6px}
+.rate .grp th small{font:500 12px/1 var(--sans);text-transform:none;letter-spacing:0;color:var(--ink-soft);margin-left:8px}
+.rate tbody td{font:500 14.5px/1.35 var(--mono);padding:7px 10px;border-bottom:1px solid var(--hair);vertical-align:top}
+.rate tbody td:first-child{font:600 14.5px/1.35 var(--sans);padding-left:0;width:34%}
+.rate td small{display:block;font:500 12px/1.3 var(--mono);color:var(--muted);margin-top:2px}
+.rate td.none{color:var(--muted)}
+.mini{width:12px;height:12px;border-width:1.5px;margin-right:6px;vertical-align:-1px}
+.mini.x::after{width:8px;height:8px}
+.tally{display:grid;grid-template-columns:1fr 1fr;border:2px solid var(--ink);margin-top:28px}
+.tally div{padding:12px 14px}
+.tally div+div{border-left:2px solid var(--ink)}
+.tally b{display:block;font:800 34px/1 var(--display)}
+.tally span{font:600 13px/1.35 var(--sans);color:var(--ink-soft)}
+.fine{margin:16px 0 0;padding:0;list-style:none;font-size:14px;line-height:1.5;color:var(--ink-soft)}
+.fine li{padding-left:14px;position:relative;margin-top:4px}
+.fine li::before{content:"";position:absolute;left:0;top:.62em;width:6px;height:2px;background:var(--ink)}
+.perf{height:14px;margin:26px -8px 0;background:radial-gradient(circle at 7px 7px,var(--paper-2) 3px,transparent 3.4px) 0 0/16px 14px repeat-x}
+.rates-pocket{position:absolute;left:0;right:0;bottom:0;height:110px;background:var(--env-deep);border-top:2px solid var(--ink);z-index:2;pointer-events:none}
+.rates-pocket::before{content:"";position:absolute;left:0;right:0;top:12px;height:14px;background:radial-gradient(circle at 7px 7px,var(--env) 3px,transparent 3.4px) 0 0/16px 14px repeat-x}
+.rates-pocket span{position:absolute;left:var(--gutter);top:40px;font:800 28px/1 var(--display);text-transform:uppercase}
+.rates-pocket small{display:block;font:600 12px/1.3 var(--sans);letter-spacing:.08em;margin-top:6px}
+@media (prefers-reduced-motion:no-preference){
+  .rates[open]::backdrop{animation:dim .35s ease-out both}
+  .rates.in .rates-pocket{animation:pocket-up .45s cubic-bezier(.16,1,.3,1) both}
+  .rates.in .sheet{animation:pull .95s cubic-bezier(.16,1,.3,1) .12s both}
+  .rates.in .rate tbody tr,.rates.in .tally{animation:printline .5s cubic-bezier(.16,1,.3,1) both;animation-delay:calc(.55s + var(--i,0) * 32ms)}
+  .rates.out .sheet{animation:tuck .42s cubic-bezier(.5,0,.75,0) both}
+  .rates.out .rates-pocket{animation:pocket-down .3s cubic-bezier(.5,0,.75,0) .3s both}
+  .rates.out::backdrop{animation:dim .3s ease-in .3s reverse both}
+  @keyframes dim{from{opacity:0}to{opacity:1}}
+  @keyframes pocket-up{from{transform:translateY(100%)}to{transform:none}}
+  @keyframes pocket-down{from{transform:none}to{transform:translateY(100%)}}
+  @keyframes pull{
+    0%{transform:translateY(105vh) rotate(4deg);clip-path:inset(0 0 0 0)}
+    62%{transform:translateY(-10px) rotate(calc(var(--tilt) - .8deg))}
+    100%{transform:translateY(0) rotate(var(--tilt))}}
+  @keyframes tuck{from{transform:translateY(0) rotate(var(--tilt))}to{transform:translateY(105vh) rotate(3deg)}}
+  @keyframes printline{from{clip-path:inset(0 100% 0 0);opacity:.2}to{clip-path:inset(0 0 0 0);opacity:1}}
+}
+
 /* ---------- narrow ---------- */
 @media (max-width:900px){
   .env-grid{grid-template-columns:1fr;align-items:start}
@@ -209,6 +274,15 @@ footer .big{font:800 44px/1 var(--display);text-transform:uppercase}
   .copy{position:static;display:block;margin:6px 14px 14px auto}
   .slip .say{padding-right:18px}
   .slip .copy{margin:8px 0 0 auto}
+  .rates-scroll{padding-inline:10px;padding-bottom:110px}
+  .sheet{--tilt:0deg}
+  .x-close span{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+  .rate tbody td,.rate tbody td:first-child{font-size:13px;padding:7px 6px}
+  .rate tbody td:first-child{padding-left:0;width:30%}
+  .rate thead th{padding:9px 6px 7px}
+  .tally b{font-size:28px}
+  .rates-pocket{height:80px}
+  .rates-pocket span{top:30px;font-size:22px}
 }
 </style>
 </head>
@@ -222,6 +296,7 @@ footer .big{font:800 44px/1 var(--display);text-transform:uppercase}
         <a href="#prints">Prints</a>
         <a href="#drop-off">Install</a>
         <a href="#terms">How it works</a>
+        <button class="navbtn" type="button" data-open-prices aria-haspopup="dialog">Prices</button>
         <a href="https://github.com/santoso-git/contentcoach-skill">GitHub</a>
       </nav>
     </div>
@@ -250,6 +325,7 @@ footer .big{font:800 44px/1 var(--display);text-transform:uppercase}
         <div class="actions">
           <a class="btn" href="#drop-off">Choose your agent
             <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M8 2v11M3 8.5 8 13.5 13 8.5"/></svg></a>
+          <button class="quiet pl" type="button" data-open-prices aria-haspopup="dialog">See the price list</button>
           <a class="quiet" href="https://github.com/santoso-git/contentcoach-skill/blob/main/contentcoach/SKILL.md">Read the skill</a>
           <div class="stamp" aria-hidden="true">Received<b>26 Sep 2026</b></div>
         </div>
@@ -419,6 +495,77 @@ mkdir -p ~/<wbr>.cursor/<wbr>skills &amp;&amp; ln -s ~/<wbr>.contentcoach-skill/
   </div>
 </footer>
 
+<dialog id="prices" class="rates" aria-labelledby="prices-title">
+  <div class="rates-scroll">
+    <article class="sheet">
+      <div class="sheet-head">
+        <div>
+          <h2 id="prices-title">Price list</h2>
+          <span class="docket">Kie AI and fal.ai · USD · 26 Sep 2026</span>
+        </div>
+        <button class="x-close" type="button" data-close-prices><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M3 3l10 10M13 3 3 13"/></svg><span>Close</span></button>
+      </div>
+      <p class="sheet-intro">What the two providers charge for every model the skill has a recipe for. You pay them directly, from your own account. A ticked box <span class="box mini x" aria-hidden="true"></span>marks a price measured in a real run; the rest are the provider's listed price.</p>
+
+      <table class="rate">
+        <caption>Images <small>per image</small></caption>
+        <thead><tr><th scope="col">Size</th><th scope="col">Kie AI</th><th scope="col">fal.ai</th></tr></thead>
+        <tbody>
+        <tr class="grp"><th colspan="3" scope="rowgroup">Nano Banana 2</th></tr>
+        <tr style="--i:1"><td>1K</td><td><span class="box mini x" role="img" aria-label="measured"></span>0.04</td><td><span class="box mini x" role="img" aria-label="measured"></span>0.08</td></tr>
+        <tr style="--i:2"><td>2K</td><td><span class="box mini x" role="img" aria-label="measured"></span>0.06</td><td>0.12</td></tr>
+        <tr style="--i:3"><td>4K</td><td><span class="box mini x" role="img" aria-label="measured"></span>0.09</td><td>0.16</td></tr>
+        <tr class="grp"><th colspan="3" scope="rowgroup">GPT Image 2.5</th></tr>
+        <tr style="--i:4"><td>1K</td><td>0.03</td><td>about 0.05</td></tr>
+        <tr style="--i:5"><td>2K</td><td><span class="box mini x" role="img" aria-label="measured"></span>0.05</td><td>about 0.11</td></tr>
+        <tr style="--i:6"><td>4K</td><td>0.08</td><td>about 0.18</td></tr>
+        <tr class="grp"><th colspan="3" scope="rowgroup">Grok Imagine 2.0</th></tr>
+        <tr style="--i:7"><td>1k</td><td>0.02</td><td><span class="box mini x" role="img" aria-label="measured"></span>0.04 low<small>0.06 medium</small></td></tr>
+        <tr style="--i:8"><td>2k</td><td class="none">—</td><td>0.06 low<small>0.08 medium</small></td></tr>
+        </tbody>
+      </table>
+
+      <table class="rate">
+        <caption>Video <small>per 5-second clip</small></caption>
+        <thead><tr><th scope="col">Size</th><th scope="col">Kie AI</th><th scope="col">fal.ai</th></tr></thead>
+        <tbody>
+        <tr class="grp"><th colspan="3" scope="rowgroup">Kling 3.0</th></tr>
+        <tr style="--i:9"><td>720p, no sound</td><td><span class="box mini x" role="img" aria-label="measured"></span>0.35<small>0.07/s</small></td><td class="none">—</td></tr>
+        <tr style="--i:10"><td>720p, sound</td><td>0.50<small>0.10/s</small></td><td class="none">—</td></tr>
+        <tr style="--i:11"><td>1080p, no sound</td><td>0.45<small>0.09/s</small></td><td>0.56<small>0.112/s</small></td></tr>
+        <tr style="--i:12"><td>1080p, sound</td><td>0.675<small>0.135/s</small></td><td>0.84<small>0.168/s</small></td></tr>
+        <tr class="grp"><th colspan="3" scope="rowgroup">MiniMax H3<small>the only one with a seed</small></th></tr>
+        <tr style="--i:13"><td>480P</td><td class="none">—</td><td>0.25<small>0.05/s</small></td></tr>
+        <tr style="--i:14"><td>768P</td><td>0.40<small>0.08/s</small></td><td>0.40<small>0.08/s</small></td></tr>
+        <tr style="--i:15"><td>2K</td><td>0.65<small>0.13/s</small></td><td>0.65<small>0.13/s</small></td></tr>
+        <tr style="--i:16"><td>4K</td><td class="none">—</td><td>0.80<small>0.16/s</small></td></tr>
+        <tr class="grp"><th colspan="3" scope="rowgroup">Grok Video 1.5<small>always with sound</small></th></tr>
+        <tr style="--i:17"><td>480p</td><td><span class="box mini x" role="img" aria-label="measured"></span>0.06<small>0.012/s</small></td><td><span class="box mini x" role="img" aria-label="measured"></span>0.41<small>0.08/s + 0.01 per image</small></td></tr>
+        <tr style="--i:18"><td>720p</td><td>0.11<small>0.0225/s</small></td><td>0.70<small>0.14/s</small></td></tr>
+        <tr class="grp"><th colspan="3" scope="rowgroup">Seedance 2.5<small>up to 30 seconds</small></th></tr>
+        <tr style="--i:19"><td>480p</td><td><span class="box mini x" role="img" aria-label="measured"></span>0.70<small>0.14/s</small></td><td>1.10<small>0.2205/s</small></td></tr>
+        <tr style="--i:20"><td>720p</td><td>1.58<small>0.315/s</small></td><td>2.37<small>0.473/s</small></td></tr>
+        </tbody>
+      </table>
+
+      <div class="tally" style="--i:21">
+        <div><b>0.02 USD</b><span>The cheapest image: Grok Imagine 2.0 on Kie.</span></div>
+        <div><b>0.06 USD</b><span>The cheapest clip: five seconds of Grok Video on Kie.</span></div>
+      </div>
+
+      <ul class="fine">
+        <li>Kling on Kie was measured on a three-second clip: 0.21 USD, exactly the quote.</li>
+        <li>GPT Image 2.5 on fal has not been run yet. Its prices are what GPT Image 2 cost there at medium quality; 2.5 is probably cheaper.</li>
+        <li>The longest Seedance clip, 30 seconds at 720p, is 9.45 USD on Kie and 14.19 USD on fal. The skill quotes every clip and waits for your yes.</li>
+        <li>Both providers also offer 1080p on Grok Video and Seedance. It has no measured price yet, so it is not listed.</li>
+        <li>Prices move. The provider's bill is what counts.</li>
+      </ul>
+      <div class="perf" aria-hidden="true"></div>
+    </article>
+  </div>
+  <div class="rates-pocket" aria-hidden="true"><span>Price list enclosed<small>Pull out, read, tuck back in</small></span></div>
+</dialog>
+
 <script>
 (function(){
   var BASE='https://raw.githubusercontent.com/santoso-git/contentcoach-skill/main/contentcoach/SKILL.md';
@@ -447,6 +594,30 @@ mkdir -p ~/<wbr>.cursor/<wbr>skills &amp;&amp; ln -s ~/<wbr>.contentcoach-skill/
     document.querySelectorAll('video[autoplay]').forEach(function(v){v.removeAttribute('autoplay');v.pause();v.controls=true;});
   }
   document.querySelectorAll('input[name="agent"]').forEach(function(r){r.addEventListener('change',function(){render(r.value)})});
+
+
+  // The price list: a rate sheet pulled out of the envelope, and tucked back in.
+  var dlg=document.getElementById('prices');
+  var still=matchMedia('(prefers-reduced-motion: reduce)');
+  function openPrices(){
+    if(dlg.open) return;
+    dlg.classList.remove('out'); dlg.showModal(); document.documentElement.style.overflow='hidden';
+    dlg.querySelector('.rates-scroll').scrollTop=0;
+    void dlg.offsetWidth; dlg.classList.add('in');
+    dlg.querySelector('[data-close-prices]').focus({preventScroll:true});
+  }
+  function closePrices(){
+    if(!dlg.open||dlg.classList.contains('out')) return;
+    function done(){dlg.classList.remove('in','out'); dlg.close(); document.documentElement.style.overflow='';}
+    if(still.matches){done();return;}
+    dlg.classList.add('out');
+    setTimeout(done,620);
+  }
+  document.querySelectorAll('[data-open-prices]').forEach(function(b){b.addEventListener('click',openPrices)});
+  dlg.querySelector('[data-close-prices]').addEventListener('click',closePrices);
+  dlg.addEventListener('cancel',function(e){e.preventDefault();closePrices();});
+  dlg.addEventListener('close',function(){dlg.classList.remove('in','out'); document.documentElement.style.overflow='';});
+  dlg.addEventListener('click',function(e){ if(!e.target.closest('.sheet')) closePrices(); });
 
   document.addEventListener('click',function(e){
     var b=e.target.closest('.copy'); if(!b) return;

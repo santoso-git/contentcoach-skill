@@ -238,6 +238,9 @@ Tactile and printed: solid ink slabs with no radius.
 ### Steps
 - A ruled table like the order form: the left cell holds a large condensed numeral (44px, 34px narrow) with an uppercase docket caption; the right holds a title, prose and a slip.
 
+### Price List (rate sheet)
+A native `<dialog>` opened from the nav ("Prices") and from the hero actions ("See the price list"). It is a print-paper rate sheet pulled out of an Envelope Deep pocket that rises at the bottom of the viewport: the pocket slides up, the sheet travels up out of it with a small overshoot and settles at -0.6deg (0 under 560px), and the table rows print in one by one from the left like a lab receipt. Closing tucks the sheet back down into the pocket and the pocket drops away; Escape, the Close button and a click outside the sheet all close it. Reduced motion shows and hides it without movement. Measured prices carry a small ticked box — the Reserved Red Rule's "ticked" state, not decoration. Prices are mono with tabular numerals; model names are Title-voice group rows; the two cheapest items close the sheet in a ruled two-cell tally. The ink scrim is flat (no blur).
+
 ### Navigation
 - Top: uppercase 600 13px sans links, 0.08em tracking, no underline until hover, beside the real logo file. Footer: a black band with the name in the display face (44px) and plain links in Envelope Yellow.
 
