@@ -1,6 +1,8 @@
 # ContentCoach — image generation for your AI agent
 
-Make images with several models — Nano Banana 2, GPT Image 2 and Grok
+**Homepage, with example images: https://santoso-git.github.io/contentcoach-skill/**
+
+Make images with several models — Nano Banana 2, GPT Image 2.5 and Grok
 Imagine — straight from Cursor, Codex, Claude Code or any agent that can run
 `curl`. No accounts with the image providers, no API keys of theirs: just one
 personal ContentCoach key.
@@ -84,7 +86,7 @@ version.
   reference. A logo described in words comes out wrong every time.
 - **Editing an image:** give the agent the image and say what to change —
   *"swap the background for a bright studio, keep everything else"*.
-- **Text inside the image** (signs, packaging, posters): ask for GPT Image 2.
+- **Text inside the image** (signs, packaging, posters): ask for GPT Image 2.5.
 - **Draft first:** everything is made at 1K by default. Ask for 2K or 4K once
   you have a favourite.
 - **Budget:** ask the agent how much is left today — it checks for free.

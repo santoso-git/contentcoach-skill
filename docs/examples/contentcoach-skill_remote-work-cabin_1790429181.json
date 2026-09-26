@@ -1,0 +1,16 @@
+{
+  "model": "nano-banana-2",
+  "provider": "kie",
+  "prompt": "Wide editorial blog header photograph: a small pine desk under the window of a Nordic cabin on a rainy afternoon. An open laptop, a paper notebook with a pencil, a brass desk lamp glowing warm, a sprig of eucalyptus in a glass jar. Rain streaks on the window, dark green spruce forest outside. No people. Muted, warm and cool contrast, natural light mixed with lamp light, generous empty space on the left for a headline.",
+  "refs": [],
+  "params": {
+    "aspect_ratio": "16:9",
+    "resolution": "2K",
+    "output_format": "png"
+  },
+  "cost_usd": 0.06,
+  "cost_source": "actual",
+  "credits": "12.0",
+  "task_id": "529514af2adf4240da76f26a62dbe8d6",
+  "created": "2026-09-26T13:26:21Z"
+}

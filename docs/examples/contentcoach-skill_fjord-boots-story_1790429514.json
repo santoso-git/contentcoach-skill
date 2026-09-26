@@ -1,0 +1,16 @@
+{
+  "model": "nano-banana-2",
+  "provider": "kie",
+  "prompt": "Vertical outdoor photograph for a social media story: worn leather hiking boots resting on a granite ledge in the foreground, seen from above, and far below a Norwegian fjord filled with low morning mist, steep dark mountainsides, first sunlight catching the peaks. No people visible other than the boots. Cool blue shadows, warm golden highlights, crisp detail, wide-angle lens.",
+  "refs": [],
+  "params": {
+    "aspect_ratio": "9:16",
+    "resolution": "2K",
+    "output_format": "png"
+  },
+  "cost_usd": 0.06,
+  "cost_source": "actual",
+  "credits": "12.0",
+  "task_id": "a4052d56d38edb1d49bbb777b4b9ef04",
+  "created": "2026-09-26T13:31:55Z"
+}

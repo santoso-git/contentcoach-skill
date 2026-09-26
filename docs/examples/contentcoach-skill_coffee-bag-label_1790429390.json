@@ -1,0 +1,15 @@
+{
+  "model": "gpt-image-2-text-to-image",
+  "provider": "kie",
+  "prompt": "Studio product photograph of a matte kraft-paper coffee bag with a flat bottom, standing on warm grey stone, soft window light from the right, gentle shadow. A cream paper label on the front, printed in black, reads exactly, line by line: MORNING ROAST (large bold condensed capitals), then Medium roast, then Ethiopia · Yirgacheffe, then Notes of apricot, jasmine and honey, then at the bottom 250 g. A few roasted coffee beans scattered in front. Every word spelled correctly, crisp print, realistic packaging.",
+  "refs": [],
+  "params": {
+    "aspect_ratio": "1:1",
+    "resolution": "2K"
+  },
+  "cost_usd": 0.05,
+  "cost_source": "actual",
+  "credits": "10.0",
+  "task_id": "d2c53065927841c69ae08cb962a93c02",
+  "created": "2026-09-26T13:29:51Z"
+}

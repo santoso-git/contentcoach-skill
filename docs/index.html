@@ -1,0 +1,408 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ContentCoach — images from your coding agent</title>
+<meta name="description" content="Make images with Nano Banana 2, GPT Image 2.5 and Grok Imagine from Cursor, Codex or Claude Code. One personal key, no provider accounts.">
+<meta property="og:title" content="ContentCoach — images from your coding agent">
+<meta property="og:description" content="One personal key. Your agent hands in the order, the lab sends back prints.">
+<meta property="og:image" content="https://santoso-git.github.io/contentcoach-skill/examples/contentcoach-skill_bakery-sign_1790429269.webp">
+<meta name="theme-color" content="#f7c21b">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='4' fill='%23f7c21b'/%3E%3Crect x='7' y='8' width='18' height='16' fill='%23fff' stroke='%23141311' stroke-width='2'/%3E%3Crect x='10' y='11' width='12' height='8' fill='%23141311'/%3E%3C/svg%3E">
+<link rel="preload" href="fonts/sofia-sans-extra-condensed-800-latin.woff2" as="font" type="font/woff2" crossorigin>
+<style>
+@font-face{font-family:"Sofia Sans Extra Condensed";font-weight:800;font-style:normal;font-display:swap;src:url(fonts/sofia-sans-extra-condensed-800-latin.woff2) format("woff2")}
+@font-face{font-family:"Sofia Sans";font-weight:1 1000;font-style:normal;font-display:swap;src:url(fonts/sofia-sans-latin.woff2) format("woff2")}
+@font-face{font-family:"JetBrains Mono";font-weight:100 800;font-style:normal;font-display:swap;src:url(fonts/jetbrains-mono-latin.woff2) format("woff2")}
+:root{
+  --env:#f7c21b;          /* envelope stock */
+  --env-deep:#e9ae00;     /* the pocket and the back: one sheet further back */
+  --ink:#141311;          /* the one printing ink */
+  --ink-soft:#3d3a33;
+  --lab:#d7261e;          /* reserved: ticked and pressed, nothing else */
+  --paper:#fbfaf6;        /* print border and page stock */
+  --paper-2:#f1efe8;
+  --hair:rgba(20,19,17,.22);
+  --muted:#5d5a52;
+  --display:"Sofia Sans Extra Condensed","Sofia Sans",ui-sans-serif,system-ui,sans-serif;
+  --sans:"Sofia Sans",ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,"SF Mono",Menlo,monospace;
+  --gutter:clamp(16px,4vw,48px);
+  --max:1180px;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{margin:0;background:var(--paper);color:var(--ink);font:17px/1.55 var(--sans);-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+::selection{background:var(--ink);color:var(--env)}
+img{max-width:100%;display:block}
+figure{margin:0}
+a{color:inherit;text-decoration-thickness:1.5px;text-underline-offset:3px}
+:focus-visible{outline:3px solid var(--lab);outline-offset:3px}
+.wrap{max-width:var(--max);margin:0 auto;padding-inline:var(--gutter)}
+h1,h2,h3{font-family:var(--display);font-weight:800;line-height:.92;letter-spacing:-.005em;text-transform:uppercase;margin:0;text-wrap:balance}
+code{font-family:var(--mono);font-size:.9em}
+
+/* ---------- envelope (first viewport) ---------- */
+.envelope{background:var(--env);position:relative;overflow:hidden}
+.env-top{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;padding-block:20px 0}
+.env-top img{height:22px;width:auto}
+.env-top nav{display:flex;gap:22px;flex-wrap:wrap;font:600 13px/1.3 var(--sans);letter-spacing:.08em;text-transform:uppercase}
+.env-top nav a{text-decoration:none}
+.env-top nav a:hover{text-decoration:underline}
+.name{font-size:min(15.2vw,228px);line-height:.78;letter-spacing:-.012em;margin:clamp(28px,4vw,48px) 0 0 -.035em;white-space:nowrap}
+.env-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:clamp(24px,4vw,64px);align-items:stretch;padding-block:clamp(22px,3vw,36px) 0}
+.lede{font:500 clamp(19px,2.1vw,24px)/1.35 var(--sans);max-width:34ch;margin:0}
+
+.order-wrap{margin-top:34px;max-width:620px}
+.order{border:2px solid var(--ink)}
+.order-row{display:grid;grid-template-columns:92px 1fr;border-top:2px solid var(--ink)}
+.order-row:first-child{border-top:0}
+.order-row>span:first-child{font:700 12px/1 var(--sans);letter-spacing:.1em;text-transform:uppercase;padding:14px 12px;border-right:2px solid var(--ink)}
+.order-row .fill{padding:10px 14px;font:500 15px/1.45 var(--mono);min-width:0}
+.order-row .note{font:500 14px/1.4 var(--sans);color:var(--ink-soft)}
+.ticks{display:flex;gap:18px;flex-wrap:wrap;align-items:center}
+.tick{display:inline-flex;align-items:center;gap:8px;font:600 14px/1 var(--sans)}
+.box{width:18px;height:18px;border:2px solid var(--ink);display:inline-grid;place-items:center;flex:none;background:var(--paper)}
+.box.x::after,.agents input:checked+.box::after{content:"";width:12px;height:12px;background:
+  linear-gradient(45deg,transparent 43%,var(--lab) 43% 57%,transparent 57%),
+  linear-gradient(-45deg,transparent 43%,var(--lab) 43% 57%,transparent 57%)}
+/* the counter's date stamp, inked by hand */
+.stamp{margin-left:auto;transform:rotate(-5deg);border:2px solid var(--ink);padding:5px 9px 4px;font:500 11.5px/1.25 var(--mono);letter-spacing:.06em;text-transform:uppercase;background:var(--env);opacity:.92}
+.stamp b{display:block;font:800 19px/1 var(--display);letter-spacing:.02em}
+
+.actions{display:flex;gap:14px 26px;align-items:center;flex-wrap:wrap;margin-top:28px;padding-bottom:clamp(40px,6vw,72px)}
+.btn{display:inline-flex;align-items:center;gap:10px;background:var(--ink);color:var(--env);font:700 16px/1 var(--sans);letter-spacing:.02em;padding:16px 22px;text-decoration:none;border:2px solid var(--ink);transition:transform .15s cubic-bezier(.2,.8,.2,1)}
+.btn:hover{transform:translate(0,-2px)}
+.btn:active{background:var(--lab);border-color:var(--lab);color:var(--paper);transform:none}
+.btn svg{width:16px;height:16px}
+.quiet{font:600 15px/1 var(--sans)}
+
+/* prints: flat sheets, depth only from overlap */
+.print{background:var(--paper);padding:10px 10px 28px;border:1px solid var(--hair)}
+.print img{width:100%;height:auto;aspect-ratio:var(--ar);object-fit:cover}
+.print figcaption{font:500 11px/1 var(--mono);letter-spacing:.02em;color:var(--muted);margin-top:9px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.fan{position:relative;min-height:520px}
+.fan .print{position:absolute}
+.fan .p1{left:0;top:8px;width:62%;--r:-6deg;transform:rotate(var(--r));z-index:1}
+.fan .p2{right:0;top:0;width:42%;--r:5deg;transform:rotate(var(--r));z-index:2}
+.fan .p3{left:24%;top:190px;width:58%;--r:-1.5deg;transform:rotate(var(--r));z-index:2}
+.pocket{position:absolute;left:-8%;right:calc(var(--gutter) * -1 - 40vw);bottom:0;height:160px;background:var(--env-deep);border-top:2px solid var(--ink);z-index:3}
+.pocket::before{content:"";position:absolute;left:0;right:0;top:12px;height:14px;background:radial-gradient(circle at 7px 7px,var(--env) 3px,transparent 3.4px) 0 0/16px 14px repeat-x}
+.pocket span{position:absolute;left:16%;top:40px;font:800 30px/1 var(--display);text-transform:uppercase;letter-spacing:.01em}
+.pocket small{display:block;font:600 12px/1.3 var(--sans);letter-spacing:.08em;margin-top:6px}
+@media (prefers-reduced-motion:no-preference){
+  .fan .print{animation:slide .9s cubic-bezier(.16,1,.3,1) both}
+  .fan .p1{animation-delay:.05s}.fan .p2{animation-delay:.16s}.fan .p3{animation-delay:.27s}
+  @keyframes slide{from{transform:translateY(46px) rotate(0deg)}to{transform:translateY(0) rotate(var(--r))}}
+}
+
+/* ---------- sections ---------- */
+section{padding-block:clamp(64px,9vw,112px)}
+.sec-head{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:24px 48px;align-items:end;margin-bottom:clamp(32px,4vw,52px)}
+.sec-head h2{font-size:clamp(46px,7vw,92px)}
+.sec-head p{margin:0;max-width:46ch;color:var(--ink-soft);font-size:18px}
+
+/* the prints, laid loose on the counter */
+.prints{display:grid;gap:clamp(18px,2.6vw,36px)}
+.prints .row{display:flex;gap:clamp(16px,2.4vw,32px);align-items:flex-start}
+.prints .print{flex:var(--k) 1 0;min-width:0;padding:12px 12px 16px;transform:rotate(var(--t,0deg))}
+.prints .row>.print:nth-child(1){--t:-.6deg}
+.prints .row>.print:nth-child(2){--t:.5deg}
+.prints .row>.print:nth-child(3){--t:-.35deg}
+.prints figcaption{white-space:normal;overflow:visible;margin-top:12px;display:grid;gap:7px}
+.back{display:flex;flex-wrap:wrap;gap:4px 14px;font:500 11.5px/1.3 var(--mono);color:var(--ink)}
+.back b{font-weight:700}
+.prompt{font:400 13.5px/1.45 var(--sans);color:var(--muted);margin:0}
+.prompt span{font:700 11px/1 var(--sans);letter-spacing:.1em;text-transform:uppercase;color:var(--ink);margin-right:6px}
+.legend{margin-top:clamp(28px,3vw,40px);display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border-top:2px solid var(--ink)}
+.legend div{padding:16px 18px 0 0}
+.legend h3{font-size:26px;margin-bottom:6px}
+.legend p{margin:0;font-size:15.5px;color:var(--ink-soft);max-width:34ch}
+
+/* drop-off: the envelope again */
+.dropoff{background:var(--env)}
+.dropoff .sec-head p{color:var(--ink)}
+.steps{border:2px solid var(--ink)}
+.step{display:grid;grid-template-columns:92px minmax(0,1fr);border-top:2px solid var(--ink)}
+.step:first-child{border-top:0}
+.step>.lbl{border-right:2px solid var(--ink);padding:18px 12px;font:800 44px/1 var(--display)}
+.step>.lbl small{display:block;font:700 11px/1.2 var(--sans);letter-spacing:.1em;text-transform:uppercase;margin-top:6px}
+.step>.body{padding:18px clamp(14px,2vw,22px);min-width:0}
+.step h3{font-size:30px;margin-bottom:10px}
+.step p{margin:0 0 12px;max-width:62ch}
+.step p:last-child{margin-bottom:0}
+
+/* the drop-off row: one unbroken line of tick boxes */
+.agents{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border:2px solid var(--ink);margin:4px 0 16px;background:var(--paper)}
+.agents label{position:relative;display:flex;align-items:center;gap:10px;padding:14px clamp(10px,1.4vw,16px);border-left:2px solid var(--ink);cursor:pointer;font:700 clamp(13px,1.5vw,16px)/1.15 var(--sans);min-width:0}
+.agents label:first-child{border-left:0}
+.agents input{position:absolute;opacity:0;pointer-events:none}
+.agents input:checked~.nm{text-decoration:underline;text-decoration-color:var(--lab);text-decoration-thickness:3px;text-underline-offset:5px}
+.agents label:hover{background:var(--paper-2)}
+.agents input:focus-visible+.box{outline:3px solid var(--lab);outline-offset:2px}
+
+.cmdbox{position:relative;background:var(--ink)}
+.cmd{color:#f5f2e8;font:14px/1.7 var(--mono);padding:16px 18px;padding-right:96px;overflow-x:auto;white-space:pre;margin:0}
+.cmd .c{color:#a8a293}
+.copy{position:absolute;top:10px;right:10px;background:var(--env);color:var(--ink);border:0;font:700 12.5px/1 var(--sans);letter-spacing:.04em;text-transform:uppercase;padding:9px 12px;cursor:pointer}
+.copy:hover{background:#ffd54a}
+.copy:active,.copy.done{background:var(--lab);color:var(--paper)}
+.hint{font-size:15px;color:var(--ink-soft);margin-top:12px}
+.say{font:500 clamp(18px,2vw,21px)/1.45 var(--sans);margin:0;padding:14px 18px;background:var(--paper);border:2px solid var(--ink)}
+@media (prefers-reduced-motion:no-preference){
+  .reprint .cmdbox,.reprint .say{animation:feed .42s cubic-bezier(.16,1,.3,1) both}
+  @keyframes feed{from{clip-path:inset(0 0 100% 0)}to{clip-path:inset(0 0 0 0)}}
+}
+
+/* terms: the back of the envelope, under its flap */
+.back-of{background:var(--env-deep);position:relative;padding-top:clamp(96px,12vw,150px)}
+.back-of::before{content:"";position:absolute;left:0;right:0;top:0;height:clamp(48px,6vw,80px);background:var(--env);clip-path:polygon(0 0,100% 0,50% 100%)}
+.back-of .sec-head p{color:var(--ink)}
+.terms{columns:3 280px;column-gap:40px}
+.terms div{break-inside:avoid;padding:14px 0 18px;border-top:1.5px solid var(--ink)}
+.terms h3{font-size:24px;margin-bottom:6px}
+.terms p{margin:0;font-size:15px;line-height:1.5;color:var(--ink)}
+
+footer{background:var(--ink);color:var(--env)}
+footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:18px 32px;padding-block:32px 40px;font:600 14px/1.4 var(--sans)}
+footer nav{display:flex;gap:22px;flex-wrap:wrap}
+footer .big{font:800 44px/1 var(--display);text-transform:uppercase}
+
+/* ---------- narrow ---------- */
+@media (max-width:900px){
+  .env-grid{grid-template-columns:1fr;align-items:start}
+  .fan{min-height:calc(76vw + 90px)}
+  .fan .p1{width:60%}
+  .fan .p2{width:44%}
+  .fan .p3{top:31%;width:60%}
+  .pocket{left:calc(var(--gutter) * -1);right:calc(var(--gutter) * -1);height:92px}
+  .pocket span{left:var(--gutter);top:32px;font-size:24px}
+  .actions{padding-bottom:28px}
+  .sec-head{grid-template-columns:1fr}
+  .prints .row{flex-wrap:wrap}
+  .prints .print{flex-basis:40%}
+  .legend{grid-template-columns:1fr}
+}
+@media (max-width:560px){
+  .prints .row{flex-direction:column}
+  .prints .print{flex:none;width:100%}
+  .order-row,.step{grid-template-columns:64px minmax(0,1fr)}
+  .order-row>span:first-child{padding:12px 8px;font-size:11px}
+  .step>.lbl{font-size:34px;padding:14px 8px}
+  .agents label{flex-direction:column;align-items:flex-start;gap:8px;padding:12px 8px}
+  .cmd{font-size:12.5px;padding:14px 14px 4px;white-space:pre-wrap;overflow-wrap:break-word}
+  .copy{position:static;display:block;margin:6px 14px 14px auto}
+}
+</style>
+</head>
+<body>
+
+<header class="envelope">
+  <div class="wrap">
+    <div class="env-top">
+      <img src="contentcoach-logo.png" width="520" height="87" alt="ContentCoach">
+      <nav aria-label="Page">
+        <a href="#prints">Prints</a>
+        <a href="#drop-off">Install</a>
+        <a href="#terms">Terms</a>
+        <a href="https://github.com/santoso-git/contentcoach-skill">GitHub</a>
+      </nav>
+    </div>
+
+    <h1 class="name">ContentCoach</h1>
+    <div class="env-grid">
+      <div>
+        <p class="lede">Ask your coding agent for a picture. It hands the order to several image models and saves the prints in your project.</p>
+
+        <div class="order-wrap">
+          <div class="order" role="group" aria-label="An example order">
+            <div class="order-row"><span>Order</span><div class="fill">a stoneware coffee cup on a windowsill, morning light, 16:9</div></div>
+            <div class="order-row"><span>Size</span><div class="fill ticks">
+              <span class="tick"><span class="box" aria-hidden="true"></span>1K draft</span>
+              <span class="tick"><span class="box x" aria-hidden="true"></span>2K</span>
+              <span class="tick"><span class="box" aria-hidden="true"></span>4K</span>
+            </div></div>
+            <div class="order-row"><span>Agent</span><div class="fill note">Cursor, Codex or Claude Code. One personal key, no provider accounts.</div></div>
+          </div>
+        </div>
+
+        <div class="actions">
+          <a class="btn" href="#drop-off">Choose your agent
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M8 2v11M3 8.5 8 13.5 13 8.5"/></svg></a>
+          <a class="quiet" href="https://create.contentcoach.se/agent.md">Read agent.md</a>
+          <div class="stamp" aria-hidden="true">Received<b>26 Sep 2026</b></div>
+        </div>
+      </div>
+
+      <div class="fan" aria-hidden="true">
+        <figure class="print p1" style="--ar:16/9"><img src="examples/contentcoach-skill_cup-windowsill_1790429059_720.webp" width="720" height="402" alt=""><figcaption>No. 1 · Nano Banana 2 · 2K</figcaption></figure>
+        <figure class="print p2" style="--ar:1/1"><img src="examples/contentcoach-skill_lighthouse-riso_1790429483_720.webp" width="720" height="720" alt=""><figcaption>No. 5 · Grok Imagine 2.0</figcaption></figure>
+        <figure class="print p3" style="--ar:4/3"><img src="examples/contentcoach-skill_bakery-sign_1790429269_720.webp" width="720" height="540" alt=""><figcaption>No. 3 · GPT Image 2 · 2K</figcaption></figure>
+        <div class="pocket"><span>Prints enclosed<small>6 frames · 0.30 USD in all</small></span></div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main>
+<section id="prints">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2>Prints from the lab</h2>
+      <p>Six images, each from a single run. Beneath each one: the model that made it, the size, what it cost, and the prompt it was given.</p>
+    </div>
+
+    <div class="prints">
+      <div class="row">
+        <figure class="print" style="--ar:1600/894;--k:1.79"><img src="examples/contentcoach-skill_cup-windowsill_1790429059.webp" width="1600" height="894" loading="lazy" alt="A speckled stoneware coffee cup on a wooden windowsill, steam rising, birch trees outside.">
+          <figcaption><span class="back"><span>No. 1</span><span>Nano Banana 2</span><span>2K · 16:9</span><b>0.06 USD</b></span>
+          <p class="prompt"><span>Prompt</span>Product photograph of a handmade stoneware coffee cup with a speckled oatmeal glaze and an uneven rim, standing on a pale wooden windowsill…</p></figcaption></figure>
+
+        <figure class="print" style="--ar:1/1;--k:1"><img src="examples/contentcoach-skill_coffee-bag-label_1790429390.webp" width="1600" height="1600" loading="lazy" alt="A kraft coffee bag with a cream label reading Morning Roast, medium roast, Ethiopia Yirgacheffe, 250 g.">
+          <figcaption><span class="back"><span>No. 4</span><span>GPT Image 2</span><span>2K · 1:1</span><b>0.05 USD</b></span>
+          <p class="prompt"><span>Prompt</span>Studio product photograph of a matte kraft-paper coffee bag… A cream paper label on the front, printed in black, reads exactly, line by line: MORNING ROAST…</p></figcaption></figure>
+
+        <figure class="print" style="--ar:720/1290;--k:0.558"><img src="examples/contentcoach-skill_fjord-boots-story_1790429514_720.webp" width="720" height="1290" loading="lazy" alt="Hiking boots on a granite ledge above a fjord filled with morning mist.">
+          <figcaption><span class="back"><span>No. 6</span><span>Nano Banana 2</span><span>2K · 9:16</span><b>0.06 USD</b></span>
+          <p class="prompt"><span>Prompt</span>Vertical outdoor photograph for a social media story: worn leather hiking boots resting on a granite ledge…</p></figcaption></figure>
+      </div>
+
+      <div class="row">
+        <figure class="print" style="--ar:4/3;--k:1.333"><img src="examples/contentcoach-skill_bakery-sign_1790429269.webp" width="1600" height="1200" loading="lazy" alt="A bakery storefront at dusk with a painted sign reading Northside Bakery and gold window lettering.">
+          <figcaption><span class="back"><span>No. 3</span><span>GPT Image 2</span><span>2K · 4:3</span><b>0.05 USD</b></span>
+          <p class="prompt"><span>Prompt</span>Street photograph of a small neighbourhood bakery storefront at dusk… a hand-painted wooden sign… reads exactly: NORTHSIDE BAKERY…</p></figcaption></figure>
+
+        <figure class="print" style="--ar:1/1;--k:1"><img src="examples/contentcoach-skill_lighthouse-riso_1790429483.webp" width="1600" height="1600" loading="lazy" alt="A two-colour risograph print of a striped lighthouse on a rocky island at dusk.">
+          <figcaption><span class="back"><span>No. 5</span><span>Grok Imagine 2.0</span><span>1:1</span><b>0.02 USD</b></span>
+          <p class="prompt"><span>Prompt</span>Risograph print illustration of a small red-and-white lighthouse on a rocky island at dusk… fluorescent coral and deep teal…</p></figcaption></figure>
+
+        <figure class="print" style="--ar:1600/894;--k:1.79"><img src="examples/contentcoach-skill_remote-work-cabin_1790429181.webp" width="1600" height="894" loading="lazy" alt="A pine desk under a cabin window on a rainy afternoon, with a laptop, a notebook and a brass lamp.">
+          <figcaption><span class="back"><span>No. 2</span><span>Nano Banana 2</span><span>2K · 16:9</span><b>0.06 USD</b></span>
+          <p class="prompt"><span>Prompt</span>Wide editorial blog header photograph: a small pine desk under the window of a Nordic cabin on a rainy afternoon…</p></figcaption></figure>
+      </div>
+    </div>
+
+    <div class="legend">
+      <div><h3>Nano Banana 2</h3><p>The default. Photos, scenes, products, and editing a picture you already have.</p></div>
+      <div><h3>GPT Image 2.5</h3><p>When words inside the image must be readable: signs, labels, posters. Nos. 3 and 4 were made with 2, its predecessor.</p></div>
+      <div><h3>Grok Imagine 2.0</h3><p>The cheapest, with a looser, stylised hand.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="drop-off" class="dropoff">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2>Hand in your order</h2>
+      <p>Three steps. You need a personal key from whoever sent you this page.</p>
+    </div>
+
+    <div class="steps">
+      <div class="step">
+        <div class="lbl">1<small>Key</small></div>
+        <div class="body">
+          <h3>Put your key in your shell</h3>
+          <p>In <code>~/.zshrc</code> on a Mac or <code>~/.bashrc</code> on Linux. Never in a project and never in git. Open a new terminal and restart your editor afterwards.</p>
+          <div class="cmdbox"><pre class="cmd"><code>export CONTENTCOACH_KEY="your-key"</code></pre><button class="copy" type="button">Copy</button></div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="lbl">2<small>Agent</small></div>
+        <div class="body">
+          <h3>Tick your agent</h3>
+          <div class="agents" role="radiogroup" aria-label="Your agent">
+            <label><input type="radio" name="agent" value="cursor" checked><span class="box" aria-hidden="true"></span><span class="nm">Cursor</span></label>
+            <label><input type="radio" name="agent" value="codex"><span class="box" aria-hidden="true"></span><span class="nm">Codex</span></label>
+            <label><input type="radio" name="agent" value="claude"><span class="box" aria-hidden="true"></span><span class="nm">Claude Code</span></label>
+            <label><input type="radio" name="agent" value="none"><span class="box" aria-hidden="true"></span><span class="nm">No install</span></label>
+          </div>
+          <div id="agent-out" aria-live="polite">
+            <div class="cmdbox"><pre class="cmd"><code><span class="c"># Cursor reads skills from ~/.cursor/skills</span>
+mkdir -p ~/<wbr>.cursor/<wbr>skills/<wbr>contentcoach
+curl -fsSL https://<wbr>create.contentcoach.se/<wbr>agent.md -o ~/<wbr>.cursor/<wbr>skills/<wbr>contentcoach/<wbr>SKILL.md</code></pre><button class="copy" type="button">Copy</button></div>
+            <p class="hint">Restart Cursor. The skill is used in Agent mode. Run the same line again to update.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="lbl">3<small>Ask</small></div>
+        <div class="body">
+          <h3>Ask for a picture</h3>
+          <p class="say">Make a 16:9 blog header about remote work: a small desk in a Nordic cabin, rain outside.</p>
+          <p class="hint">The image lands in <code>generations/</code> in your open project, next to a <code>.json</code> that records the prompt, the model and the cost.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="terms" class="back-of">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2>Terms of the lab</h2>
+      <p>Printed on the back of every envelope, so nobody is surprised.</p>
+    </div>
+    <div class="terms">
+      <div><h3>Keys by invitation</h3><p>Keys are handed out personally. There is no sign-up. If someone sent you this page, they have yours.</p></div>
+      <div><h3>Images only</h3><p>A key makes still images. Video is not part of it.</p></div>
+      <div><h3>A daily budget</h3><p>Each key has a budget in US dollars per day that resets at midnight Stockholm time. Your agent can check what is left, for free, before it spends anything.</p></div>
+      <div><h3>Drafts first</h3><p>Everything is made at 1K unless you ask. Ask for 2K or 4K once you have a favourite.</p></div>
+      <div><h3>Real files, not descriptions</h3><p>For a logo, a product or a face, give the agent the file. A logo described in words comes back wrong every time.</p></div>
+      <div><h3>Where your data goes</h3><p>Prompts and reference images go to ContentCoach, then to an image provider: Kie AI, fal.ai, WaveSpeed or Google. Reference images sit at a public address so the provider can fetch them; upload nothing you would not want reachable. Finished images are not kept, and their link expires within hours, so the agent downloads them straight away.</p></div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span class="big">ContentCoach</span>
+    <nav aria-label="Elsewhere">
+      <a href="https://github.com/santoso-git/contentcoach-skill">The skill on GitHub</a>
+      <a href="https://create.contentcoach.se/agent.md">agent.md</a>
+      <a href="https://create.contentcoach.se">create.contentcoach.se</a>
+    </nav>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var BASE='https://create.contentcoach.se/agent.md';
+  var AGENTS={
+    cursor:{dir:'~/.cursor/skills',note:'Cursor reads skills from ~/.cursor/skills',hint:'Restart Cursor. The skill is used in Agent mode. Run the same line again to update.'},
+    codex:{dir:'~/.agents/skills',note:'Codex reads skills from ~/.agents/skills',hint:'Restart Codex. The skill calls the API over the network, so approve the curl calls when Codex asks, or use a sandbox mode that allows network.'},
+    claude:{dir:'~/.claude/skills',note:'Claude Code reads skills from ~/.claude/skills',hint:'Start a new session. Ask in plain words, or type /contentcoach.'}
+  };
+  var out=document.getElementById('agent-out');
+  function esc(s){return s.replace(/[&<>]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;'}[c]})}
+  function render(v){
+    if(v==='none'){
+      out.innerHTML='<p class="say">Read '+BASE+' and make a 16:9 image of a coffee cup on a windowsill in morning light.</p>'+
+        '<p class="hint">Say this to any agent that can run curl. It reads the instructions and does the rest; nothing is installed.</p>';
+    }else{
+      var a=AGENTS[v];
+      var cmd='mkdir -p '+a.dir+'/contentcoach\ncurl -fsSL '+BASE+' -o '+a.dir+'/contentcoach/SKILL.md';
+      out.innerHTML='<div class="cmdbox"><pre class="cmd"><code><span class="c"># '+esc(a.note)+'</span>\n'+esc(cmd).replace(/\//g,'/<wbr>')+'</code></pre><button class="copy" type="button">Copy</button></div><p class="hint">'+esc(a.hint)+'</p>';
+    }
+    // the new slip feeds out of the counter printer
+    out.classList.remove('reprint'); void out.offsetWidth; out.classList.add('reprint');
+  }
+  document.querySelectorAll('input[name="agent"]').forEach(function(r){r.addEventListener('change',function(){render(r.value)})});
+
+  document.addEventListener('click',function(e){
+    var b=e.target.closest('.copy'); if(!b) return;
+    var code=b.parentNode.querySelector('code');
+    var text=[].slice.call(code.childNodes).filter(function(n){return !(n.classList&&n.classList.contains('c'))}).map(function(n){return n.textContent}).join('').replace(/^\n/,'').trim();
+    function done(){b.textContent='Copied';b.classList.add('done');setTimeout(function(){b.textContent='Copy';b.classList.remove('done')},1600)}
+    function pick(){var r=document.createRange();r.selectNodeContents(code);var s=getSelection();s.removeAllRanges();s.addRange(r);b.textContent='Selected'}
+    try{navigator.clipboard.writeText(text).then(done,pick)}catch(err){pick()}
+  });
+})();
+</script>
+</body>
+</html>

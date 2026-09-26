@@ -1,6 +1,6 @@
 ---
 name: contentcoach
-description: Generate images with several AI models (Nano Banana 2, GPT Image 2, Grok Imagine) through the ContentCoach API, using a personal key. Use when the user asks to generate, create or edit an image, a thumbnail, a blog header, a social image, a product shot or a mockup, or mentions ContentCoach.
+description: Generate images with several AI models (Nano Banana 2, GPT Image 2.5, Grok Imagine) through the ContentCoach API, using a personal key. Use when the user asks to generate, create or edit an image, a thumbnail, a blog header, a social image, a product shot or a mockup, or mentions ContentCoach.
 ---
 
 # ContentCoach — image generation over HTTP
@@ -80,7 +80,7 @@ curl -sS -H "$AUTH" -H "Content-Type: application/json" "$CC/api/generate" \
 | Field | Values |
 |---|---|
 | `prompt` | Required. English works best. Describe subject, setting, light, composition, style. Max 5000 characters. |
-| `model` | `nano-banana-2` (default), `gpt-image-2`, `grok-2` — see `/api/me` |
+| `model` | `nano-banana-2` (default), `gpt-image-2.5`, `grok-2` — see `/api/me` |
 | `aspect` | e.g. `1:1`, `16:9`, `9:16`, `4:5`; `auto` follows the first reference |
 | `resolution` | `1K` (default), `2K`, `4K` |
 | `refs` | Array of URLs from step 2 |
