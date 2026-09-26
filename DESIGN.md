@@ -120,7 +120,7 @@ components:
 
 # Design System: ContentCoach skill homepage
 
-**Scope.** This file describes the skill homepage in `docs/`, published by GitHub Pages. The ContentCoach web app is a separate repository with its own, different system (near-neutral surfaces with one gold for the spending action, rounded panels and soft shadows). Nothing here describes or overrides it, and nothing in it constrains this page.
+**Scope.** This file describes the skill homepage in `docs/`, published by GitHub Pages at skill.contentcoach.se. The ContentCoach web app is a separate repository with its own, different system (near-neutral surfaces with one gold for the spending action, rounded panels and soft shadows). Nothing here describes or overrides it, and nothing in it constrains this page.
 
 ## Overview
 

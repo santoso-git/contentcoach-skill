@@ -1,6 +1,6 @@
 # ContentCoach — an image and video skill for your AI agent
 
-**Homepage, with examples: https://santoso-git.github.io/contentcoach-skill/**
+**Homepage, with examples: https://skill.contentcoach.se/**
 
 A skill that makes images and short videos with several models — Nano Banana 2,
 GPT Image 2.5 and Grok Imagine for images; Kling 3.0, MiniMax H3, Grok Video and

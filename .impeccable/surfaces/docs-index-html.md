@@ -8,7 +8,7 @@ related_targets: []
 # Skill homepage
 
 Scope: the one-page public homepage for the ContentCoach client skill, served by
-GitHub Pages from `docs/` in santoso-git/contentcoach-skill. Visitor mode: Persuade.
+GitHub Pages from `docs/` in santoso-git/contentcoach-skill, at skill.contentcoach.se. Visitor mode: Persuade.
 
 Audience: people who work in Cursor, Codex or Claude Code and will create their
 own key at Kie AI or fal.ai. Job: understand what they get, get a key, pick

@@ -9,7 +9,9 @@ committed here is published.
   recipe per model. **These files are the source**; they are not generated from
   anywhere. Installs clone or fetch them raw from `main`, so a push here is a
   release to everyone who updates.
-- `docs/` — the homepage, served by GitHub Pages from `docs/` on `main`.
+- `docs/` — the homepage at https://skill.contentcoach.se/, served by GitHub
+  Pages from `docs/` on `main`. `docs/CNAME` holds the domain; keep it. The old
+  github.io address redirects there.
   Static, no build step, fonts self-hosted in `docs/fonts/`.
 - `docs/examples/` — real generations with a `.json` sidecar each. Never show an
   image without its sidecar, and never caption it with words the prompt did not say.

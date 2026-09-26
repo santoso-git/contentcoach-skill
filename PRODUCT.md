@@ -11,7 +11,7 @@ web
 The skill is a folder: `contentcoach/SKILL.md` plus one Markdown recipe per model
 in `contentcoach/models/`. It calls Kie AI and fal.ai directly over HTTP with the
 user's own keys; there is no ContentCoach server in between. The homepage is
-static HTML/CSS with no build step, served by GitHub Pages from `docs/`.
+static HTML/CSS with no build step, served by GitHub Pages from `docs/` at https://skill.contentcoach.se/.
 Delegated: the owner asked for "static and very simple"; plain files were chosen
 because Pages serves them with no toolchain.
 
