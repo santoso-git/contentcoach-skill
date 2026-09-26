@@ -16,6 +16,24 @@ Kie AI or fal.ai account, and you pay per image or clip at the provider's price.
 other skills. A design skill builds a landing page, and this one makes the hero
 image, the product shots and a short clip for it, saved straight into the project.
 
+## Short version: give this to your agent
+
+> Install the ContentCoach skill from https://github.com/santoso-git/contentcoach-skill: clone it to ~/.contentcoach-skill and link its contentcoach folder into your skills folder. Then check whether KIE_API_KEY or FAL_KEY is set in my shell, without showing the value. If neither is, tell me where to create one and how to add it to my shell profile. Never ask me to paste a key into the chat.
+
+Paste it into Claude Code, Cursor or Codex. The sections below do the same by
+hand.
+
+## Things to ask for
+
+- *Make a 16:9 blog header about remote work: a small desk in a Nordic cabin,
+  rain outside.*
+- *Animate that image: a slow push-in, rain running down the window. Five
+  seconds.*
+- *Put our logo from logo.png on a square post announcing the autumn menu, with
+  the words "Autumn menu" readable.*
+- *Build a landing page for my bakery with your design skill, and make the hero
+  image and three product shots for it with ContentCoach.*
+
 ## 1. Get a key
 
 One is enough. With both, the skill falls back from one to the other.
@@ -76,6 +94,11 @@ https://github.com/santoso-git/contentcoach-skill"*.
 ```bash
 git -C ~/.contentcoach-skill pull
 ```
+
+The recipes are kept up to date. Models and prices change every month: when a
+provider renames a model or changes a field or a price, the recipe is fixed, and
+new models get a recipe of their own as they come out. Pull to get them. The
+no-install route always reads the latest version.
 
 ## What it costs
 
