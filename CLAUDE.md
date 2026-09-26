@@ -5,9 +5,10 @@ committed here is published.
 
 ## Layout
 
-- `contentcoach/SKILL.md` — the skill. **This file is the source**; it is not
-  generated from anywhere. Installs fetch it raw from `main`, so a push here is a
-  release to everyone who reinstalls.
+- `contentcoach/SKILL.md` and `contentcoach/models/*.md` — the skill and one
+  recipe per model. **These files are the source**; they are not generated from
+  anywhere. Installs clone or fetch them raw from `main`, so a push here is a
+  release to everyone who updates.
 - `docs/` — the homepage, served by GitHub Pages from `docs/` on `main`.
   Static, no build step, fonts self-hosted in `docs/fonts/`.
 - `docs/examples/` — real generations with a `.json` sidecar each. Never show an
@@ -17,16 +18,17 @@ committed here is published.
 
 ## The boundary
 
-The skill calls the ContentCoach API at `https://create.contentcoach.se/api/*`
-(`me`, `upload`, `generate`, `status`). That API lives in a **separate, private
-repository** and is the only thing the two share. Nothing from the app belongs
-here, and nothing here belongs in the app. When the API changes, update
-SKILL.md here in the same breath.
+The skill calls **Kie AI** and **fal.ai** directly, with keys the user creates
+and pays for themselves (`KIE_API_KEY`, `FAL_KEY`). It has nothing to do with the
+ContentCoach web app or its API at create.contentcoach.se: no shared keys, no
+shared code, no calls. Users are not guests of anything; they are customers of
+the providers. When a provider changes a model id, a field or a price, fix the
+recipe in `contentcoach/models/` from a real run.
 
 ## Rules
 
-- Never commit a key. The skill reads `CONTENTCOACH_KEY` from the environment.
-- In SKILL.md, write prices as `0.08 USD`: a dollar sign followed by a digit is
+- Never commit a key. The skill reads `KIE_API_KEY` and `FAL_KEY` from the environment.
+- In the skill files, write prices as `0.08 USD`: a dollar sign followed by a digit is
   substituted away when Claude Code loads a skill.
-- Video costs roughly ten times an image. SKILL.md must keep the rule that the
+- Video costs roughly ten times an image. The skill must keep the rule that the
   agent quotes every clip and waits for an explicit yes.

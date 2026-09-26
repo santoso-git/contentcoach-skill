@@ -10,10 +10,10 @@ related_targets: []
 Scope: the one-page public homepage for the ContentCoach client skill, served by
 GitHub Pages from `docs/` in santoso-git/contentcoach-skill. Visitor mode: Persuade.
 
-Audience: invited guests who work in Cursor, Codex or Claude Code and have, or are
-about to get, a personal key. Job: understand what they get, pick their agent,
-copy one command. Proof: seven real generations made by this product on
-26 Sep 2026. Constraints: static, very simple, English, keys by invitation only,
+Audience: people who work in Cursor, Codex or Claude Code and will create their
+own key at Kie AI or fal.ai. Job: understand what they get, get a key, pick
+their agent, copy one command. Proof: seven real generations made by this product on
+26 Sep 2026. Constraints: static, very simple, English, the user's own provider keys,
 no invented claims.
 
 ## Direction contract
@@ -34,7 +34,7 @@ the envelope's printed headings, a plain sans for body, mono for commands and fo
 what the lab's machines print: the typed order line and the back-print on each
 print (adaptation recorded after the finish review).
 
-STORY: One key; your agent makes images with several models; here are real
+STORY: Your own Kie or fal key; your agent makes images with several models; here are real
 prints with what each cost; pick your agent, copy one line; know what it costs
 and where the data goes.
 

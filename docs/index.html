@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>ContentCoach — an image and video skill for your coding agent</title>
-<meta name="description" content="A skill for Cursor, Codex and Claude Code that makes images and short videos with Nano Banana 2, GPT Image 2.5, Grok Imagine, Kling 3.0 and Seedance. One personal key, no provider accounts.">
+<meta name="description" content="A skill for Cursor, Codex and Claude Code that makes images and short videos with Nano Banana 2, GPT Image 2.5, Grok Imagine, Kling 3.0 and Seedance. Calls Kie AI and fal.ai directly with your own key.">
 <meta property="og:title" content="ContentCoach — an image and video skill for your coding agent">
 <meta property="og:description" content="Install one skill. Ask your agent for a picture or a clip; it comes back as a file in your project.">
 <meta property="og:image" content="https://santoso-git.github.io/contentcoach-skill/examples/contentcoach-skill_bakery-sign_1790429269.webp">
@@ -233,7 +233,7 @@ footer .big{font:800 44px/1 var(--display);text-transform:uppercase}
               <span class="tick"><span class="box x" aria-hidden="true"></span>2K</span>
               <span class="tick"><span class="box" aria-hidden="true"></span>4K</span>
             </div></div>
-            <div class="order-row"><span>Agent</span><div class="fill note">Cursor, Codex or Claude Code. One personal key, no provider accounts.</div></div>
+            <div class="order-row"><span>Agent</span><div class="fill note">Cursor, Codex or Claude Code, with your own Kie AI or fal.ai key.</div></div>
           </div>
         </div>
 
@@ -323,16 +323,17 @@ footer .big{font:800 44px/1 var(--display);text-transform:uppercase}
   <div class="wrap">
     <div class="sec-head">
       <h2>Install the skill</h2>
-      <p>One file in your agent's skills folder, and a key in your shell. You get the key from whoever sent you this page.</p>
+      <p>A key from Kie AI or fal.ai in your shell, and the skill folder linked into your agent. You pay the providers directly; nothing goes through ContentCoach.</p>
     </div>
 
     <div class="steps">
       <div class="step">
         <div class="lbl">1<small>Key</small></div>
         <div class="body">
-          <h3>Put your key in your shell</h3>
-          <p>In <code>~/.zshrc</code> on a Mac or <code>~/.bashrc</code> on Linux. Never in a project and never in git. Open a new terminal and restart your editor afterwards.</p>
-          <div class="cmdbox"><pre class="cmd"><code>export CONTENTCOACH_KEY="your-key"</code></pre><button class="copy" type="button">Copy</button></div>
+          <h3>Get a key and put it in your shell</h3>
+          <p>Create one at <a href="https://kie.ai/api-key">Kie AI</a>, the cheapest for nearly every model, or at <a href="https://fal.ai/dashboard/keys">fal.ai</a>, and top up a little credit. One is enough; with both, the skill falls back from one to the other. Add the lines for the keys you have to <code>~/.zshrc</code> on a Mac or <code>~/.bashrc</code> on Linux, never to a project or git, then open a new terminal and restart your editor.</p>
+          <div class="cmdbox"><pre class="cmd"><code>export KIE_API_KEY="your-kie-key"
+export FAL_KEY="your-fal-key"</code></pre><button class="copy" type="button">Copy</button></div>
         </div>
       </div>
 
@@ -348,9 +349,9 @@ footer .big{font:800 44px/1 var(--display);text-transform:uppercase}
           </div>
           <div id="agent-out" aria-live="polite">
             <div class="cmdbox"><pre class="cmd"><code><span class="c"># Cursor reads skills from ~/.cursor/skills</span>
-mkdir -p ~/<wbr>.cursor/<wbr>skills/<wbr>contentcoach
-curl -fsSL https://<wbr>raw.githubusercontent.com/<wbr>santoso-git/<wbr>contentcoach-skill/<wbr>main/<wbr>contentcoach/<wbr>SKILL.md -o ~/<wbr>.cursor/<wbr>skills/<wbr>contentcoach/<wbr>SKILL.md</code></pre><button class="copy" type="button">Copy</button></div>
-            <p class="hint">Restart Cursor. The skill is used in Agent mode. Run the same line again to update.</p>
+git clone --depth 1 https://<wbr>github.com/<wbr>santoso-git/<wbr>contentcoach-skill ~/<wbr>.contentcoach-skill
+mkdir -p ~/<wbr>.cursor/<wbr>skills &amp;&amp; ln -s ~/<wbr>.contentcoach-skill/<wbr>contentcoach ~/<wbr>.cursor/<wbr>skills/<wbr>contentcoach</code></pre><button class="copy" type="button">Copy</button></div>
+            <p class="hint">Restart Cursor. The skill is used in Agent mode. To update, run <code>git -C ~/.contentcoach-skill pull</code>.</p>
           </div>
         </div>
       </div>
@@ -361,7 +362,7 @@ curl -fsSL https://<wbr>raw.githubusercontent.com/<wbr>santoso-git/<wbr>contentc
           <h3>Ask for a picture or a clip</h3>
           <p class="say">Make a 16:9 blog header about remote work: a small desk in a Nordic cabin, rain outside.</p>
           <p class="say say-2">Animate that image: a slow push-in, rain running down the window. Five seconds.</p>
-          <p class="hint">Before a clip runs, the skill tells you the model, the length and the price, and waits for your yes. Everything lands in <code>generations/</code> in your open project, next to a <code>.json</code> that records the prompt, the model and the cost.</p>
+          <p class="hint">Before a clip, or anything at 2K or 4K, the skill tells you the model, the provider and the price, and waits for your yes. Everything lands in <code>generations/</code> in your open project, next to a <code>.json</code> that records the prompt, the model and the cost.</p>
         </div>
       </div>
     </div>
@@ -375,12 +376,12 @@ curl -fsSL https://<wbr>raw.githubusercontent.com/<wbr>santoso-git/<wbr>contentc
       <p>Printed on the back of the envelope, so nobody is surprised.</p>
     </div>
     <div class="terms">
-      <div><h3>One personal key</h3><p>The skill needs a ContentCoach key, handed out personally. There is no sign-up and no provider account. If someone sent you this page, they have yours.</p></div>
-      <div><h3>Video is quoted first</h3><p>A clip costs roughly ten times an image. The skill shows you the model, length, resolution and price before every clip, and runs only on your yes.</p></div>
-      <div><h3>A daily budget</h3><p>Each key has a budget in US dollars per day that resets at midnight Stockholm time. The skill checks what is left, for free, before it spends anything.</p></div>
+      <div><h3>Your own key</h3><p>The skill calls Kie AI and fal.ai directly with a key you create there, and you pay them at their own prices. Nothing goes through ContentCoach, and nobody hands out keys.</p></div>
+      <div><h3>Video is quoted first</h3><p>A clip costs roughly ten times an image. The skill shows you the model, provider, length, resolution and price before every clip, and runs only on your yes. One yes covers one run.</p></div>
+      <div><h3>Cheapest route first</h3><p>With a Kie key the skill starts there, since it is the cheaper provider for nearly every model, and falls back to fal. It always says which provider ran and what it cost.</p></div>
       <div><h3>Drafts first</h3><p>Everything is made at 1K unless you ask. Ask for 2K or 4K once you have a favourite.</p></div>
       <div><h3>Real files, not descriptions</h3><p>For a logo, a product or a face, give the agent the file. A logo described in words comes back wrong every time.</p></div>
-      <div><h3>Where your data goes</h3><p>The skill sends prompts and reference images to the ContentCoach API, which passes them to a model provider: Kie AI, fal.ai, WaveSpeed or Google. Reference images sit at a public address so the provider can fetch them; upload nothing you would not want reachable. Finished images and clips are not kept, and their link expires within hours, so the skill downloads them straight away.</p></div>
+      <div><h3>Where your data goes</h3><p>Prompts and reference images go straight from your machine to Kie AI or fal.ai, under your own account. For Kie, reference images are uploaded to its temporary file storage, which deletes them within days; fal receives them inline. Result links expire within hours, so the skill downloads them straight away.</p></div>
     </div>
   </div>
 </section>
@@ -399,20 +400,21 @@ curl -fsSL https://<wbr>raw.githubusercontent.com/<wbr>santoso-git/<wbr>contentc
 <script>
 (function(){
   var BASE='https://raw.githubusercontent.com/santoso-git/contentcoach-skill/main/contentcoach/SKILL.md';
+  var REPO='https://github.com/santoso-git/contentcoach-skill';
   var AGENTS={
-    cursor:{dir:'~/.cursor/skills',note:'Cursor reads skills from ~/.cursor/skills',hint:'Restart Cursor. The skill is used in Agent mode. Run the same line again to update.'},
-    codex:{dir:'~/.agents/skills',note:'Codex reads skills from ~/.agents/skills',hint:'Restart Codex. The skill calls the API over the network, so approve the curl calls when Codex asks, or use a sandbox mode that allows network.'},
-    claude:{dir:'~/.claude/skills',note:'Claude Code reads skills from ~/.claude/skills',hint:'Start a new session. Ask in plain words, or type /contentcoach.'}
+    cursor:{dir:'~/.cursor/skills',note:'Cursor reads skills from ~/.cursor/skills',hint:'Restart Cursor. The skill is used in Agent mode. To update, run git -C ~/.contentcoach-skill pull.'},
+    codex:{dir:'~/.agents/skills',note:'Codex reads skills from ~/.agents/skills',hint:'Restart Codex. The skill calls Kie AI and fal.ai over the network, so approve the curl calls when Codex asks, or use a sandbox mode that allows network.'},
+    claude:{dir:'~/.claude/skills',note:'Claude Code reads skills from ~/.claude/skills',hint:'Start a new session. Ask in plain words, or type /contentcoach. To update, run git -C ~/.contentcoach-skill pull.'}
   };
   var out=document.getElementById('agent-out');
   function esc(s){return s.replace(/[&<>]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;'}[c]})}
   function render(v){
     if(v==='none'){
       out.innerHTML='<p class="say">Read '+BASE+' and make a 16:9 image of a coffee cup on a windowsill in morning light.</p>'+
-        '<p class="hint">Say this to any agent that can run curl. It reads the instructions and does the rest; nothing is installed.</p>';
+        '<p class="hint">Say this to any agent that can run curl, with your key already in your shell. It reads the instructions and the recipe for the model it picks, and does the rest; nothing is installed.</p>';
     }else{
       var a=AGENTS[v];
-      var cmd='mkdir -p '+a.dir+'/contentcoach\ncurl -fsSL '+BASE+' -o '+a.dir+'/contentcoach/SKILL.md';
+      var cmd='git clone --depth 1 '+REPO+' ~/.contentcoach-skill\nmkdir -p '+a.dir+' && ln -s ~/.contentcoach-skill/contentcoach '+a.dir+'/contentcoach';
       out.innerHTML='<div class="cmdbox"><pre class="cmd"><code><span class="c"># '+esc(a.note)+'</span>\n'+esc(cmd).replace(/\//g,'/<wbr>')+'</code></pre><button class="copy" type="button">Copy</button></div><p class="hint">'+esc(a.hint)+'</p>';
     }
     // the new slip feeds out of the counter printer

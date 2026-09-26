@@ -336,7 +336,7 @@
       "kind": "custom",
       "refersTo": "order-form-label",
       "description": "A ruled step row: condensed numeral with a docket caption, then title and prose.",
-      "html": "<div class=\"ds-step\"><div class=\"ds-lbl\">1<small>Key</small></div><div class=\"ds-body\"><h3>Put your key in your shell</h3><p>Never in a project and never in git.</p></div></div>",
+      "html": "<div class=\"ds-step\"><div class=\"ds-lbl\">1<small>Key</small></div><div class=\"ds-body\"><h3>Get a key and put it in your shell</h3><p>From Kie AI or fal.ai. Never in a project and never in git.</p></div></div>",
       "css": ":host{--env:#f7c21b;--env-deep:#e9ae00;--ink:#141311;--ink-soft:#3d3a33;--lab:#d7261e;--paper:#fbfaf6;--paper-2:#f1efe8;--hair:rgba(20,19,17,.22);--muted:#5d5a52;--display:\"Sofia Sans Extra Condensed\",\"Sofia Sans\",ui-sans-serif,system-ui,sans-serif;--sans:\"Sofia Sans\",ui-sans-serif,system-ui,sans-serif;--mono:\"JetBrains Mono\",ui-monospace,Menlo,monospace} .ds-step{display:grid;grid-template-columns:92px minmax(0,1fr);border:2px solid var(--ink);background:var(--env);color:var(--ink)} .ds-lbl{border-right:2px solid var(--ink);padding:18px 12px;font:800 44px/1 var(--display)} .ds-lbl small{display:block;font:700 11px/1.2 var(--sans);letter-spacing:.1em;text-transform:uppercase;margin-top:6px} .ds-body{padding:18px 22px} .ds-body h3{font:800 30px/.92 var(--display);text-transform:uppercase;margin:0 0 10px} .ds-body p{margin:0;font:17px/1.55 var(--sans)}"
     },
     {

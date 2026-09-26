@@ -1,149 +1,181 @@
 ---
 name: contentcoach
-description: Generate images and short videos with several AI models (Nano Banana 2, GPT Image 2.5, Grok Imagine, Kling 3.0, MiniMax H3, Seedance 2.5) through the ContentCoach API, using a personal key. Use when the user asks to generate, create or edit an image, a thumbnail, a blog header, a social image, a product shot or a mockup, to animate a picture or make a video clip, or mentions ContentCoach.
+description: Generate images and short videos with Nano Banana 2, GPT Image 2.5, Grok Imagine, Kling 3.0, MiniMax H3, Grok Video and Seedance 2.5, calling Kie AI and fal.ai directly with the user's own API keys, cheapest route first, with a price quote before anything expensive runs. Use when the user asks to generate, create or edit an image, a thumbnail, a blog header, a social image, a product shot or a mockup, to animate a picture or make a video clip, or mentions ContentCoach.
 ---
 
-# ContentCoach — images and video over HTTP
+# ContentCoach — images and video with your own keys
 
-Makes images and short videos by calling one HTTP API. The app holds every provider key; the
-user needs only a personal ContentCoach key. Everything below is `curl`.
+Makes images and short videos by calling two providers, **Kie AI** and **fal.ai**,
+over HTTP with `curl`. The user brings their own keys and pays the providers
+directly; nothing goes through any other server. Every output lands in one flat
+folder with a JSON sidecar recording how it was made.
+
 Answer the user in their own language.
 
-API base: `https://create.contentcoach.se` (override with `CONTENTCOACH_URL`).
+## Keys
 
-## The key
+Two environment variables. **One is enough; both give a fallback.**
 
-Read it from the environment variable `CONTENTCOACH_KEY`. If it is not set,
-ask the user for it and tell them to set it themselves, for example in their
-shell profile:
+| Variable | Get it at | Used for |
+|---|---|---|
+| `KIE_API_KEY` | https://kie.ai/api-key — top up credits first | Cheapest route for almost every model |
+| `FAL_KEY` | https://fal.ai/dashboard/keys — add a payment method first | Fallback, base64 references, and a few things only fal does |
 
-```bash
-export CONTENTCOACH_KEY="…"
-```
-
-Never write the key into a file in the project, a commit, a log, or your reply.
-Send it only to the API base above, only as `Authorization: Bearer`.
+If neither is set, stop and tell the user to create a key at one of the links
+above and put it in their shell profile (`~/.zshrc` on a Mac, `~/.bashrc` on
+Linux), then restart the agent:
 
 ```bash
-CC="${CONTENTCOACH_URL:-https://create.contentcoach.se}"
-AUTH="Authorization: Bearer $CONTENTCOACH_KEY"
+export KIE_API_KEY="…"
+export FAL_KEY="…"
 ```
 
-## 1. Check the key and the budget — free
+Never ask the user to paste a key into the chat. Never write a key into a file,
+a commit, a log or your reply. Send `KIE_API_KEY` only to `api.kie.ai` and
+`kieai.redpandaai.co`, and `FAL_KEY` only to `fal.run` and `queue.fal.run`.
+
+Check what is set without printing the values:
 
 ```bash
-curl -sS -H "$AUTH" "$CC/api/me"
+for v in KIE_API_KEY FAL_KEY; do [ -n "${!v}" ] && echo "$v set" || echo "$v missing"; done
 ```
 
-Returns the image models (`models`) and video models (`video_models`) this
-key may use — id, what each is for, aspects, resolutions or durations, price
-range in USD — and, for a guest key,
-`cap_usd`, `spent_usd` and `remaining_usd` for today. Choose the model from
-this list, not from memory.
+(`${!v}` is bash; in zsh use `${(P)v}`.)
 
-## 2. Reference images — optional, free
+## Models
 
-Anything the image must contain exactly — a logo, a product, a face, a photo
-to edit — goes in as a file. **Never describe a logo, a face or a brand colour
-in words**; the model gets it wrong every time. PNG, JPEG or WebP, max 4 MB
-(downscale larger files first, e.g. `sips -Z 2048` on macOS).
+**Read the recipe before every generation.** Do not call an API from memory: the
+recipe holds the endpoint, the body shape and the traps. The recipes sit next to
+this file in `models/`. If you are reading this from a URL rather than an
+installed copy, fetch them from
+`https://raw.githubusercontent.com/santoso-git/contentcoach-skill/main/contentcoach/models/<file>`.
+
+| Task | Model | Recipe |
+|---|---|---|
+| Image — default, drafts, edits with references | Nano Banana 2 | `nano-banana-2.md` |
+| Image — readable text in the picture, transparent background | GPT Image 2.5 | `gpt-image-2.5.md` |
+| Image — a different look | Grok Imagine 2.0 | `grok-imagine-2.md` |
+| Video — default | Kling 3.0 | `kling-3.md` |
+| Video — cheapest, or needs a seed | MiniMax H3 | `minimax-h3.md` |
+| Video — Grok's look, or a person from a photo | Grok Imagine Video 1.5 | `grok-imagine-video-1-5.md` |
+| Video — hero shot, or longer than 15 s | Seedance 2.5 | `seedance-2.5.md` |
+
+Before any reference image, and before handing a still to a video model, read
+`models/providers.md`. A still means three different things to a video model, and the
+two providers disagree on nearly every convention.
+
+## Routing
+
+Cheapest route first, and **say which route ran and why** in the reply.
+
+- **Kie first** when `KIE_API_KEY` is set. It is cheaper for nearly everything.
+- **fal** when only `FAL_KEY` is set, when Kie fails, or when the job needs
+  something only fal does: a seed on Nano Banana, Grok Imagine edits with
+  your own pictures, or MiniMax H3 at 480P or 4K.
+- If the only key set cannot run the job, say so and name the key that would.
+
+Never hide a swap between providers or models.
+
+## Reference images
+
+Anything the result must contain exactly — a logo, a product, a face, a photo to
+edit — goes in as a file. **Never describe a logo, a face or a brand colour in
+words**; the model gets it wrong every time. If a needed reference is missing,
+ask for it rather than approximating.
+
+- **fal** takes a base64 data URI directly. No upload.
+- **Kie** takes only public HTTPS URLs. Upload the local file first with the
+  user's own Kie key; the file is deleted after at most a few days:
 
 ```bash
-curl -sS -H "$AUTH" -F "file=@logo.png" "$CC/api/upload"
-# → {"url":"https://…/refs/…png"}
+curl -sS -X POST https://kieai.redpandaai.co/api/file-stream-upload \
+  -H "Authorization: Bearer $KIE_API_KEY" \
+  -F "file=@logo.png" -F "uploadPath=contentcoach-refs" | jq -r .data.downloadUrl
 ```
 
-Pass the returned `url` values in `refs`. Only URLs from this upload are
-accepted.
+Downscale files over about 4 MB first (`sips -Z 2048 file.png` on macOS).
 
-## 3. Quote — free
+## Rules
 
-The same request as step 4 with `"dryRun": true`. Nothing is generated.
+1. **Quote before video.** Before every video run, state model, provider,
+   duration, resolution, sound on or off, and the cost in USD from the recipe.
+   Then stop and wait for an explicit yes. Quoting is not approval. **One yes
+   covers exactly one run** — if the clip is wrong, quote again before a retry.
+   Video costs roughly ten times an image; Seedance up to sixty.
+2. **Quote before anything above a plain draft.** Several images at once,
+   anything at 2K or 4K, or GPT Image 2.5 on fal: say the price first.
+3. **Draft cheap, finish pretty.** Iterate at 1K. Rerun only the winning prompt
+   at 2K or 4K once the user has picked a favourite. Never draft at 4K.
+4. **Always send the fields whose defaults are dear.** Several models default to
+   their most expensive resolution, quality or audio setting. The recipes say
+   which.
+5. **One at a time.** Run generations sequentially, not in parallel.
+6. **Never loop on a failing request.** Every accepted submit is billed. On
+   `model not found` the id has been renamed: open the provider's model page,
+   copy the id fresh, and run once. Do not probe candidate ids.
+7. **Build request JSON with `jq -n --arg`**, never by string interpolation.
+   Prompts contain quotes that corrupt a hand-built body.
+8. **Poll one job per tool call** with a bounded loop, so a long render cannot
+   blow a tool timeout.
+
+## Save it — right away
+
+Result URLs expire within hours. Download immediately into `generations/` in the
+current project: flat, no subfolders, named
+`{short-description}_{unix-timestamp}.{ext}`, lowercase with hyphens inside the
+description.
+
+Then write `NAME.json` beside `NAME.ext` — same basename:
+
+```json
+{
+  "model": "nano-banana-2",
+  "provider": "kie",
+  "prompt": "the full text prompt exactly as sent",
+  "refs": ["logo.png"],
+  "params": { "aspect_ratio": "16:9", "resolution": "1K" },
+  "cost_usd": 0.04,
+  "created": "2026-09-26T09:41:00Z"
+}
+```
+
+Record the real cost where the provider reports it (`creditsConsumed` × 0.005
+on Kie, `x-fal-billable-units` on fal — its unit differs per model, see the
+recipe), otherwise the quoted one. Show the user the saved path, and the image
+if you can display it.
+
+## Cost at a glance
+
+Prices in USD, from the providers' pages and real runs; the recipes say which
+is which. Check the provider's pricing page before relying on them.
+
+| Job | Kie | fal |
+|---|---|---|
+| Nano Banana 2, 1K · 2K · 4K | 0.04 · 0.06 · 0.09 | 0.08 · 0.12 · 0.16 |
+| GPT Image 2.5, 1K · 2K · 4K | 0.03 · 0.05 · 0.08 | about 0.05 · 0.11 · 0.18 at `medium` |
+| Grok Imagine 2.0, 1k | 0.02 | 0.04 `low` · 0.06 `medium` |
+| Kling 3.0, 5 s, no sound | 0.35 at 720p · 0.45 at 1080p | 0.56 at 1080p |
+| MiniMax H3, 5 s | 0.40 at 768P | **0.25 at 480P** · 0.40 at 768P |
+| Grok Video 1.5, 5 s at 480p | 0.06 | 0.41 |
+| Seedance 2.5, 5 s | 0.70 at 480p · 1.58 at 720p | 1.10 at 480p · 2.37 at 720p |
+
+## Balance
 
 ```bash
-curl -sS -H "$AUTH" -H "Content-Type: application/json" "$CC/api/generate" \
-  -d '{"prompt":"…","model":"nano-banana-2","aspect":"16:9","resolution":"1K","dryRun":true}'
+curl -sS -H "Authorization: Bearer $KIE_API_KEY" -H "Content-Type: application/json" \
+  https://api.kie.ai/api/v1/chat/credit     # Content-Type is required, even on a GET
 ```
 
-`charged_usd` is what the run will take from today's budget (the dearest
-route it could fall back to); `remaining_usd` is what is left. Tell the user
-the price before a run when they asked for several images or anything above
-1K.
-
-## 4. Generate — costs money
-
-```bash
-curl -sS -H "$AUTH" -H "Content-Type: application/json" "$CC/api/generate" \
-  -d '{"prompt":"…","model":"nano-banana-2","aspect":"16:9","resolution":"1K"}'
-# → {"job":"eyJ…","model":"nano-banana-2","provider":"kie","estimate":0.04,…}
-```
-
-| Field | Values |
-|---|---|
-| `prompt` | Required. English works best. Describe subject, setting, light, composition, style. Max 5000 characters. |
-| `model` | `nano-banana-2` (default), `gpt-image-2.5`, `grok-2` — see `/api/me` |
-| `aspect` | e.g. `1:1`, `16:9`, `9:16`, `4:5`; `auto` follows the first reference |
-| `resolution` | `1K` (default), `2K`, `4K` |
-| `refs` | Array of URLs from step 2 |
-| `quality` | `low` or `medium`, `grok-2` only |
-
-**Draft at 1K.** Rerun at 2K or 4K only once the user has picked a favourite.
-To edit an existing image, upload it, pass it in `refs`, and write the prompt
-as an instruction: "Change the background to …, keep everything else".
-
-## Video
-
-Same three calls, with `"kind":"video"`. **Video costs roughly ten times an
-image. Before every video run, show the user the model, duration, resolution,
-sound on or off, and the `estimate` from a `dryRun`, and wait for an explicit
-yes. One yes covers one run** — if the clip is wrong, quote again before a retry.
-
-```bash
-curl -sS -H "$AUTH" -H "Content-Type: application/json" "$CC/api/generate" \
-  -d '{"kind":"video","model":"kling-3","prompt":"…","refs":["<start frame url>"],
-       "duration":"5","resolution":"720p","audio":false,"dryRun":true}'
-```
-
-| Field | Values |
-|---|---|
-| `model` | `kling-3` (default), `minimax-h3`, `grok-video-1-5`, `seedance-2.5` — see `video_models` |
-| `duration` | seconds as a string, one of the model's `durations` |
-| `resolution` | one of the model's `resolutions`; always set it — some defaults are dear |
-| `audio` | `true`/`false`. On Kling 3.0 sound costs about 45 % more |
-| `refs` | one uploaded image = the **first frame**. Best results come from animating a still the user already likes |
-| `endRef` | optional last frame (URL from step 2) |
-| `subjectRefs` | pictures of who the video is about, not a frame: `grok-video-1-5` and `seedance-2.5` |
-| `aspect` | used only without a start frame; with one, the ratio follows the picture |
-
-Describe motion, not only the scene: what moves, how the camera moves, the
-light. A video takes 1–5 minutes; poll every 10 seconds. The result is an mp4.
-
-## 5. Wait for it
-
-Poll every 5 seconds until `done` is true. An image takes 20–70 seconds.
-
-```bash
-curl -sS -H "$AUTH" "$CC/api/status?job=$JOB"
-# → {"done":false}   …then…   {"done":true,"item":{"url":"https://…","cost_usd":0.04,…}}
-```
-
-## 6. Save it — right away
-
-`item.url` expires within hours. Download it immediately into
-`generations/` in the current project, flat, no subfolders, named
-`{short-description}_{unix-timestamp}.{ext}` with the extension taken from
-the URL. Then write a sidecar `.json` with the same basename holding the whole
-`item` object, so the prompt that made the file is never lost. Show the user
-the saved path (and the image, if you can display it).
+fal has no balance endpoint for ordinary keys. An empty fal account shows up as
+`403 User is locked. Reason: TOP_UP`; a rejected job on a valid Kie key is also
+usually an empty balance, not a bad key. Check the balance before blaming auth.
 
 ## Errors
 
-| Status | Meaning |
+| What you see | Meaning |
 |---|---|
-| 401 | The key is missing, wrong or revoked. Ask the user to check it. |
-| 403 | Not allowed with this key, or a job that belongs to another key. |
-| 429 | Today's budget cannot cover this run. The message says how much; it resets at midnight Stockholm time. Do not retry. |
-| 400 | The request is invalid; the `error` text says why (unsupported aspect, too many refs…). Fix it and try once more. |
-| 502 | The providers failed. Nothing was charged if no job was created. Try once more, then tell the user. |
-
-Never loop on a failing request: every accepted submit is billed.
+| 401, or Kie `200` with `401` in the body | Key missing or wrong. On Kie's balance check, a missing `Content-Type` header also does this. |
+| 402, 403 `TOP_UP`, or "insufficient credits" | Empty balance. Tell the user to top up at the provider. |
+| 422 "model … not supported" / `model not found` | Renamed id. See rule 6. |
+| fal `COMPLETED` but the body has `detail` instead of `images` or `video` | The job failed on the caller's side, usually a reference fal could not download. Report the `detail` text. |
+| Kie `state: fail` | Read `failMsg` and tell the user. Try once more at most. |
