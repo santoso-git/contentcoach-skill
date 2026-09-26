@@ -13,6 +13,9 @@ committed here is published.
   Static, no build step, fonts self-hosted in `docs/fonts/`.
 - `docs/examples/` — real generations with a `.json` sidecar each. Never show an
   image without its sidecar, and never caption it with words the prompt did not say.
+- `LICENSE` — MIT, for the skill, recipes and homepage code. The logo, the
+  fonts (`docs/fonts/OFL.txt`) and the example generations are outside it; the
+  README's License section says so.
 - `PRODUCT.md`, `DESIGN.md`, `.impeccable/` — design context for the homepage.
   Change the page through the `impeccable` skill.
 

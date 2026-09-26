@@ -2,7 +2,7 @@
   "schemaVersion": 2,
   "generatedAt": "2026-09-26T13:54:02+00:00",
   "title": "Design System: ContentCoach skill homepage",
-  "scope": "docs/ only. The Next.js app in web/ has its own system (the web app repository) that this file does not describe.",
+  "scope": "docs/ only: the skill homepage.",
   "extensions": {
     "colorMeta": {
       "envelope-yellow": {

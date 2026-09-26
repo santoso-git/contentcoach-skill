@@ -1,24 +1,27 @@
 # Grok Imagine Video 1.5 (xAI, via Kie AI and fal.ai)
 
-Short video with Grok's look, on two routes with very different prices. **Sound
-is always on**; no route has a switch.
+Short video with Grok's look, on two routes with very different prices — on Kie
+the cheapest video in this skill. **Sound is always on**; no route has a switch.
 
-**Quote before running** (SKILL.md, rule 1).
+**Quote before running** (SKILL.md, rule 1). Send the body with the patterns in
+SKILL.md, *Running a job*.
 
 | Field | Kie AI (first) | fal.ai |
 |---|---|---|
 | Model id | `grok-imagine-video-1-5-preview` — one endpoint | `xai/grok-imagine-video/v1.5/text-to-video` · `…/image-to-video` · `…/reference-to-video` |
-| Duration | number 1–15, default **8** | integer 1–15, default **6** |
-| Resolution | `480p` `720p`, default `480p` | `480p` `720p`, default `720p` |
+| Duration | number 1–15, default **8** | integer 1–15; default **6** on text- and image-to-video, **8** on reference-to-video |
+| Resolution | `480p` `720p`, default `480p` | `480p` `720p`; default `720p`, **`480p` on reference-to-video** |
 | Aspect | `auto` `1:1` `16:9` `9:16` `3:2` `2:3` | on text- and reference-to-video, never image-to-video |
 | Images | `image_urls[]`, up to 7 | `image_url` (first frame) or `reference_image_urls[]` (likeness, up to 7) |
-| Docs | https://kie.ai/model/grok-imagine-video-1-5-preview | https://fal.ai/models/xai/grok-imagine-video/v1.5/text-to-video |
+| Docs | https://kie.ai/model/grok-imagine-video-1-5-preview.md | https://fal.ai/models/xai/grok-imagine-video/v1.5/text-to-video |
 
-The defaults disagree, so **always send duration and resolution**.
+The defaults disagree, so **always send duration and resolution**. Both
+providers also list 1080p, but no run has priced it; quote it only after reading
+the provider's price page.
 
 ## Cost
 
-Measured 21 Aug 2026, one 5-second 480p image-to-video clip on each route:
+Measured 21 Aug 2026, one 5-second 480p clip from a picture on each route:
 **0.06 USD on Kie, 0.41 USD on fal.** The gap is real.
 
 | Per second | Kie | fal |
@@ -44,27 +47,17 @@ tables, which held exactly at 480p.
 A prompt that describes a person the reference does not show makes the model
 drop the reference. That is prompt behaviour, not a missing capability.
 
-## Calls
+## Bodies
 
 ```bash
-# Kie — text to video, or add image_urls for a frame
+# Kie — text to video; add image_urls:["https://…"] for pictures of the subject
 jq -n --arg p "PROMPT" '{model:"grok-imagine-video-1-5-preview",input:{
   prompt:$p, duration:5, resolution:"480p", aspect_ratio:"16:9"}}' > /tmp/cc-req.json
-curl -sS -X POST https://api.kie.ai/api/v1/jobs/createTask \
-  -H "Authorization: Bearer $KIE_API_KEY" -H "Content-Type: application/json" \
-  --data @/tmp/cc-req.json | jq -r '.data.taskId'
 
-# fal — likeness
+# fal — likeness; submit to xai/grok-imagine-video/v1.5/reference-to-video
 jq -n --arg p "@Image1 walks through rain" --arg r "https://…" '{prompt:$p,
   reference_image_urls:[$r], duration:5, resolution:"480p", aspect_ratio:"9:16"}' > /tmp/cc-req.json
-curl -sS -X POST https://queue.fal.run/xai/grok-imagine-video/v1.5/reference-to-video \
-  -H "Authorization: Key $FAL_KEY" -H "Content-Type: application/json" \
-  --data @/tmp/cc-req.json | jq -r .request_id
 ```
-
-Poll Kie as in `nano-banana-2.md`. Poll fal at
-`https://queue.fal.run/xai/grok-imagine-video/requests/{id}/status`, then
-`…/requests/{id}`, as in `minimax-h3.md`; the clip is at `.video.url`.
 
 Kie calls the model `preview` — the kind of id that gets renamed. On `model not
 found`, open the model page and copy the id fresh.

@@ -8,11 +8,12 @@ OpenAI ships two variants at the same price on Kie: **Flare** (faster, used
 here) and **Sunburst** (slower, finer detail). For Sunburst, swap `flare` for
 `sunburst` in every id below.
 
+Send the body with the patterns in SKILL.md, *Running a job*.
+
 | Field | Kie AI (first) | fal.ai (fallback) |
 |---|---|---|
 | Text → image | `gpt-image-2-5-flare-text-to-image` | `openai/gpt-image-2.5/flare/text-to-image` |
-| With references | `gpt-image-2-5-flare-image-to-image`, refs in **`input_urls`** (max 16) | `openai/gpt-image-2.5/flare/edit`, refs in `image_urls` (max 16) |
-| Method | Async — createTask, poll recordInfo | Sync |
+| With references | `gpt-image-2-5-flare-image-to-image`, refs in **`input_urls`** | `openai/gpt-image-2.5/flare/edit`, refs in `image_urls` (max 16) |
 | Size | `resolution`: `1K` `2K` `4K` | `image_size`: preset or `{width, height}` |
 | Quality | none | `low` `medium` `high` `xhigh` `max` — **defaults to `high`**, always send `medium` |
 | Background | `transparent` `opaque` `auto` | same |
@@ -35,32 +36,21 @@ references.
 ```bash
 jq -n --arg p "PROMPT" '{model:"gpt-image-2-5-flare-text-to-image",
   input:{prompt:$p, aspect_ratio:"1:1", resolution:"1K"}}' > /tmp/cc-req.json
-# references:  model "gpt-image-2-5-flare-image-to-image", input.input_urls:["https://…"]
-# cut-out:     input.background:"transparent"
-curl -sS -X POST https://api.kie.ai/api/v1/jobs/createTask \
-  -H "Authorization: Bearer $KIE_API_KEY" -H "Content-Type: application/json" \
-  --data @/tmp/cc-req.json | jq -r '.data.taskId'
+# references:  model "gpt-image-2-5-flare-image-to-image", add input.input_urls:["https://…"]
+# cut-out:     add input.background:"transparent"
 ```
 
-Poll exactly as in `nano-banana-2.md`; `resultJson` is a JSON string.
-
-Aspect ratios, text-to-image: `auto 1:1 3:2 2:3 4:3 3:4 16:9 9:16 21:9 27:16
-16:27 9:8 8:9`. The last four are 1K only. `4:5`, `5:4`, `2:1` and `3:1` exist on
-image-to-image but not text-to-image.
+Aspect ratios: `auto 1:1 3:2 2:3 4:3 3:4 16:9 9:16 21:9 27:16 16:27 9:8 8:9`.
+The last four are 1K only. There is no `4:5`.
 
 ## fal.ai
 
 The prefix is **`openai/`, not `fal-ai/`**. `fal-ai/…` returns `model not found`.
 
 ```bash
-OUT=generations/desc_$(date +%s).png
 jq -n --arg p "PROMPT" '{prompt:$p, image_size:"landscape_16_9", quality:"medium",
   output_format:"png"}' > /tmp/cc-req.json
-curl -sS -m 300 -X POST https://fal.run/openai/gpt-image-2.5/flare/text-to-image \
-  -H "Authorization: Key $FAL_KEY" -H "Content-Type: application/json" \
-  --data @/tmp/cc-req.json -o /tmp/cc-resp.json -D /tmp/cc-headers.txt
-curl -sS -o "$OUT" "$(jq -r '.images[0].url' /tmp/cc-resp.json)"
-grep -i x-fal-billable-units /tmp/cc-headers.txt
+# submit to openai/gpt-image-2.5/flare/text-to-image
 ```
 
 - `image_size` presets: `square_hd` `square` `portrait_4_3` `portrait_16_9`

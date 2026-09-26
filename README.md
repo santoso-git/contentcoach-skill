@@ -41,7 +41,7 @@ One is enough. With both, the skill falls back from one to the other.
 - **Kie AI** — cheapest for nearly every model. Create a key at
   https://kie.ai/api-key and top up some credits.
 - **fal.ai** — the fallback, plus a few things only fal does (a seed on Nano
-  Banana, Grok Imagine edits, MiniMax H3 at 480P). Create a key at
+  Banana, Grok Imagine edits, MiniMax H3 at 480P or 4K). Create a key at
   https://fal.ai/dashboard/keys and add a payment method.
 
 Put them in your shell profile (`~/.zshrc` on a Mac, `~/.bashrc` on Linux) —
@@ -54,6 +54,10 @@ export FAL_KEY="your-fal-key"
 
 Open a new terminal, and restart your editor or agent so it picks them up.
 
+The skill runs `curl` and `jq`. Both come with most systems; if `jq` is
+missing, install it (`brew install jq` on a Mac, your package manager on
+Linux).
+
 ## 2. Use it — no install needed
 
 Tell your agent:
@@ -64,6 +68,8 @@ Tell your agent:
 It reads the instructions and the recipe for the model it picks, and does the
 rest. The image lands in `generations/` in the project you have open, with a
 `.json` beside it recording the prompt, model, provider and cost.
+
+In Codex, allow network access for the `curl` calls.
 
 ## 3. Or install it as a skill
 
@@ -77,6 +83,9 @@ once and link it into your agent's skills folder:
 ```bash
 git clone --depth 1 https://github.com/santoso-git/contentcoach-skill ~/.contentcoach-skill
 ```
+
+If `~/.contentcoach-skill` already exists, you have it — run the update command
+below instead. The same goes for the link: if it exists, leave it.
 
 Then, for your tool:
 
@@ -102,10 +111,10 @@ no-install route always reads the latest version.
 
 ## What it costs
 
-You pay Kie and fal at their own prices. A draft image is 0.03–0.08 USD; a
+You pay Kie and fal at their own prices. A draft image is 0.02–0.08 USD; a
 five-second video clip is 0.06–2.37 USD depending on model and provider. **Video
 costs roughly ten times an image, so the skill quotes every clip and waits for
-your yes before it runs**, and it quotes before anything at 2K or 4K. The full
+your yes before it runs**, and it does the same before anything at 2K or 4K. The full
 table is in [`SKILL.md`](contentcoach/SKILL.md).
 
 ## Tips
@@ -124,7 +133,28 @@ table is in [`SKILL.md`](contentcoach/SKILL.md).
 
 Your prompt and any reference images go straight from your machine to Kie AI or
 fal.ai, under your own account. For Kie, reference images are uploaded to Kie's
-temporary file storage, which deletes them within days; fal receives them inline.
+temporary file storage, which deletes them after about a day; fal receives them inline.
 Results are downloaded into your project straight away, because the providers'
 links expire within hours. Your keys stay in your shell; the skill never writes
 them anywhere.
+
+## License
+
+The skill, its recipes and the homepage code are released under the
+[MIT License](LICENSE).
+
+Not covered by that license:
+
+- **The ContentCoach name and logo** (`docs/contentcoach-logo.png`). Please don't
+  use them to present your own fork as this project.
+- **The fonts** in `docs/fonts/` — Sofia Sans, Sofia Sans Extra Condensed and
+  JetBrains Mono, under the [SIL Open Font License 1.1](docs/fonts/OFL.txt).
+- **The example images and clip** in `docs/examples/`. They were generated with
+  the AI models named in their `.json` sidecars and are shown as examples of
+  output; reuse them at your own discretion.
+
+ContentCoach is not affiliated with or endorsed by Kie AI, fal.ai, Google,
+OpenAI, xAI, Kuaishou (Kling), MiniMax, ByteDance, Higgsfield or Runway. Model
+and product names belong to their owners. You use the providers under their
+own terms and pay them directly; the skill quotes prices from their pages and
+real runs, but the provider's bill is what counts.

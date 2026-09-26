@@ -1,6 +1,7 @@
 ---
 name: contentcoach
 description: Generate images and short videos with Nano Banana 2, GPT Image 2.5, Grok Imagine, Kling 3.0, MiniMax H3, Grok Video and Seedance 2.5, calling Kie AI and fal.ai directly with the user's own API keys, cheapest route first, with a price quote before anything expensive runs. Use when the user asks to generate, create or edit an image, a thumbnail, a blog header, a social image, a product shot or a mockup, to animate a picture or make a video clip, or mentions ContentCoach.
+license: MIT
 ---
 
 # ContentCoach — images and video with your own keys
@@ -37,10 +38,11 @@ a commit, a log or your reply. Send `KIE_API_KEY` only to `api.kie.ai` and
 Check what is set without printing the values:
 
 ```bash
-for v in KIE_API_KEY FAL_KEY; do [ -n "${!v}" ] && echo "$v set" || echo "$v missing"; done
+for v in KIE_API_KEY FAL_KEY; do printenv "$v" >/dev/null && echo "$v set" || echo "$v missing"; done
 ```
 
-(`${!v}` is bash; in zsh use `${(P)v}`.)
+Tools you need: `curl` and `jq`. If `jq` is missing, tell the user to install it
+(`brew install jq` on a Mac, the package manager on Linux).
 
 ## Models
 
@@ -56,8 +58,8 @@ installed copy, fetch them from
 | Image — readable text in the picture, transparent background | GPT Image 2.5 | `gpt-image-2.5.md` |
 | Image — a different look | Grok Imagine 2.0 | `grok-imagine-2.md` |
 | Video — default | Kling 3.0 | `kling-3.md` |
-| Video — cheapest, or needs a seed | MiniMax H3 | `minimax-h3.md` |
-| Video — Grok's look, or a person from a photo | Grok Imagine Video 1.5 | `grok-imagine-video-1-5.md` |
+| Video — cheap at 480p, or needs a seed | MiniMax H3 | `minimax-h3.md` |
+| Video — cheapest of all on Kie, Grok's look, or a person from a photo | Grok Imagine Video 1.5 | `grok-imagine-video-1-5.md` |
 | Video — hero shot, or longer than 15 s | Seedance 2.5 | `seedance-2.5.md` |
 
 Before any reference image, and before handing a still to a video model, read
@@ -71,7 +73,8 @@ Cheapest route first, and **say which route ran and why** in the reply.
 - **Kie first** when `KIE_API_KEY` is set. It is cheaper for nearly everything.
 - **fal** when only `FAL_KEY` is set, when Kie fails, or when the job needs
   something only fal does: a seed on Nano Banana, Grok Imagine edits with
-  your own pictures, or MiniMax H3 at 480P or 4K.
+  your own pictures, or MiniMax H3 at 480P or 4K. **MiniMax H3 is the one
+  model that starts on fal**, because its cheapest tier exists only there.
 - If the only key set cannot run the job, say so and name the key that would.
 
 Never hide a swap between providers or models.
@@ -85,7 +88,8 @@ ask for it rather than approximating.
 
 - **fal** takes a base64 data URI directly. No upload.
 - **Kie** takes only public HTTPS URLs. Upload the local file first with the
-  user's own Kie key; the file is deleted after at most a few days:
+  user's own Kie key and use the URL right away; Kie deletes uploads after
+  about a day:
 
 ```bash
 curl -sS -X POST https://kieai.redpandaai.co/api/file-stream-upload \
@@ -103,7 +107,8 @@ Downscale files over about 4 MB first (`sips -Z 2048 file.png` on macOS).
    covers exactly one run** — if the clip is wrong, quote again before a retry.
    Video costs roughly ten times an image; Seedance up to sixty.
 2. **Quote before anything above a plain draft.** Several images at once,
-   anything at 2K or 4K, or GPT Image 2.5 on fal: say the price first.
+   anything at 2K or 4K, or GPT Image 2.5 on fal: say the price first and
+   wait for a yes.
 3. **Draft cheap, finish pretty.** Iterate at 1K. Rerun only the winning prompt
    at 2K or 4K once the user has picked a favourite. Never draft at 4K.
 4. **Always send the fields whose defaults are dear.** Several models default to
@@ -115,15 +120,87 @@ Downscale files over about 4 MB first (`sips -Z 2048 file.png` on macOS).
    copy the id fresh, and run once. Do not probe candidate ids.
 7. **Build request JSON with `jq -n --arg`**, never by string interpolation.
    Prompts contain quotes that corrupt a hand-built body.
-8. **Poll one job per tool call** with a bounded loop, so a long render cannot
-   blow a tool timeout.
+8. **Every tool call starts a fresh shell.** Variables set in one call are gone
+   in the next, so each block below starts by setting what it needs. Poll one
+   job per call, in loops of about 100 seconds; if it is still running, run
+   the poll block again.
+
+## Running a job
+
+Every recipe gives the model id, the endpoint and the request body. The body is
+built with `jq -n --arg` into `/tmp/cc-req.json`; then one of these three
+patterns sends it, waits and downloads. Choose the output name first,
+`generations/{short-description}_{unix-timestamp}.{ext}`, and reuse it.
+
+**Kie AI — submit:**
+
+```bash
+curl -sS -X POST https://api.kie.ai/api/v1/jobs/createTask \
+  -H "Authorization: Bearer $KIE_API_KEY" -H "Content-Type: application/json" \
+  --data @/tmp/cc-req.json | tee /tmp/cc-submit.json | jq -r '.data.taskId // empty'
+# no task id printed: read /tmp/cc-submit.json for the error
+```
+
+**Kie AI — poll and download** (fill in the two values):
+
+```bash
+TID="TASK_ID"; OUT="generations/NAME.png"
+for i in $(seq 1 12); do
+  curl -sS -H "Authorization: Bearer $KIE_API_KEY" \
+    "https://api.kie.ai/api/v1/jobs/recordInfo?taskId=$TID" -o /tmp/cc-rec.json
+  ST=$(jq -r '.data.state' /tmp/cc-rec.json)
+  case "$ST" in success|fail) break;; esac
+  sleep 8
+done
+echo "state: $ST"
+if [ "$ST" = success ]; then
+  mkdir -p generations
+  curl -sS -o "$OUT" "$(jq -r '.data.resultJson // "{}"' /tmp/cc-rec.json | jq -r '.resultUrls[0] // empty')"
+fi
+jq '.data | {creditsConsumed, failMsg}' /tmp/cc-rec.json
+```
+
+`resultJson` is a JSON **string**, so it is parsed twice. Cost is
+`creditsConsumed × 0.005` USD.
+
+**fal.ai — submit to the queue:**
+
+```bash
+curl -sS -X POST "https://queue.fal.run/MODEL_ID" \
+  -H "Authorization: Key $FAL_KEY" -H "Content-Type: application/json" \
+  --data @/tmp/cc-req.json | tee /tmp/cc-submit.json | jq -r '.status_url, .response_url'
+```
+
+**fal.ai — poll and download** (paste the two URLs the submit printed):
+
+```bash
+STATUS_URL="…"; RESPONSE_URL="…"; OUT="generations/NAME.png"
+for i in $(seq 1 10); do
+  ST=$(curl -sS -H "Authorization: Key $FAL_KEY" "$STATUS_URL" | jq -r .status)
+  [ "$ST" = COMPLETED ] && break
+  sleep 10
+done
+echo "status: $ST"
+if [ "$ST" = COMPLETED ]; then
+  curl -sS -H "Authorization: Key $FAL_KEY" "$RESPONSE_URL" -o /tmp/cc-resp.json -D /tmp/cc-headers.txt
+  URL=$(jq -r '.images[0].url // .video.url // empty' /tmp/cc-resp.json)
+  if [ -n "$URL" ]; then mkdir -p generations; curl -sS -o "$OUT" "$URL"; else jq .detail /tmp/cc-resp.json; fi
+  grep -i x-fal-billable-units /tmp/cc-headers.txt
+fi
+```
+
+Use the URLs fal returns rather than building them: the poll address drops the
+endpoint's sub-path (`…/kling-video/v3/pro/image-to-video` is polled at
+`…/kling-video/requests/{id}`), and a hand-built one returns a 404 that looks
+like a lost job. A `COMPLETED` body with `detail` instead of `images` or `video`
+is a failed job — report the `detail`.
 
 ## Save it — right away
 
-Result URLs expire within hours. Download immediately into `generations/` in the
-current project: flat, no subfolders, named
-`{short-description}_{unix-timestamp}.{ext}`, lowercase with hyphens inside the
-description.
+Result URLs expire within hours; the patterns above download at once into
+`generations/` in the current project. Keep it flat, no subfolders, with names
+like `{short-description}_{unix-timestamp}.{ext}`, lowercase with hyphens inside
+the description.
 
 Then write `NAME.json` beside `NAME.ext` — same basename:
 

@@ -57,14 +57,14 @@ in `generations/` in their open project, each with a JSON sidecar.
   balance is the limit.
 - Keys are the user's own, from Kie AI or fal.ai. One is enough; both give a
   fallback.
-- Reference images for Kie go to Kie's temporary file storage (deleted within
-  days); fal receives them inline.
+- Reference images for Kie go to Kie's temporary file storage (deleted after
+  about a day); fal receives them inline.
 - Nothing passes through ContentCoach. Result links expire in hours, so the skill
   downloads straight away.
 
 ## Brand Commitments
 
-- Name: ContentCoach. Logo: `assets/contentcoach-logo.png`.
+- Name: ContentCoach. Logo: `docs/contentcoach-logo.png`.
 - The web app's own palette is near-neutral with one gold (`#e6b84f`) reserved
   for the action that spends money. Inferred, not confirmed as binding for the
   skill homepage.
@@ -72,10 +72,10 @@ in `generations/` in their open project, each with a JSON sidecar.
 
 ## Evidence on Hand
 
-- Six example images made for the homepage on 26 Sep 2026, with prompt
-  sidecars, in `docs/examples/`. A seventh, an edit, failed and
-  was not shipped. They are real generations with
-  the same models and providers the skill calls, not stock.
+- Seven example images and one clip, made on 26 Sep 2026 with prompt sidecars
+  in `docs/examples/`. They are real generations with the same models and
+  providers the skill calls, made through the owner's web app, not stock. Nos. 3
+  and 4 used GPT Image 2, the predecessor of 2.5.
 - No testimonials, customer names, usage figures or benchmarks exist. Do not
   invent them.
 

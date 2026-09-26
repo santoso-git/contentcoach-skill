@@ -267,8 +267,8 @@ footer .big{font:800 44px/1 var(--display);text-transform:uppercase}
 <section id="prints">
   <div class="wrap">
     <div class="sec-head">
-      <h2>What the skill made</h2>
-      <p>Seven images and one clip, each from a single run. Beneath each one: the model the skill chose, the size, what it cost, and the prompt it sent.</p>
+      <h2>What the models made</h2>
+      <p>Seven images and one clip, each from a single run of the models and providers the skill calls. Beneath each one: the model, the size, what it cost, and the prompt.</p>
     </div>
 
     <div class="prints">
@@ -304,7 +304,7 @@ footer .big{font:800 44px/1 var(--display);text-transform:uppercase}
       <div class="row edit">
         <figure class="print" style="--ar:1600/894;--k:1.79"><img src="examples/contentcoach-skill_cup-windowsill_1790429059.webp" width="1600" height="894" loading="lazy" alt="The original: the stoneware cup on the cabin windowsill.">
           <figcaption><span class="back"><span>No. 1</span><span>Before</span></span>
-          <p class="prompt"><span>Given</span>as the reference image, uploaded by the agent</p></figcaption></figure>
+          <p class="prompt"><span>Given</span>No. 1, as the reference image</p></figcaption></figure>
         <figure class="print" style="--ar:1600/899;--k:1.78"><img src="examples/contentcoach-skill_cup-studio-edit-gpt25_1790437004.webp" width="1600" height="899" loading="lazy" alt="The same cup, glaze and steam, now on a pale sage studio backdrop.">
           <figcaption><span class="back"><span>No. 7</span><span>GPT Image 2.5</span><span>2K · 16:9</span><b>0.05 USD</b></span>
           <p class="prompt"><span>Prompt</span>Edit this image. Replace the window, the birch trees and the wooden windowsill with a bright seamless studio backdrop in pale sage green… Keep everything else exactly as it is…</p></figcaption></figure>
@@ -321,7 +321,7 @@ footer .big{font:800 44px/1 var(--display);text-transform:uppercase}
     </div>
     <div class="legend legend-video">
       <div><h3>Kling 3.0</h3><p>The default for video. Animates a still you like, 3–15 seconds, sound optional.</p></div>
-      <div><h3>MiniMax H3</h3><p>The cheapest clips at 480p, and the only one that can repeat a take with a seed.</p></div>
+      <div><h3>MiniMax H3</h3><p>Cheap clips at 480p, and the only one that can repeat a take with a seed.</p></div>
       <div><h3>Grok Video · Seedance 2.5</h3><p>Grok keeps a person recognisable from photos. Seedance for hero shots up to 30 seconds, at a price.</p></div>
     </div>
   </div>
@@ -400,7 +400,7 @@ mkdir -p ~/<wbr>.cursor/<wbr>skills &amp;&amp; ln -s ~/<wbr>.contentcoach-skill/
       <div><h3>Cheapest route first</h3><p>With a Kie key the skill starts there, since it is the cheaper provider for nearly every model, and falls back to fal. It always says which provider ran and what it cost.</p></div>
       <div><h3>Drafts first</h3><p>Everything is made at 1K unless you ask. Ask for 2K or 4K once you have a favourite.</p></div>
       <div><h3>Real files, not descriptions</h3><p>For a logo, a product or a face, give the agent the file. A logo described in words comes back wrong every time.</p></div>
-      <div><h3>Where your data goes</h3><p>Prompts and reference images go straight from your machine to Kie AI or fal.ai, under your own account. For Kie, reference images are uploaded to its temporary file storage, which deletes them within days; fal receives them inline. Result links expire within hours, so the skill downloads them straight away.</p></div>
+      <div><h3>Where your data goes</h3><p>Prompts and reference images go straight from your machine to Kie AI or fal.ai, under your own account. For Kie, reference images are uploaded to its temporary file storage, which deletes them after about a day; fal receives them inline. Result links expire within hours, so the skill downloads them straight away.</p></div>
     </div>
   </div>
 </section>
@@ -412,6 +412,7 @@ mkdir -p ~/<wbr>.cursor/<wbr>skills &amp;&amp; ln -s ~/<wbr>.contentcoach-skill/
     <nav aria-label="Elsewhere">
       <a href="https://github.com/santoso-git/contentcoach-skill">The skill on GitHub</a>
       <a href="https://github.com/santoso-git/contentcoach-skill/blob/main/contentcoach/SKILL.md">SKILL.md</a>
+      <a href="https://github.com/santoso-git/contentcoach-skill/blob/main/LICENSE">MIT License</a>
     </nav>
   </div>
 </footer>
@@ -422,7 +423,7 @@ mkdir -p ~/<wbr>.cursor/<wbr>skills &amp;&amp; ln -s ~/<wbr>.contentcoach-skill/
   var REPO='https://github.com/santoso-git/contentcoach-skill';
   var AGENTS={
     cursor:{dir:'~/.cursor/skills',note:'Cursor reads skills from ~/.cursor/skills',hint:'Restart Cursor. The skill is used in Agent mode. To update, run git -C ~/.contentcoach-skill pull.'},
-    codex:{dir:'~/.agents/skills',note:'Codex reads skills from ~/.agents/skills',hint:'Restart Codex. The skill calls Kie AI and fal.ai over the network, so approve the curl calls when Codex asks, or use a sandbox mode that allows network.'},
+    codex:{dir:'~/.agents/skills',note:'Codex reads skills from ~/.agents/skills',hint:'Restart Codex. The skill calls Kie AI and fal.ai over the network, so approve the curl calls when Codex asks, or use a sandbox mode that allows network. To update, run git -C ~/.contentcoach-skill pull.'},
     claude:{dir:'~/.claude/skills',note:'Claude Code reads skills from ~/.claude/skills',hint:'Start a new session. Ask in plain words, or type /contentcoach. To update, run git -C ~/.contentcoach-skill pull.'}
   };
   var out=document.getElementById('agent-out');

@@ -4,15 +4,15 @@ General-purpose short video with optional native sound, and the default video
 route. Best results come from animating a still the user already likes: make it
 with Nano Banana 2, pick a winner, then animate it.
 
-**Quote before running** (SKILL.md, rule 1).
+**Quote before running** (SKILL.md, rule 1). Send the body with the patterns in
+SKILL.md, *Running a job*; poll every 10–15 s, a clip takes 1–5 minutes.
 
 | Field | Kie AI (first) | fal.ai (fallback) |
 |---|---|---|
 | Model id | `kling-3.0/video` — one id for text and image | `fal-ai/kling-video/v3/pro/text-to-video` · `…/v3/pro/image-to-video` |
-| Method | Async — createTask, poll recordInfo | Async — queue submit, poll |
 | Resolution | `mode`: `std` = 720p, `pro` = 1080p | 1080p only |
-| Duration | `"3"`–`"15"`, a string | `"3"`–`"15"`, a string |
-| Sound | `sound`, default false | `generate_audio`, **default true** — always send it |
+| Duration | 3–15, **a number** | `"3"`–`"15"`, **a string** |
+| Sound | `sound`, **default true** — always send it | `generate_audio`, **default true** — always send it |
 | Frames | `image_urls`: `[first]` or `[first, last]` | `start_image_url`, `end_image_url` |
 | Aspect | `16:9` `9:16` `1:1`; ignored when a frame is given | same; image-to-video has none |
 | Negative prompt | none | `negative_prompt` |
@@ -41,36 +41,26 @@ route is unrun; its prices are published, not measured.
 
 ```bash
 jq -n --arg p "PROMPT" --arg img "https://…first-frame.png" '{model:"kling-3.0/video",input:{
-  prompt:$p, duration:"5", mode:"std", sound:false, multi_shots:false, image_urls:[$img]}}' > /tmp/cc-req.json
-curl -sS -X POST https://api.kie.ai/api/v1/jobs/createTask \
-  -H "Authorization: Bearer $KIE_API_KEY" -H "Content-Type: application/json" \
-  --data @/tmp/cc-req.json | jq -r '.data.taskId'
+  prompt:$p, duration:5, mode:"std", sound:false, multi_shots:false, image_urls:[$img]}}' > /tmp/cc-req.json
 ```
 
 - `sound`, `duration`, `mode` and `multi_shots` are all required. Send
-  `multi_shots: false` explicitly.
+  `multi_shots: false` explicitly, and `sound: false` unless sound was quoted.
 - Without a frame, send `aspect_ratio` and drop `image_urls`.
 - A last frame alone is not possible: index 0 is always the first frame.
 - Frames must be public URLs — upload local files first (SKILL.md).
-- Poll as in `nano-banana-2.md`, every 10–15 s; a clip takes 1–5 minutes.
 
 ## fal.ai
 
-```
-POST https://queue.fal.run/fal-ai/kling-video/v3/pro/image-to-video
-GET  https://queue.fal.run/fal-ai/kling-video/requests/{request_id}/status
-GET  https://queue.fal.run/fal-ai/kling-video/requests/{request_id}
-```
+Submit to `fal-ai/kling-video/v3/pro/image-to-video`:
 
-Status and result strip the sub-path back to `fal-ai/kling-video`.
-
-```json
-{ "prompt": "…", "start_image_url": "https://… or data:image/png;base64,…",
-  "duration": "5", "generate_audio": false, "negative_prompt": "blur, distort, low quality" }
+```bash
+jq -n --arg p "PROMPT" --arg img "https://… or data:image/png;base64,…" '{prompt:$p,
+  start_image_url:$img, duration:"5", generate_audio:false,
+  negative_prompt:"blur, distort, low quality"}' > /tmp/cc-req.json
 ```
 
-Poll as in `minimax-h3.md`. The clip is at `.video.url`; one billable unit is
-one second.
+One billable unit is one second.
 
 ## Prompting
 

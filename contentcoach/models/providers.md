@@ -11,7 +11,7 @@ ignored part of the request.
 |---|---|---|
 | Auth header | `Authorization: Bearer $KIE_API_KEY` | `Authorization: Key $FAL_KEY` — the word `Key` |
 | Body | nested in `input` | flat |
-| Method | always async: `jobs/createTask`, poll `jobs/recordInfo` | images sync at `fal.run`; video and Grok via `queue.fal.run` |
+| Method | always async: `jobs/createTask`, poll `jobs/recordInfo` | queue: submit to `queue.fal.run/<model>`, poll the returned `status_url` |
 | Result | `data.resultJson` — **a JSON string**, parse twice | `images[0].url` or `video.url` |
 | References | public HTTPS URLs only — upload first | URLs **or** base64 data URIs |
 | Unknown fields | **ignored silently** | usually rejected |
@@ -26,8 +26,8 @@ dollar on GPT Image 2.5**. Never carry a unit rate from one model to another.
 
 **fal's queue strips the sub-path on polls.** Submit to
 `queue.fal.run/fal-ai/kling-video/v3/pro/image-to-video`, but poll
-`queue.fal.run/fal-ai/kling-video/requests/{id}/status`. Keeping the sub-path
-returns a 404 that looks like a lost job.
+`queue.fal.run/fal-ai/kling-video/requests/{id}/status`. Use the `status_url` and
+`response_url` the submit returns rather than building them by hand.
 
 **fal's `COMPLETED` does not mean it produced anything.** When a job fails for a
 reason fal blames on the caller — usually a reference it could not download —
