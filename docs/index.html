@@ -3,10 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>ContentCoach — images from your coding agent</title>
-<meta name="description" content="Make images with Nano Banana 2, GPT Image 2.5 and Grok Imagine from Cursor, Codex or Claude Code. One personal key, no provider accounts.">
-<meta property="og:title" content="ContentCoach — images from your coding agent">
-<meta property="og:description" content="One personal key. Your agent hands in the order, the lab sends back prints.">
+<title>ContentCoach — an image and video skill for your coding agent</title>
+<meta name="description" content="A skill for Cursor, Codex and Claude Code that makes images and short videos with Nano Banana 2, GPT Image 2.5, Grok Imagine, Kling 3.0 and Seedance. One personal key, no provider accounts.">
+<meta property="og:title" content="ContentCoach — an image and video skill for your coding agent">
+<meta property="og:description" content="Install one skill. Ask your agent for a picture or a clip; it comes back as a file in your project.">
 <meta property="og:image" content="https://santoso-git.github.io/contentcoach-skill/examples/contentcoach-skill_bakery-sign_1790429269.webp">
 <meta name="theme-color" content="#f7c21b">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='4' fill='%23f7c21b'/%3E%3Crect x='7' y='8' width='18' height='16' fill='%23fff' stroke='%23141311' stroke-width='2'/%3E%3Crect x='10' y='11' width='12' height='8' fill='%23141311'/%3E%3C/svg%3E">
@@ -118,6 +118,9 @@ section{padding-block:clamp(64px,9vw,112px)}
 .prompt{font:400 13.5px/1.45 var(--sans);color:var(--muted);margin:0}
 .prompt span{font:700 11px/1 var(--sans);letter-spacing:.1em;text-transform:uppercase;color:var(--ink);margin-right:6px}
 .edit-head{font-size:clamp(28px,3.4vw,40px);margin-top:clamp(16px,2vw,28px)}
+.legend-video{margin-top:18px}
+.say-2{margin-top:10px}
+.clip video{width:100%;height:auto;aspect-ratio:var(--ar);object-fit:cover;display:block;background:var(--ink)}
 .legend{margin-top:clamp(28px,3vw,40px);display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border-top:2px solid var(--ink)}
 .legend div{padding:16px 18px 0 0}
 .legend h3{font-size:26px;margin-bottom:6px}
@@ -208,7 +211,7 @@ footer .big{font:800 44px/1 var(--display);text-transform:uppercase}
       <nav aria-label="Page">
         <a href="#prints">Prints</a>
         <a href="#drop-off">Install</a>
-        <a href="#terms">Terms</a>
+        <a href="#terms">How it works</a>
         <a href="https://github.com/santoso-git/contentcoach-skill">GitHub</a>
       </nav>
     </div>
@@ -216,11 +219,15 @@ footer .big{font:800 44px/1 var(--display);text-transform:uppercase}
     <h1 class="name">ContentCoach</h1>
     <div class="env-grid">
       <div>
-        <p class="lede">Ask your coding agent for a picture. It hands the order to several image models and saves the prints in your project.</p>
+        <p class="lede">A skill for Cursor, Codex and Claude Code. Ask your agent for a picture or a short clip; the skill picks the model, places the order and saves the result in your project.</p>
 
         <div class="order-wrap">
           <div class="order" role="group" aria-label="An example order">
             <div class="order-row"><span>Order</span><div class="fill">a stoneware coffee cup on a windowsill, morning light, 16:9</div></div>
+            <div class="order-row"><span>Kind</span><div class="fill ticks">
+              <span class="tick"><span class="box x" aria-hidden="true"></span>Image</span>
+              <span class="tick"><span class="box" aria-hidden="true"></span>Video</span>
+            </div></div>
             <div class="order-row"><span>Size</span><div class="fill ticks">
               <span class="tick"><span class="box" aria-hidden="true"></span>1K draft</span>
               <span class="tick"><span class="box x" aria-hidden="true"></span>2K</span>
@@ -233,7 +240,7 @@ footer .big{font:800 44px/1 var(--display);text-transform:uppercase}
         <div class="actions">
           <a class="btn" href="#drop-off">Choose your agent
             <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M8 2v11M3 8.5 8 13.5 13 8.5"/></svg></a>
-          <a class="quiet" href="https://create.contentcoach.se/agent.md">Read agent.md</a>
+          <a class="quiet" href="https://github.com/santoso-git/contentcoach-skill/blob/main/contentcoach/SKILL.md">Read the skill</a>
           <div class="stamp" aria-hidden="true">Received<b>26 Sep 2026</b></div>
         </div>
       </div>
@@ -242,7 +249,7 @@ footer .big{font:800 44px/1 var(--display);text-transform:uppercase}
         <figure class="print p1" style="--ar:16/9"><img src="examples/contentcoach-skill_cup-windowsill_1790429059_720.webp" width="720" height="402" alt=""><figcaption>No. 1 · Nano Banana 2 · 2K</figcaption></figure>
         <figure class="print p2" style="--ar:1/1"><img src="examples/contentcoach-skill_lighthouse-riso_1790429483_720.webp" width="720" height="720" alt=""><figcaption>No. 5 · Grok Imagine 2.0</figcaption></figure>
         <figure class="print p3" style="--ar:4/3"><img src="examples/contentcoach-skill_bakery-sign_1790429269_720.webp" width="720" height="540" alt=""><figcaption>No. 3 · GPT Image 2 · 2K</figcaption></figure>
-        <div class="pocket"><span>Prints enclosed<small>7 frames · 0.35 USD in all</small></span></div>
+        <div class="pocket"><span>Prints enclosed<small>7 frames and a clip · 0.56 USD in all</small></span></div>
       </div>
     </div>
   </div>
@@ -252,8 +259,8 @@ footer .big{font:800 44px/1 var(--display);text-transform:uppercase}
 <section id="prints">
   <div class="wrap">
     <div class="sec-head">
-      <h2>Prints from the lab</h2>
-      <p>Seven images, each from a single run. Beneath each one: the model that made it, the size, what it cost, and the prompt it was given.</p>
+      <h2>What the skill made</h2>
+      <p>Seven images and one clip, each from a single run. Beneath each one: the model the skill chose, the size, what it cost, and the prompt it sent.</p>
     </div>
 
     <div class="prints">
@@ -285,7 +292,7 @@ footer .big{font:800 44px/1 var(--display);text-transform:uppercase}
           <p class="prompt"><span>Prompt</span>Wide editorial blog header photograph: a small pine desk under the window of a Nordic cabin on a rainy afternoon…</p></figcaption></figure>
       </div>
 
-      <h3 class="edit-head">An edit: the same cup, a new room</h3>
+      <h3 class="edit-head">An edit, and a clip from the same cup</h3>
       <div class="row edit">
         <figure class="print" style="--ar:1600/894;--k:1.79"><img src="examples/contentcoach-skill_cup-windowsill_1790429059.webp" width="1600" height="894" loading="lazy" alt="The original: the stoneware cup on the cabin windowsill.">
           <figcaption><span class="back"><span>No. 1</span><span>Before</span></span>
@@ -293,6 +300,9 @@ footer .big{font:800 44px/1 var(--display);text-transform:uppercase}
         <figure class="print" style="--ar:1600/899;--k:1.78"><img src="examples/contentcoach-skill_cup-studio-edit-gpt25_1790437004.webp" width="1600" height="899" loading="lazy" alt="The same cup, glaze and steam, now on a pale sage studio backdrop.">
           <figcaption><span class="back"><span>No. 7</span><span>GPT Image 2.5</span><span>2K · 16:9</span><b>0.05 USD</b></span>
           <p class="prompt"><span>Prompt</span>Edit this image. Replace the window, the birch trees and the wooden windowsill with a bright seamless studio backdrop in pale sage green… Keep everything else exactly as it is…</p></figcaption></figure>
+        <figure class="print clip" style="--ar:960/536;--k:1.79"><video src="examples/contentcoach-skill_cup-pushin-kling3_1790437085.mp4" poster="examples/contentcoach-skill_cup-pushin-kling3_1790437085.webp" width="960" height="536" muted loop playsinline autoplay preload="metadata" aria-label="A three-second clip: the camera pushes in slowly on the cup as steam rises."></video>
+          <figcaption><span class="back"><span>No. 8</span><span>Kling 3.0</span><span>720p · 3 s · no sound</span><span>from No. 1</span><b>0.21 USD</b></span>
+          <p class="prompt"><span>Prompt</span>Slow gentle push-in on the stoneware cup; the wisp of steam curls and drifts upward…</p></figcaption></figure>
       </div>
     </div>
 
@@ -301,14 +311,19 @@ footer .big{font:800 44px/1 var(--display);text-transform:uppercase}
       <div><h3>GPT Image 2.5</h3><p>When words inside the image must be readable, and for careful edits. No. 7 is 2.5; Nos. 3 and 4 were made with 2, its predecessor.</p></div>
       <div><h3>Grok Imagine 2.0</h3><p>The cheapest, with a looser, stylised hand.</p></div>
     </div>
+    <div class="legend legend-video">
+      <div><h3>Kling 3.0</h3><p>The default for video. Animates a still you like, 3–15 seconds, sound optional.</p></div>
+      <div><h3>MiniMax H3</h3><p>The cheapest clips at 480p, and the only one that can repeat a take with a seed.</p></div>
+      <div><h3>Grok Video · Seedance 2.5</h3><p>Grok keeps a person recognisable from photos. Seedance for hero shots up to 30 seconds, at a price.</p></div>
+    </div>
   </div>
 </section>
 
 <section id="drop-off" class="dropoff">
   <div class="wrap">
     <div class="sec-head">
-      <h2>Hand in your order</h2>
-      <p>Three steps. You need a personal key from whoever sent you this page.</p>
+      <h2>Install the skill</h2>
+      <p>One file in your agent's skills folder, and a key in your shell. You get the key from whoever sent you this page.</p>
     </div>
 
     <div class="steps">
@@ -334,7 +349,7 @@ footer .big{font:800 44px/1 var(--display);text-transform:uppercase}
           <div id="agent-out" aria-live="polite">
             <div class="cmdbox"><pre class="cmd"><code><span class="c"># Cursor reads skills from ~/.cursor/skills</span>
 mkdir -p ~/<wbr>.cursor/<wbr>skills/<wbr>contentcoach
-curl -fsSL https://<wbr>create.contentcoach.se/<wbr>agent.md -o ~/<wbr>.cursor/<wbr>skills/<wbr>contentcoach/<wbr>SKILL.md</code></pre><button class="copy" type="button">Copy</button></div>
+curl -fsSL https://<wbr>raw.githubusercontent.com/<wbr>santoso-git/<wbr>contentcoach-skill/<wbr>main/<wbr>contentcoach/<wbr>SKILL.md -o ~/<wbr>.cursor/<wbr>skills/<wbr>contentcoach/<wbr>SKILL.md</code></pre><button class="copy" type="button">Copy</button></div>
             <p class="hint">Restart Cursor. The skill is used in Agent mode. Run the same line again to update.</p>
           </div>
         </div>
@@ -343,9 +358,10 @@ curl -fsSL https://<wbr>create.contentcoach.se/<wbr>agent.md -o ~/<wbr>.cursor/<
       <div class="step">
         <div class="lbl">3<small>Ask</small></div>
         <div class="body">
-          <h3>Ask for a picture</h3>
+          <h3>Ask for a picture or a clip</h3>
           <p class="say">Make a 16:9 blog header about remote work: a small desk in a Nordic cabin, rain outside.</p>
-          <p class="hint">The image lands in <code>generations/</code> in your open project, next to a <code>.json</code> that records the prompt, the model and the cost.</p>
+          <p class="say say-2">Animate that image: a slow push-in, rain running down the window. Five seconds.</p>
+          <p class="hint">Before a clip runs, the skill tells you the model, the length and the price, and waits for your yes. Everything lands in <code>generations/</code> in your open project, next to a <code>.json</code> that records the prompt, the model and the cost.</p>
         </div>
       </div>
     </div>
@@ -355,16 +371,16 @@ curl -fsSL https://<wbr>create.contentcoach.se/<wbr>agent.md -o ~/<wbr>.cursor/<
 <section id="terms" class="back-of">
   <div class="wrap">
     <div class="sec-head">
-      <h2>Terms of the lab</h2>
-      <p>Printed on the back of every envelope, so nobody is surprised.</p>
+      <h2>How the skill behaves</h2>
+      <p>Printed on the back of the envelope, so nobody is surprised.</p>
     </div>
     <div class="terms">
-      <div><h3>Keys by invitation</h3><p>Keys are handed out personally. There is no sign-up. If someone sent you this page, they have yours.</p></div>
-      <div><h3>Images only</h3><p>A key makes still images. Video is not part of it.</p></div>
-      <div><h3>A daily budget</h3><p>Each key has a budget in US dollars per day that resets at midnight Stockholm time. Your agent can check what is left, for free, before it spends anything.</p></div>
+      <div><h3>One personal key</h3><p>The skill needs a ContentCoach key, handed out personally. There is no sign-up and no provider account. If someone sent you this page, they have yours.</p></div>
+      <div><h3>Video is quoted first</h3><p>A clip costs roughly ten times an image. The skill shows you the model, length, resolution and price before every clip, and runs only on your yes.</p></div>
+      <div><h3>A daily budget</h3><p>Each key has a budget in US dollars per day that resets at midnight Stockholm time. The skill checks what is left, for free, before it spends anything.</p></div>
       <div><h3>Drafts first</h3><p>Everything is made at 1K unless you ask. Ask for 2K or 4K once you have a favourite.</p></div>
       <div><h3>Real files, not descriptions</h3><p>For a logo, a product or a face, give the agent the file. A logo described in words comes back wrong every time.</p></div>
-      <div><h3>Where your data goes</h3><p>Prompts and reference images go to ContentCoach, then to an image provider: Kie AI, fal.ai, WaveSpeed or Google. Reference images sit at a public address so the provider can fetch them; upload nothing you would not want reachable. Finished images are not kept, and their link expires within hours, so the agent downloads them straight away.</p></div>
+      <div><h3>Where your data goes</h3><p>The skill sends prompts and reference images to the ContentCoach API, which passes them to a model provider: Kie AI, fal.ai, WaveSpeed or Google. Reference images sit at a public address so the provider can fetch them; upload nothing you would not want reachable. Finished images and clips are not kept, and their link expires within hours, so the skill downloads them straight away.</p></div>
     </div>
   </div>
 </section>
@@ -375,15 +391,14 @@ curl -fsSL https://<wbr>create.contentcoach.se/<wbr>agent.md -o ~/<wbr>.cursor/<
     <span class="big">ContentCoach</span>
     <nav aria-label="Elsewhere">
       <a href="https://github.com/santoso-git/contentcoach-skill">The skill on GitHub</a>
-      <a href="https://create.contentcoach.se/agent.md">agent.md</a>
-      <a href="https://create.contentcoach.se">create.contentcoach.se</a>
+      <a href="https://github.com/santoso-git/contentcoach-skill/blob/main/contentcoach/SKILL.md">SKILL.md</a>
     </nav>
   </div>
 </footer>
 
 <script>
 (function(){
-  var BASE='https://create.contentcoach.se/agent.md';
+  var BASE='https://raw.githubusercontent.com/santoso-git/contentcoach-skill/main/contentcoach/SKILL.md';
   var AGENTS={
     cursor:{dir:'~/.cursor/skills',note:'Cursor reads skills from ~/.cursor/skills',hint:'Restart Cursor. The skill is used in Agent mode. Run the same line again to update.'},
     codex:{dir:'~/.agents/skills',note:'Codex reads skills from ~/.agents/skills',hint:'Restart Codex. The skill calls the API over the network, so approve the curl calls when Codex asks, or use a sandbox mode that allows network.'},
@@ -402,6 +417,10 @@ curl -fsSL https://<wbr>create.contentcoach.se/<wbr>agent.md -o ~/<wbr>.cursor/<
     }
     // the new slip feeds out of the counter printer
     out.classList.remove('reprint'); void out.offsetWidth; out.classList.add('reprint');
+  }
+  // A clip that plays by itself is motion; honour a reduced-motion setting.
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    document.querySelectorAll('video[autoplay]').forEach(function(v){v.removeAttribute('autoplay');v.pause();v.controls=true;});
   }
   document.querySelectorAll('input[name="agent"]').forEach(function(r){r.addEventListener('change',function(){render(r.value)})});
 

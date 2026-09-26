@@ -1,10 +1,11 @@
-# ContentCoach — image generation for your AI agent
+# ContentCoach — an image and video skill for your AI agent
 
-**Homepage, with example images: https://santoso-git.github.io/contentcoach-skill/**
+**Homepage, with examples: https://santoso-git.github.io/contentcoach-skill/**
 
-Make images with several models — Nano Banana 2, GPT Image 2.5 and Grok
-Imagine — straight from Cursor, Codex, Claude Code or any agent that can run
-`curl`. No accounts with the image providers, no API keys of theirs: just one
+A skill that makes images and short videos with several models — Nano Banana 2,
+GPT Image 2.5 and Grok Imagine for images; Kling 3.0, MiniMax H3, Grok Video and
+Seedance 2.5 for video — straight from Cursor, Codex, Claude Code or any agent
+that can run `curl`. No accounts with the image providers, no API keys of theirs: just one
 personal ContentCoach key.
 
 ## 1. Set your key
@@ -20,14 +21,15 @@ export CONTENTCOACH_KEY="your-key"
 Open a new terminal, and restart your editor or agent so it picks the variable
 up.
 
-The key makes images only, and has a daily budget in US dollars that resets at
-midnight Stockholm time.
+The key has a daily budget in US dollars that resets at midnight Stockholm
+time. Video costs roughly ten times an image, so the skill quotes every clip
+and waits for your yes before it runs.
 
 ## 2. Use it — no install needed
 
 Tell your agent:
 
-> Read https://create.contentcoach.se/agent.md and make a 16:9 image of a
+> Read https://raw.githubusercontent.com/santoso-git/contentcoach-skill/main/contentcoach/SKILL.md and make a 16:9 image of a
 > coffee cup on a windowsill in morning light.
 
 It reads the instructions and does the rest. The image lands in
@@ -50,7 +52,7 @@ or run the command for your tool yourself.
 
 ```bash
 mkdir -p ~/.cursor/skills/contentcoach
-curl -fsSL https://create.contentcoach.se/agent.md -o ~/.cursor/skills/contentcoach/SKILL.md
+curl -fsSL https://raw.githubusercontent.com/santoso-git/contentcoach-skill/main/contentcoach/SKILL.md -o ~/.cursor/skills/contentcoach/SKILL.md
 ```
 
 Restart Cursor. The skill is used by Agent mode.
@@ -59,7 +61,7 @@ Restart Cursor. The skill is used by Agent mode.
 
 ```bash
 mkdir -p ~/.agents/skills/contentcoach
-curl -fsSL https://create.contentcoach.se/agent.md -o ~/.agents/skills/contentcoach/SKILL.md
+curl -fsSL https://raw.githubusercontent.com/santoso-git/contentcoach-skill/main/contentcoach/SKILL.md -o ~/.agents/skills/contentcoach/SKILL.md
 ```
 
 Restart Codex. The skill calls the ContentCoach API over the network, so Codex
@@ -70,7 +72,7 @@ with a sandbox mode that permits network.
 
 ```bash
 mkdir -p ~/.claude/skills/contentcoach
-curl -fsSL https://create.contentcoach.se/agent.md -o ~/.claude/skills/contentcoach/SKILL.md
+curl -fsSL https://raw.githubusercontent.com/santoso-git/contentcoach-skill/main/contentcoach/SKILL.md -o ~/.claude/skills/contentcoach/SKILL.md
 ```
 
 Start a new session. Ask for an image in plain words, or type `/contentcoach`.
@@ -87,6 +89,8 @@ version.
 - **Editing an image:** give the agent the image and say what to change —
   *"swap the background for a bright studio, keep everything else"*.
 - **Text inside the image** (signs, packaging, posters): ask for GPT Image 2.5.
+- **Video:** ask it to animate an image you already like — *"animate that, a slow
+  push-in, five seconds"*. It tells you the price first.
 - **Draft first:** everything is made at 1K by default. Ask for 2K or 4K once
   you have a favourite.
 - **Budget:** ask the agent how much is left today — it checks for free.

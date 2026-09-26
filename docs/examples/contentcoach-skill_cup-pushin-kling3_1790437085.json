@@ -1,0 +1,23 @@
+{
+  "prompt": "Slow gentle push-in on the stoneware cup; the wisp of steam curls and drifts upward, soft morning light flickers through the birch leaves outside, a faint breeze moves the trees. Calm, still, realistic.",
+  "kind": "video",
+  "model": "Kling 3.0 via kie.ai",
+  "provider": "kie.ai",
+  "refs": [
+    "https://assets.contentcoach.se/refs/1790436994357_cup-ref.jpg"
+  ],
+  "params": {
+    "aspect_ratio": "16:9",
+    "aspect_ratio_note": "härleds från startbilden",
+    "duration_s": 3,
+    "audio": false,
+    "resolution": "720p"
+  },
+  "cost_usd": 0.21,
+  "cost_source": "actual",
+  "url": "https://assets.contentcoach.se/gen/1790437085-c0f518_slow-gentle-push-in-on-the-stoneware-cup-the-wis.mp4",
+  "created": "2026-09-26T15:38:05.393Z",
+  "used_on": "skill homepage No. 8",
+  "start_frame": "contentcoach-skill_cup-windowsill_1790429059 (downscaled to 2048 jpg)",
+  "prompt_note": "sent through the web app as kind video, model kling-3"
+}

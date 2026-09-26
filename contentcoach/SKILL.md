@@ -1,11 +1,11 @@
 ---
 name: contentcoach
-description: Generate images with several AI models (Nano Banana 2, GPT Image 2.5, Grok Imagine) through the ContentCoach API, using a personal key. Use when the user asks to generate, create or edit an image, a thumbnail, a blog header, a social image, a product shot or a mockup, or mentions ContentCoach.
+description: Generate images and short videos with several AI models (Nano Banana 2, GPT Image 2.5, Grok Imagine, Kling 3.0, MiniMax H3, Seedance 2.5) through the ContentCoach API, using a personal key. Use when the user asks to generate, create or edit an image, a thumbnail, a blog header, a social image, a product shot or a mockup, to animate a picture or make a video clip, or mentions ContentCoach.
 ---
 
-# ContentCoach — image generation over HTTP
+# ContentCoach — images and video over HTTP
 
-Makes images by calling one HTTP API. The app holds every provider key; the
+Makes images and short videos by calling one HTTP API. The app holds every provider key; the
 user needs only a personal ContentCoach key. Everything below is `curl`.
 Answer the user in their own language.
 
@@ -35,8 +35,9 @@ AUTH="Authorization: Bearer $CONTENTCOACH_KEY"
 curl -sS -H "$AUTH" "$CC/api/me"
 ```
 
-Returns the models this key may use (id, what each is for, aspects,
-resolutions, max reference images, price range in USD) and, for a guest key,
+Returns the image models (`models`) and video models (`video_models`) this
+key may use — id, what each is for, aspects, resolutions or durations, price
+range in USD — and, for a guest key,
 `cap_usd`, `spent_usd` and `remaining_usd` for today. Choose the model from
 this list, not from memory.
 
@@ -90,6 +91,33 @@ curl -sS -H "$AUTH" -H "Content-Type: application/json" "$CC/api/generate" \
 To edit an existing image, upload it, pass it in `refs`, and write the prompt
 as an instruction: "Change the background to …, keep everything else".
 
+## Video
+
+Same three calls, with `"kind":"video"`. **Video costs roughly ten times an
+image. Before every video run, show the user the model, duration, resolution,
+sound on or off, and the `estimate` from a `dryRun`, and wait for an explicit
+yes. One yes covers one run** — if the clip is wrong, quote again before a retry.
+
+```bash
+curl -sS -H "$AUTH" -H "Content-Type: application/json" "$CC/api/generate" \
+  -d '{"kind":"video","model":"kling-3","prompt":"…","refs":["<start frame url>"],
+       "duration":"5","resolution":"720p","audio":false,"dryRun":true}'
+```
+
+| Field | Values |
+|---|---|
+| `model` | `kling-3` (default), `minimax-h3`, `grok-video-1-5`, `seedance-2.5` — see `video_models` |
+| `duration` | seconds as a string, one of the model's `durations` |
+| `resolution` | one of the model's `resolutions`; always set it — some defaults are dear |
+| `audio` | `true`/`false`. On Kling 3.0 sound costs about 45 % more |
+| `refs` | one uploaded image = the **first frame**. Best results come from animating a still the user already likes |
+| `endRef` | optional last frame (URL from step 2) |
+| `subjectRefs` | pictures of who the video is about, not a frame: `grok-video-1-5` and `seedance-2.5` |
+| `aspect` | used only without a start frame; with one, the ratio follows the picture |
+
+Describe motion, not only the scene: what moves, how the camera moves, the
+light. A video takes 1–5 minutes; poll every 10 seconds. The result is an mp4.
+
 ## 5. Wait for it
 
 Poll every 5 seconds until `done` is true. An image takes 20–70 seconds.
@@ -113,8 +141,8 @@ the saved path (and the image, if you can display it).
 | Status | Meaning |
 |---|---|
 | 401 | The key is missing, wrong or revoked. Ask the user to check it. |
-| 403 | Not allowed with this key — guest keys make images only, not video. |
-| 429 | Today's budget is spent. The message says how much; it resets at midnight Stockholm time. Do not retry. |
+| 403 | Not allowed with this key, or a job that belongs to another key. |
+| 429 | Today's budget cannot cover this run. The message says how much; it resets at midnight Stockholm time. Do not retry. |
 | 400 | The request is invalid; the `error` text says why (unsupported aspect, too many refs…). Fix it and try once more. |
 | 502 | The providers failed. Nothing was charged if no job was created. Try once more, then tell the user. |
 
