@@ -11,7 +11,7 @@ switching is only a change of id.
 
 Send the body with the patterns in SKILL.md, *Running a job*.
 
-| Field | Kie AI (first) | fal.ai (fallback) |
+| Field | Kie AI | fal.ai (first — cheaper at every size) |
 |---|---|---|
 | Text → image | `gpt-image-2-5-flare-text-to-image` | `openai/gpt-image-2.5/flare/text-to-image` |
 | With references | `gpt-image-2-5-flare-image-to-image`, refs in **`input_urls`** | `openai/gpt-image-2.5/flare/edit`, refs in `image_urls` (max 16) |
@@ -19,19 +19,32 @@ Send the body with the patterns in SKILL.md, *Running a job*.
 | Quality | none | `low` `medium` `high` `xhigh` `max` — **defaults to `high`**, always send `medium` |
 | Background | `transparent` `opaque` `auto` | same |
 | Seed | none | none |
-| Cost 1K · 2K · 4K | **0.03 · 0.05 · 0.08 USD** (6 / 10 / 16 credits) | **0.0136 USD at 1K**, `medium`, 1:1 · 2K and 4K unmeasured |
+| Cost 1K · 2K · 4K | **0.03 · 0.05 · 0.08 USD** (6 / 10 / 16 credits) | text only: **0.0136** at 1K · with one reference: **0.0207 · 0.0275 · 0.0389 USD**, all at `medium` |
 | Docs | https://docs.kie.ai/market/gpt/gpt-image-2-5-flare-text-to-image | https://fal.ai/models/openai/gpt-image-2.5/flare/text-to-image/api |
 
 **Confirmed on Kie, 26 Sep 2026:** image-to-image, one reference, 16:9 at 2K →
 2736×1536 PNG, 10 credits = 0.05 USD as listed. It held the subject exactly
 while replacing the whole background.
 
-**Confirmed on fal, 27 Sep 2026:** text-to-image, 1:1 at 1K, `quality: medium`
-→ **0.0136 USD** measured from `x-fal-billable-units`. At 1K that makes **fal the
-cheaper route** — less than half Kie's 0.03 — so start there for 1K drafts when
-`FAL_KEY` is set. fal's `/edit` with references is unrun, and so are 2K and 4K:
-fal bills this model by tokens, so quote larger sizes as "unmeasured, likely
-under 0.10 USD at `medium`" until a run says otherwise.
+**Confirmed on fal, 27 Sep 2026**, all at `quality: medium`, measured from
+`x-fal-billable-units` (one unit = 1 USD), Flare and Sunburst alike:
+
+| Job | Size | Cost | Time |
+|---|---|---|---|
+| Text → image, 1:1 | 1K, 1024×1024 | **0.0136 USD** | about 21–26 s |
+| `/edit`, one reference, 9:16 | 1K, 768×1360 | **0.0207 USD** | about 27–30 s |
+| `/edit`, one reference, 9:16 | 2K, 1536×2736 | **0.0275 USD** | about 28 s |
+| `/edit`, one reference, 9:16 | 4K, 2160×3840 | **0.0389 USD** | about 33 s |
+
+**fal is the cheaper route at every size** — at 4K with a reference it is half
+Kie's 0.08 — so start there when `FAL_KEY` is set. A reference adds about 0.007
+USD at 1K. Text-to-image above 1K is not measured, but should sit below the edit
+prices. Use the queue at every size: a synchronous `fal.run` call at 4K ran over
+60 seconds and was cut off, and fal probably billed the lost image anyway.
+
+An edit can also move people into a new scene: "Use the people from the reference
+image — same faces, … Make a new photograph of them, not an edit of this frame",
+then the new scene, kept the faces and changed the camera angle entirely.
 
 ## Kie AI
 
@@ -55,11 +68,17 @@ The last four are 1K only. There is no `4:5`.
 The prefix is **`openai/`, not `fal-ai/`**. `fal-ai/…` returns `model not found`.
 
 ```bash
-jq -n --arg p "PROMPT" '{prompt:$p, image_size:"landscape_16_9", quality:"medium",
-  output_format:"png"}' > /tmp/cc-req.json
+jq -n --arg p "PROMPT" '{prompt:$p, image_size:{width:1360,height:768}, quality:"medium",
+  output_format:"png", num_images:1}' > /tmp/cc-req.json
 # submit to openai/gpt-image-2.5/flare/text-to-image
+# with references: add image_urls:["https://… or data:image/png;base64,…"], submit to …/flare/edit
+# cut-out: add background:"transparent"
 ```
 
+- **Sizes by pixel budget:** about 1.05 MP for 1K, 4.2 MP for 2K and the
+  8,294,400-pixel ceiling for 4K, edges in multiples of 16. Measured sizes: 1:1
+  1024×1024; 9:16 768×1360, 1536×2736, 2160×3840 (16:9 is the same turned).
+  For a square at 2K use 2048×2048, and at 4K 2880×2880.
 - `image_size` presets: `square_hd` `square` `portrait_4_3` `portrait_16_9`
   `landscape_4_3` `landscape_16_9` `auto`. An explicit `{width, height}` must be
   multiples of 16, longest edge at most 3840, ratio at most 3:1, and total pixels
@@ -77,7 +96,7 @@ there is time to wait — a product close-up, dense small lettering, a hero imag
 that will be printed or shown large. For drafts and everyday text-in-image work,
 stay on Flare.
 
-| Field | Kie AI (first) | fal.ai (fallback) |
+| Field | Kie AI | fal.ai (first) |
 |---|---|---|
 | Text → image | `gpt-image-2-5-sunburst-text-to-image` | `openai/gpt-image-2.5/sunburst/text-to-image` |
 | With references | `gpt-image-2-5-sunburst-image-to-image`, refs in `input_urls` | `openai/gpt-image-2.5/sunburst/edit`, refs in `image_urls` (max 16), optional `mask_url` |
@@ -92,13 +111,11 @@ and ä, came back exactly as asked. **`background: "transparent"` works:** it
 returned an RGBA PNG with a real alpha channel, the can cut out cleanly with no
 floor or shadow — say "isolated on a transparent background, no floor, no
 shadow" in the prompt as well.
-**Confirmed on fal, 27 Sep 2026:** text-to-image, 1:1 at 1K, `medium` →
-**0.0136 USD**, the same as Flare, in about **26 seconds** — much faster than on
-Kie. fal's `/edit` is unrun. Kie's price for 2K and 4K is from its pricing page,
-27 Sep 2026 (search the table for the model name; the page loads prices in the
-browser, so `curl` does not see them). fal's page lists, at `high`, 0.0527 USD
-at 1024², 0.0396 at 1920×1080 and 0.1001 at 3840×2160 — figures that do not add
-up; quote 2K and 4K on fal as unmeasured.
+**Confirmed on fal, 27 Sep 2026:** the same prices as Flare at every size, and
+**not slower** there — about 26 s for text-to-image and 27–30 s for an edit. The
+slowness is Kie's. Kie's price for 2K and 4K is from its pricing page, 27 Sep
+2026 (search the table for the model name; the page loads prices in the browser,
+so `curl` does not see them).
 
 ## Notes
 

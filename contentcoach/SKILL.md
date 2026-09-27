@@ -75,7 +75,8 @@ Cheapest route first, and **say which route ran and why** in the reply.
   something only fal does: a seed on Nano Banana, Grok Imagine edits with
   your own pictures, or MiniMax H3 at 480P or 4K. Two exceptions start on fal
   because they are cheaper there: **MiniMax H3** (its cheapest tier exists only
-  on fal) and **GPT Image 2.5 at 1K** (0.0136 USD measured, against 0.03 on Kie).
+  on fal) and **GPT Image 2.5** (0.0136–0.039 USD measured at every size, against
+  0.03–0.08 on Kie).
 - If the only key set cannot run the job, say so and name the key that would.
 
 Never hide a swap between providers or models.
@@ -234,7 +235,7 @@ is which. Check the provider's pricing page before relying on them.
 | Job | Kie | fal |
 |---|---|---|
 | Nano Banana 2, 1K · 2K · 4K | 0.04 · 0.06 · 0.09 | 0.08 · 0.12 · 0.16 |
-| GPT Image 2.5, 1K · 2K · 4K | 0.03 · 0.05 · 0.08 | **0.0136** at 1K, `medium` · larger sizes unmeasured |
+| GPT Image 2.5, 1K · 2K · 4K | 0.03 · 0.05 · 0.08 | **0.0136** at 1K · with a reference **0.021 · 0.028 · 0.039**, `medium` |
 | Grok Imagine 2.0, 1k | 0.02 | 0.04 `low` · 0.06 `medium` |
 | Kling 3.0, 5 s, no sound | 0.35 at 720p · 0.45 at 1080p | 0.56 at 1080p |
 | MiniMax H3, 5 s | 0.40 at 768P | **0.25 at 480P** · 0.40 at 768P |
