@@ -98,6 +98,10 @@ curl -sS -X POST https://kieai.redpandaai.co/api/file-stream-upload \
   -F "file=@logo.png" -F "uploadPath=contentcoach-refs" | jq -r .data.downloadUrl
 ```
 
+Confirmed 27 Sep 2026: the upload returns a public URL on
+`tempfile.redpandaai.co` that anyone with the link can fetch, so upload nothing
+the user would not want reachable while it lasts.
+
 Downscale files over about 4 MB first (`sips -Z 2048 file.png` on macOS).
 
 ## Rules
