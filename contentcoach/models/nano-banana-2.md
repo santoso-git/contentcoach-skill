@@ -16,7 +16,8 @@ Send the body with the patterns in SKILL.md, *Running a job*.
 | Cost 1K · 2K · 4K | **0.04 · 0.06 · 0.09 USD** (8 / 12 / 18 credits) | 0.08 · 0.12 · 0.16 USD |
 | Docs | https://docs.kie.ai/market/google/nanobanana2 | https://fal.ai/models/fal-ai/nano-banana-2/api |
 
-Both routes confirmed by real runs, Kie again on 26 Sep 2026 (1K, 16:9 →
+Both routes confirmed by real runs — fal through its queue, with and without
+references, at 1K, 2K and 4K (0.08, 0.12, 0.16 USD measured) — and Kie again on 26 Sep 2026 (1K, 16:9 →
 1376×768 PNG, 8 credits, 30 s). On Kie, `google/nano-banana-2` returns 422; use
 the exact string above.
 

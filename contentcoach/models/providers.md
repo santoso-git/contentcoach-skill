@@ -29,6 +29,10 @@ dollar on GPT Image 2.5**. Never carry a unit rate from one model to another.
 `queue.fal.run/fal-ai/kling-video/requests/{id}/status`. Use the `status_url` and
 `response_url` the submit returns rather than building them by hand.
 
+**fal does not always report a cost.** `x-fal-billable-units` came back on
+Grok Imagine and GPT Image 2.5, but a Kling queue job carried none. When it is
+missing, record the quoted cost and say so.
+
 **fal's `COMPLETED` does not mean it produced anything.** When a job fails for a
 reason fal blames on the caller — usually a reference it could not download —
 the body carries `detail` instead of `images` or `video`. Check `detail` before

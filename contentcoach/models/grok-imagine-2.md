@@ -13,8 +13,9 @@ Send the body with the patterns in SKILL.md, *Running a job*.
 | Cost | **0.02 USD** (4 credits) | 1k: 0.04 `low` · 0.06 `medium`; 2k: 0.06 · 0.08 |
 | Docs | https://kie.ai/model/grok-imagine-image-2-0/text-to-image.md | https://fal.ai/models/xai/grok-imagine-image/v2.0/text-to-image |
 
-fal route confirmed by a real run (`1k` / `low` / `3:2` → 1248×832). Kie's text
-to image is the same version at half the price.
+Both confirmed by real runs: fal text-to-image (`1k` / `low`, 0.04 USD, 26 Sep
+2026) and `/edit` with references (0.05–0.09 USD); Kie text-to-image at **0.02
+USD** measured. Kie's body has no resolution field — one size, one price.
 
 **Edits go to fal regardless of price.** Kie's `image-edit` endpoint takes a
 `task_id` and edits a previous Kie job; it cannot see an image you supply.

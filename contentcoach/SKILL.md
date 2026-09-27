@@ -73,8 +73,9 @@ Cheapest route first, and **say which route ran and why** in the reply.
 - **Kie first** when `KIE_API_KEY` is set. It is cheaper for nearly everything.
 - **fal** when only `FAL_KEY` is set, when Kie fails, or when the job needs
   something only fal does: a seed on Nano Banana, Grok Imagine edits with
-  your own pictures, or MiniMax H3 at 480P or 4K. **MiniMax H3 is the one
-  model that starts on fal**, because its cheapest tier exists only there.
+  your own pictures, or MiniMax H3 at 480P or 4K. Two exceptions start on fal
+  because they are cheaper there: **MiniMax H3** (its cheapest tier exists only
+  on fal) and **GPT Image 2.5 at 1K** (0.0136 USD measured, against 0.03 on Kie).
 - If the only key set cannot run the job, say so and name the key that would.
 
 Never hide a swap between providers or models.
@@ -229,12 +230,12 @@ is which. Check the provider's pricing page before relying on them.
 | Job | Kie | fal |
 |---|---|---|
 | Nano Banana 2, 1K · 2K · 4K | 0.04 · 0.06 · 0.09 | 0.08 · 0.12 · 0.16 |
-| GPT Image 2.5, 1K · 2K · 4K | 0.03 · 0.05 · 0.08 | about 0.05 · 0.11 · 0.18 at `medium` |
+| GPT Image 2.5, 1K · 2K · 4K | 0.03 · 0.05 · 0.08 | **0.0136** at 1K, `medium` · larger sizes unmeasured |
 | Grok Imagine 2.0, 1k | 0.02 | 0.04 `low` · 0.06 `medium` |
 | Kling 3.0, 5 s, no sound | 0.35 at 720p · 0.45 at 1080p | 0.56 at 1080p |
 | MiniMax H3, 5 s | 0.40 at 768P | **0.25 at 480P** · 0.40 at 768P |
 | Grok Video 1.5, 5 s at 480p | 0.06 | 0.41 |
-| Seedance 2.5, 5 s | 0.70 at 480p · 1.58 at 720p | 1.10 at 480p · 2.37 at 720p |
+| Seedance 2.5, 5 s | 0.70 at 480p · 1.58 at 720p | 0.70 at 480p · 2.37 at 720p (listed) |
 
 ## Balance
 

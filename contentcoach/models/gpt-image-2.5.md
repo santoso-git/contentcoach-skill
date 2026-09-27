@@ -19,13 +19,19 @@ Send the body with the patterns in SKILL.md, *Running a job*.
 | Quality | none | `low` `medium` `high` `xhigh` `max` — **defaults to `high`**, always send `medium` |
 | Background | `transparent` `opaque` `auto` | same |
 | Seed | none | none |
-| Cost 1K · 2K · 4K | **0.03 · 0.05 · 0.08 USD** (6 / 10 / 16 credits) | quote about 0.05 · 0.11 · 0.18 USD at `medium` |
+| Cost 1K · 2K · 4K | **0.03 · 0.05 · 0.08 USD** (6 / 10 / 16 credits) | **0.0136 USD at 1K**, `medium`, 1:1 · 2K and 4K unmeasured |
 | Docs | https://docs.kie.ai/market/gpt/gpt-image-2-5-flare-text-to-image | https://fal.ai/models/openai/gpt-image-2.5/flare/text-to-image/api |
 
 **Confirmed on Kie, 26 Sep 2026:** image-to-image, one reference, 16:9 at 2K →
 2736×1536 PNG, 10 credits = 0.05 USD as listed. It held the subject exactly
-while replacing the whole background. **The fal route is unrun**; its quote is
-GPT Image 2's measured price on fal and probably over-states 2.5.
+while replacing the whole background.
+
+**Confirmed on fal, 27 Sep 2026:** text-to-image, 1:1 at 1K, `quality: medium`
+→ **0.0136 USD** measured from `x-fal-billable-units`. At 1K that makes **fal the
+cheaper route** — less than half Kie's 0.03 — so start there for 1K drafts when
+`FAL_KEY` is set. fal's `/edit` with references is unrun, and so are 2K and 4K:
+fal bills this model by tokens, so quote larger sizes as "unmeasured, likely
+under 0.10 USD at `medium`" until a run says otherwise.
 
 ## Kie AI
 
@@ -76,7 +82,7 @@ stay on Flare.
 | Text → image | `gpt-image-2-5-sunburst-text-to-image` | `openai/gpt-image-2.5/sunburst/text-to-image` |
 | With references | `gpt-image-2-5-sunburst-image-to-image`, refs in `input_urls` | `openai/gpt-image-2.5/sunburst/edit`, refs in `image_urls` (max 16), optional `mask_url` |
 | Everything else | as Flare | as Flare — `quality` also defaults to `high`; send `medium` |
-| Cost 1K · 2K · 4K | **the same as Flare:** 0.03 · 0.05 · 0.08 USD (6 / 10 / 16 credits), with or without references | no reliable figure — see below |
+| Cost 1K · 2K · 4K | **the same as Flare:** 0.03 · 0.05 · 0.08 USD (6 / 10 / 16 credits), with or without references | **0.0136 USD at 1K**, `medium`, 1:1 · 2K and 4K unmeasured |
 | Docs | https://docs.kie.ai/market/gpt/gpt-image-2-5-sunburst-text-to-image | https://fal.ai/models/openai/gpt-image-2.5/sunburst/text-to-image/api |
 
 **Confirmed on Kie, 27 Sep 2026:** text-to-image, 1:1 at 1K → 1254×1254 PNG,
@@ -86,13 +92,13 @@ and ä, came back exactly as asked. **`background: "transparent"` works:** it
 returned an RGBA PNG with a real alpha channel, the can cut out cleanly with no
 floor or shadow — say "isolated on a transparent background, no floor, no
 shadow" in the prompt as well.
-The fal route is unrun. Kie's price for 2K and 4K is from its pricing page, 27
-Sep 2026 (search the table for the model name; the page loads prices in the
-browser, so `curl` does not see them). fal's page lists, at `high`, 0.0527 USD at 1024²,
-0.0396 at 1920×1080 and 0.1001 at 3840×2160 — the 1080p figure is below the
-square one, which does not add up. Quote fal as "roughly 0.04–0.10 USD at
-`high`, less at `medium`, unmeasured" until a run's `x-fal-billable-units` says
-otherwise.
+**Confirmed on fal, 27 Sep 2026:** text-to-image, 1:1 at 1K, `medium` →
+**0.0136 USD**, the same as Flare, in about **26 seconds** — much faster than on
+Kie. fal's `/edit` is unrun. Kie's price for 2K and 4K is from its pricing page,
+27 Sep 2026 (search the table for the model name; the page loads prices in the
+browser, so `curl` does not see them). fal's page lists, at `high`, 0.0527 USD
+at 1024², 0.0396 at 1920×1080 and 0.1001 at 3840×2160 — figures that do not add
+up; quote 2K and 4K on fal as unmeasured.
 
 ## Notes
 

@@ -29,7 +29,10 @@ Measured 21 Aug 2026, one 5-second 480p clip from a picture on each route:
 | 480p | 0.012 USD | 0.08 USD |
 | 720p | 0.0225 USD | 0.14 USD |
 
-5 s at 720p: 0.11 USD on Kie, 0.70 on fal. fal adds 0.01 USD per image,
+5 s at 720p: 0.11 USD on Kie, 0.70 on fal. Also measured on Kie: 8 s and 10 s
+at 480p, 0.096 and 0.12 USD — the same 0.012 per second. Runs so far: Kie text-
+and image-to-video, fal text-to-video; fal's image- and reference-to-video are
+unrun. fal adds 0.01 USD per image,
 including the required frame. The 720p rows are extrapolated from the published
 tables, which held exactly at 480p.
 

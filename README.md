@@ -111,7 +111,7 @@ no-install route always reads the latest version.
 
 ## What it costs
 
-You pay Kie and fal at their own prices. A draft image is 0.02–0.08 USD; a
+You pay Kie and fal at their own prices. A draft image is 0.01–0.08 USD; a
 five-second video clip is 0.06–2.37 USD depending on model and provider. **Video
 costs roughly ten times an image, so the skill quotes every clip and waits for
 your yes before it runs**, and it does the same before anything at 2K or 4K. The full

@@ -19,7 +19,10 @@ SKILL.md, *Running a job*; poll every 10–15 s.
 | Seed | `seed` | — |
 | Docs | https://fal.ai/models/minimax/h3/text-to-video | https://kie.ai/model/minimax-h3/text-to-video.md |
 
-Text-to-video on fal confirmed by a real run. The Kie route is from docs, unrun.
+Text- and image-to-video on fal confirmed by real runs (Aug 2026, one with an end
+frame); those runs sent the older `enable_prompt_expansion: false`, which fal's
+current schema has replaced with `prompt_expansion_mode`. The Kie route is from
+docs, unrun.
 
 ## Cost — quote one of these
 

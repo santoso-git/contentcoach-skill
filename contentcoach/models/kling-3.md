@@ -20,8 +20,10 @@ SKILL.md, *Running a job*; poll every 10–15 s, a clip takes 1–5 minutes.
 | Docs | https://docs.kie.ai/market/kling/kling-3-0 | https://fal.ai/models/fal-ai/kling-video/v3/pro/image-to-video/api |
 
 **Confirmed on Kie, 26 Sep 2026:** `std`, 3 s, no sound, one start frame →
-1284×716 at 24 fps, no audio track, **0.21 USD — exactly the quote**. The fal
-route is unrun; its prices are published, not measured.
+1284×716 at 24 fps, no audio track, **0.21 USD — exactly the quote**.
+**Run on fal, 27 Sep 2026:** text-to-video, 3 s at 1080p without sound →
+1920×1080, 24 fps, no audio track. fal's queue reported no billable units for it,
+so its price is still the published one. fal's image-to-video is unrun.
 
 ## Cost — quote one of these
 
