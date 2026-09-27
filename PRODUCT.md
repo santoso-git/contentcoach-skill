@@ -72,10 +72,12 @@ in `generations/` in their open project, each with a JSON sidecar.
 
 ## Evidence on Hand
 
-- Seven example images and one clip, made on 26 Sep 2026 with prompt sidecars
-  in `docs/examples/`. They are real generations with the same models and
-  providers the skill calls, made through the owner's web app, not stock. Nos. 3
-  and 4 used GPT Image 2, the predecessor of 2.5.
+- Nine example images and one clip with prompt sidecars in `docs/examples/`.
+  Nos. 1–8 were made on 26 Sep 2026 through the owner's web app with the same
+  models and providers the skill calls; Nos. 9 and 10 (GPT Image 2.5 Sunburst,
+  27 Sep, the second with a transparent background) were run with the public
+  skill's own recipe. None is stock. Nos. 3 and 4 used
+  GPT Image 2, the predecessor of 2.5.
 - No testimonials, customer names, usage figures or benchmarks exist. Do not
   invent them.
 

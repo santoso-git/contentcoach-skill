@@ -120,6 +120,12 @@ section{padding-block:clamp(64px,9vw,112px)}
 .prompt{font:400 13.5px/1.45 var(--sans);color:var(--muted);margin:0}
 .prompt span{font:700 11px/1 var(--sans);letter-spacing:.1em;text-transform:uppercase;color:var(--ink);margin-right:6px}
 .edit-head{font-size:clamp(28px,3.4vw,40px);margin-top:clamp(16px,2vw,28px)}
+.solo{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr) minmax(0,.9fr);gap:clamp(20px,3vw,44px);align-items:end}
+.solo .print{--t:.4deg;transform:rotate(var(--t))}
+.solo .print+.print{--t:-.5deg}
+.cutout img{background:var(--env)}
+.solo-note{margin:0;max-width:40ch;font-size:17px;color:var(--ink-soft)}
+.solo-note b{color:var(--ink)}
 .legend-video{margin-top:18px}
 .say-2{margin-top:10px}
 .tldr{margin-bottom:clamp(28px,3vw,40px)}
@@ -262,6 +268,8 @@ footer .big{font:800 44px/1 var(--display);text-transform:uppercase}
   .prints .row{flex-wrap:wrap}
   .prints .print{flex-basis:40%}
   .legend{grid-template-columns:1fr}
+  .solo{grid-template-columns:1fr 1fr}
+  .solo-note{grid-column:1/-1}
 }
 @media (max-width:560px){
   .prints .row{flex-direction:column}
@@ -274,6 +282,7 @@ footer .big{font:800 44px/1 var(--display);text-transform:uppercase}
   .copy{position:static;display:block;margin:6px 14px 14px auto}
   .slip .say{padding-right:18px}
   .slip .copy{margin:8px 0 0 auto}
+  .solo{grid-template-columns:1fr}
   .rates-scroll{padding-inline:10px;padding-bottom:110px}
   .sheet{--tilt:0deg}
   .x-close span{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
@@ -335,7 +344,7 @@ footer .big{font:800 44px/1 var(--display);text-transform:uppercase}
         <figure class="print p1" style="--ar:16/9"><img src="examples/contentcoach-skill_cup-windowsill_1790429059_720.webp" width="720" height="402" alt=""><figcaption>No. 1 · Nano Banana 2 · 2K</figcaption></figure>
         <figure class="print p2" style="--ar:1/1"><img src="examples/contentcoach-skill_lighthouse-riso_1790429483_720.webp" width="720" height="720" alt=""><figcaption>No. 5 · Grok Imagine 2.0</figcaption></figure>
         <figure class="print p3" style="--ar:4/3"><img src="examples/contentcoach-skill_bakery-sign_1790429269_720.webp" width="720" height="540" alt=""><figcaption>No. 3 · GPT Image 2 · 2K</figcaption></figure>
-        <div class="pocket"><span>Prints enclosed<small>7 frames and a clip · 0.56 USD in all</small></span></div>
+        <div class="pocket"><span>Prints enclosed<small>9 frames and a clip · 0.62 USD in all</small></span></div>
       </div>
     </div>
   </div>
@@ -346,7 +355,7 @@ footer .big{font:800 44px/1 var(--display);text-transform:uppercase}
   <div class="wrap">
     <div class="sec-head">
       <h2>What the models made</h2>
-      <p>Seven images and one clip, each from a single run of the models and providers the skill calls. Beneath each one: the model, the size, what it cost, and the prompt.</p>
+      <p>Nine images and one clip, each from a single run of the models and providers the skill calls. Beneath each one: the model, the size, what it cost, and the prompt.</p>
     </div>
 
     <div class="prints">
@@ -378,6 +387,17 @@ footer .big{font:800 44px/1 var(--display);text-transform:uppercase}
           <p class="prompt"><span>Prompt</span>Wide editorial blog header photograph: a small pine desk under the window of a Nordic cabin on a rainy afternoon…</p></figcaption></figure>
       </div>
 
+      <h3 class="edit-head">Run by the skill itself: fine lettering, then no background</h3>
+      <div class="solo">
+        <figure class="print"><img src="examples/contentcoach-skill_energy-can-sunburst_1790507266.webp" width="1254" height="1254" loading="lazy" alt="A green energy drink can on dark concrete, printed Träningskraft, Energidryck, Citron och ingefära, 330 ml.">
+          <figcaption><span class="back"><span>No. 9</span><span>GPT Image 2.5 Sunburst</span><span>1K · 1:1</span><b>0.03 USD</b></span>
+          <p class="prompt"><span>Prompt</span>Studio product photograph of a single slim aluminium energy drink can standing upright on a dark grey concrete surface… Printed on the can, reads exactly, top to bottom: TRÄNINGSKRAFT… then Energidryck · Citron &amp; ingefära, then at the bottom 330 ml…</p></figcaption></figure>
+        <figure class="print cutout"><img src="examples/contentcoach-skill_energy-can-transparent-sunburst_1790507341.webp" width="1254" height="1254" loading="lazy" alt="The same can as a cut-out with a transparent background, shown on the page's yellow.">
+          <figcaption><span class="back"><span>No. 10</span><span>GPT Image 2.5 Sunburst</span><span>1K · 1:1 · transparent</span><b>0.03 USD</b></span>
+          <p class="prompt"><span>Prompt</span>Studio product photograph of a single slim aluminium energy drink can standing upright, soft light from the left, isolated on a transparent background with no floor, no surface and no shadow…</p></figcaption></figure>
+        <p class="solo-note"><b>Made with the skill's own recipe, straight from Kie.</b> Sunburst is the slower variant of GPT Image 2.5, for when fine detail carries the picture. Each can took about a minute, and every letter, ä included, came back as asked. No. 10 asked for a transparent background and arrived as a cut-out PNG; the yellow behind it is this page, not the picture.</p>
+      </div>
+
       <h3 class="edit-head">An edit, and a clip from the same cup</h3>
       <div class="row edit">
         <figure class="print" style="--ar:1600/894;--k:1.79"><img src="examples/contentcoach-skill_cup-windowsill_1790429059.webp" width="1600" height="894" loading="lazy" alt="The original: the stoneware cup on the cabin windowsill.">
@@ -394,7 +414,7 @@ footer .big{font:800 44px/1 var(--display);text-transform:uppercase}
 
     <div class="legend">
       <div><h3>Nano Banana 2</h3><p>The default. Photos, scenes, products, and editing a picture you already have.</p></div>
-      <div><h3>GPT Image 2.5</h3><p>When words inside the image must be readable, and for careful edits. No. 7 is 2.5; Nos. 3 and 4 were made with 2, its predecessor.</p></div>
+      <div><h3>GPT Image 2.5</h3><p>When words inside the image must be readable, and for careful edits. No. 7 is 2.5, Nos. 9 and 10 its slower Sunburst variant; Nos. 3 and 4 were made with 2, its predecessor.</p></div>
       <div><h3>Grok Imagine 2.0</h3><p>The cheapest, with a looser, stylised hand.</p></div>
     </div>
     <div class="legend legend-video">
@@ -555,6 +575,7 @@ mkdir -p ~/<wbr>.cursor/<wbr>skills &amp;&amp; ln -s ~/<wbr>.contentcoach-skill/
 
       <ul class="fine">
         <li>Kling on Kie was measured on a three-second clip: 0.21 USD, exactly the quote.</li>
+        <li>GPT Image 2.5 comes as Flare, the default, and Sunburst, slower with finer detail. On Kie both cost the same; Sunburst was measured there at 0.03 USD for 1K, in one to one and a half minutes, and a transparent background works.</li>
         <li>GPT Image 2.5 on fal has not been run yet. Its prices are what GPT Image 2 cost there at medium quality; 2.5 is probably cheaper.</li>
         <li>The longest Seedance clip, 30 seconds at 720p, is 9.45 USD on Kie and 14.19 USD on fal. The skill quotes every clip and waits for your yes.</li>
         <li>Both providers also offer 1080p on Grok Video and Seedance. It has no measured price yet, so it is not listed.</li>

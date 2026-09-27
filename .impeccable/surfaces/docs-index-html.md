@@ -12,7 +12,7 @@ GitHub Pages from `docs/` in santoso-git/contentcoach-skill, at skill.contentcoa
 
 Audience: people who work in Cursor, Codex or Claude Code and will create their
 own key at Kie AI or fal.ai. Job: understand what they get, get a key, pick
-their agent, copy one command. Proof: seven real images and one clip made with the same models and providers on
+their agent, copy one command. Proof: nine real images and one clip made with the same models and providers on
 26 Sep 2026. Constraints: static, very simple, English, the user's own provider keys,
 no invented claims.
 

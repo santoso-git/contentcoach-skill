@@ -55,7 +55,7 @@ installed copy, fetch them from
 | Task | Model | Recipe |
 |---|---|---|
 | Image — default, drafts, edits with references | Nano Banana 2 | `nano-banana-2.md` |
-| Image — readable text in the picture, transparent background | GPT Image 2.5 | `gpt-image-2.5.md` |
+| Image — readable text in the picture, transparent background; Sunburst for fine detail | GPT Image 2.5 (Flare, Sunburst) | `gpt-image-2.5.md` |
 | Image — a different look | Grok Imagine 2.0 | `grok-imagine-2.md` |
 | Video — default | Kling 3.0 | `kling-3.md` |
 | Video — cheap at 480p, or needs a seed | MiniMax H3 | `minimax-h3.md` |

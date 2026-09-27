@@ -1,12 +1,13 @@
-# GPT Image 2.5 Flare (OpenAI, via Kie AI and fal.ai)
+# GPT Image 2.5 — Flare and Sunburst (OpenAI, via Kie AI and fal.ai)
 
 The one to reach for when **text inside the picture has to be readable** —
 signs, packaging, posters, UI mockups, lettering. Letterforms hold, and Swedish
 å ä ö come back intact. Also the model for **transparent backgrounds**.
 
-OpenAI ships two variants at the same price on Kie: **Flare** (faster, used
-here) and **Sunburst** (slower, finer detail). For Sunburst, swap `flare` for
-`sunburst` in every id below.
+OpenAI ships 2.5 in two variants. **Flare** is faster and the default.
+**Sunburst** is slower and holds finer detail; see *Sunburst* below. The two
+share every request field on both providers (schemas compared 27 Sep 2026), so
+switching is only a change of id.
 
 Send the body with the patterns in SKILL.md, *Running a job*.
 
@@ -61,6 +62,37 @@ jq -n --arg p "PROMPT" '{prompt:$p, image_size:"landscape_16_9", quality:"medium
 - **One billable unit is one US dollar** on this model — not Nano Banana's 0.08.
 - `quality` scales the price roughly fourfold per step. Draft at `medium` or
   `low`; rerun only the winner higher.
+
+## Sunburst
+
+OpenAI's precision variant: extra fidelity on intricate detail, in exchange for
+longer generation times. Reach for it when fine detail carries the image and
+there is time to wait — a product close-up, dense small lettering, a hero image
+that will be printed or shown large. For drafts and everyday text-in-image work,
+stay on Flare.
+
+| Field | Kie AI (first) | fal.ai (fallback) |
+|---|---|---|
+| Text → image | `gpt-image-2-5-sunburst-text-to-image` | `openai/gpt-image-2.5/sunburst/text-to-image` |
+| With references | `gpt-image-2-5-sunburst-image-to-image`, refs in `input_urls` | `openai/gpt-image-2.5/sunburst/edit`, refs in `image_urls` (max 16), optional `mask_url` |
+| Everything else | as Flare | as Flare — `quality` also defaults to `high`; send `medium` |
+| Cost 1K · 2K · 4K | **the same as Flare:** 0.03 · 0.05 · 0.08 USD (6 / 10 / 16 credits), with or without references | no reliable figure — see below |
+| Docs | https://docs.kie.ai/market/gpt/gpt-image-2-5-sunburst-text-to-image | https://fal.ai/models/openai/gpt-image-2.5/sunburst/text-to-image/api |
+
+**Confirmed on Kie, 27 Sep 2026:** text-to-image, 1:1 at 1K → 1254×1254 PNG,
+6 credits = **0.03 USD, as listed**, in **62–97 seconds** over three runs —
+expect to run the poll block once or twice. Small label lettering, including å
+and ä, came back exactly as asked. **`background: "transparent"` works:** it
+returned an RGBA PNG with a real alpha channel, the can cut out cleanly with no
+floor or shadow — say "isolated on a transparent background, no floor, no
+shadow" in the prompt as well.
+The fal route is unrun. Kie's price for 2K and 4K is from its pricing page, 27
+Sep 2026 (search the table for the model name; the page loads prices in the
+browser, so `curl` does not see them). fal's page lists, at `high`, 0.0527 USD at 1024²,
+0.0396 at 1920×1080 and 0.1001 at 3840×2160 — the 1080p figure is below the
+square one, which does not add up. Quote fal as "roughly 0.04–0.10 USD at
+`high`, less at `medium`, unmeasured" until a run's `x-fal-billable-units` says
+otherwise.
 
 ## Notes
 

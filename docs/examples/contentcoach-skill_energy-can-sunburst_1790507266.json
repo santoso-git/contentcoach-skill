@@ -1,0 +1,17 @@
+{
+  "model": "gpt-image-2-5-sunburst-text-to-image",
+  "provider": "kie",
+  "prompt": "Studio product photograph of a single slim aluminium energy drink can standing upright on a dark grey concrete surface, soft light from the left, clean seamless charcoal background. The can is matte deep green with a bright lime stripe. Printed on the can, reads exactly, top to bottom: TRÄNINGSKRAFT (large bold condensed capitals, with the two dots over the A clearly visible), then Energidryck · Citron & ingefära, then at the bottom 330 ml. A few fine condensation beads on the metal. Crisp, correctly spelled print, realistic packaging.",
+  "refs": [],
+  "params": {
+    "aspect_ratio": "1:1",
+    "resolution": "1K"
+  },
+  "cost_usd": 0.03,
+  "credits": "6.0",
+  "seconds": 62,
+  "task_id": "9a91095accc86b3802a3eb554318acc6",
+  "created": "2026-09-27T11:07:46Z",
+  "cost_source": "actual",
+  "prompt_note": "run with the public skill's own recipe and Kie patterns"
+}
