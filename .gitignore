@@ -1,3 +1,7 @@
 .env
 .env.*
 generations/
+# Homepage design context, kept on the owner's machine only
+.impeccable/
+PRODUCT.md
+DESIGN.md

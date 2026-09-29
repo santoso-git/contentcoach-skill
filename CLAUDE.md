@@ -18,8 +18,9 @@ committed here is published.
 - `LICENSE` — MIT, for the skill, recipes and homepage code. The logo, the
   fonts (`docs/fonts/OFL.txt`) and the example generations are outside it; the
   README's License section says so.
-- `PRODUCT.md`, `DESIGN.md`, `.impeccable/` — design context for the homepage.
-  Change the page through the `impeccable` skill.
+- `PRODUCT.md`, `DESIGN.md`, `.impeccable/` — design context for the homepage,
+  **local only**: git-ignored and not on GitHub, since they are not part of the
+  skill. Change the page through the `impeccable` skill, which reads them here.
 
 ## The boundary
 
