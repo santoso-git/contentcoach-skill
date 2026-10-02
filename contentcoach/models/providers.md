@@ -18,7 +18,7 @@ ignored part of the request.
 | Seed | **accepted and ignored** | honoured where the model has one |
 | Reports cost | `creditsConsumed`, 1 credit = 0.005 USD | `x-fal-billable-units` header — **unit differs per model** |
 | Balance | `GET /api/v1/chat/credit` (needs `Content-Type`) | none for ordinary keys; empty shows as `403 TOP_UP` |
-| Catalogue | https://kie.ai/market | https://fal.ai/explore/search |
+| Catalogue | https://kie.ai/market · free API, see below | https://fal.ai/explore/search · free API, see below |
 
 **`x-fal-billable-units` is priced per model.** One unit is 0.08 USD on Nano
 Banana 2, one second on Kling, 0.01 USD on Grok Imagine, and **one whole US
@@ -42,6 +42,55 @@ reporting a missing URL.
 but kie.ai returns 403 to plain fetch tools. Use `curl -A 'Mozilla/5.0 …'`.
 Those pages give field names but no prices; the reliable price is
 `creditsConsumed` from a real run.
+
+## Checking a price or a field live
+
+The recipes hold measured prices and field names; use those to quote. When
+something looks off — a `model not found`, a field the provider rejects, a price
+that seems stale, or a model the user names that has no recipe — both providers
+have **free catalogue lookups**. They never generate anything and never bill.
+
+**Kie** (`Authorization: Bearer $KIE_API_KEY`). The four lookups share **one
+request per second** per account; over that, the reply is `code: 429` inside an
+HTTP 200. Fetch the catalogue once and filter locally.
+
+```bash
+K="Authorization: Bearer $KIE_API_KEY"
+curl -sS -H "$K" "https://api.kie.ai/api/v1/models?q=kling" -o /tmp/cc-cat.json   # also taskType=Text%20to%20Video, provider=
+jq -r '.data.models[] | "\(.model)\t\(.pricingDesc | split("\n")[0])"' /tmp/cc-cat.json
+curl -sS -H "$K" "https://api.kie.ai/api/v1/models/nano-banana-2/price" | jq -r '.data.pricingDesc'
+curl -sS -H "$K" "https://api.kie.ai/api/v1/models/kling-3.0/video/schema" | jq '.data.openapi'
+```
+
+`pricingDesc` is prose that matches what Kie bills. An id with a slash goes in
+unencoded, as above. The schema can be `null` for a model Kie has not synced;
+`/success-rate` on the same path shows the last 24 hours, null meaning no
+traffic.
+
+**fal** (`Authorization: Key $FAL_KEY`). The id must be the full endpoint path —
+`openai/gpt-image-2.5/sunburst/text-to-image`, not `…/sunburst`.
+
+```bash
+F="Authorization: Key $FAL_KEY"
+curl -sS -H "$F" "https://api.fal.ai/v1/models/pricing?endpoint_id=fal-ai/nano-banana-2" | jq '.prices'
+curl -sS -H "$F" "https://api.fal.ai/v1/models?endpoint_id=fal-ai/nano-banana-2&expand=openapi-3.0" \
+  | jq '.models[0] | {status: .metadata.status, openapi}'
+# search: https://api.fal.ai/v1/models?q=kling
+```
+
+Three traps in fal's catalogue:
+
+- **It answers any well-formed id**, real or invented, with a stub priced per
+  "compute second". Only an entry whose `metadata.status` is set is a real model.
+- **Token-billed models are useless here.** GPT Image 2.5 comes back as
+  `unit_price: 1` per "units" — one dollar per unit, no quote possible — and
+  Seedance 2.5 is priced per 1,000 tokens. Use the recipe's measured prices.
+- **A burst is throttled with an error reply.** Wait and retry; it does not mean
+  there is no price.
+
+A catalogue price is a list price. When a run reports a different figure,
+`creditsConsumed` or `x-fal-billable-units` wins, and the recipe should be fixed
+from it.
 
 ## A still means three things to a video model
 

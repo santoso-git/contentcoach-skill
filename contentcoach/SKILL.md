@@ -122,8 +122,9 @@ Downscale files over about 4 MB first (`sips -Z 2048 file.png` on macOS).
    which.
 5. **One at a time.** Run generations sequentially, not in parallel.
 6. **Never loop on a failing request.** Every accepted submit is billed. On
-   `model not found` the id has been renamed: open the provider's model page,
-   copy the id fresh, and run once. Do not probe candidate ids.
+   `model not found` the id has been renamed: look it up in the provider's free
+   catalogue (`models/providers.md`, *Checking a price or a field live*) or on
+   its model page, copy the id fresh, and run once. Do not probe candidate ids.
 7. **Build request JSON with `jq -n --arg`**, never by string interpolation.
    Prompts contain quotes that corrupt a hand-built body.
 8. **Every tool call starts a fresh shell.** Variables set in one call are gone
@@ -168,6 +169,12 @@ jq '.data | {creditsConsumed, failMsg}' /tmp/cc-rec.json
 
 `resultJson` is a JSON **string**, so it is parsed twice. Cost is
 `creditsConsumed × 0.005` USD.
+
+Kie reports errors in the body: check `code`, not the HTTP status — a 429 or a
+rejected job can arrive with HTTP 200. Keep Kie replies in files as above and
+never pipe them through `echo`; `recordInfo` carries JSON inside JSON, and the
+shell mangles its backslashes. Kie keeps results for 14 days, but download at
+once anyway.
 
 **fal.ai — submit to the queue:**
 

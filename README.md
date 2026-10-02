@@ -115,7 +115,10 @@ You pay Kie and fal at their own prices. A draft image is 0.01–0.08 USD; a
 five-second video clip is 0.06–2.37 USD depending on model and provider. **Video
 costs roughly ten times an image, so the skill quotes every clip and waits for
 your yes before it runs**, and it does the same before anything at 2K or 4K. The full
-table is in [`SKILL.md`](contentcoach/SKILL.md).
+table is in [`SKILL.md`](contentcoach/SKILL.md). The prices are measured from
+real runs; when one looks stale, the skill can look up the provider's current
+list price and fields in Kie's and fal's free catalogues before it spends
+anything.
 
 ## Tips
 
