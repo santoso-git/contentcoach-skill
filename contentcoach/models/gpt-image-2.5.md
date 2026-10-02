@@ -40,7 +40,8 @@ while replacing the whole background.
 Kie's 0.08 — so start there when `FAL_KEY` is set. A reference adds about 0.007
 USD at 1K. Text-to-image above 1K is not measured, but should sit below the edit
 prices. Use the queue at every size: a synchronous `fal.run` call at 4K ran over
-60 seconds and was cut off, and fal probably billed the lost image anyway.
+60 seconds and was cut off. fal's billing showed it was not charged, but the
+image was lost and the run had to be repeated.
 
 An edit can also move people into a new scene: "Use the people from the reference
 image — same faces, … Make a new photograph of them, not an edit of this frame",

@@ -31,6 +31,32 @@ shared code, no calls. Users are not guests of anything; they are customers of
 the providers. When a provider changes a model id, a field or a price, fix the
 recipe in `contentcoach/models/` from a real run.
 
+## Working here
+
+- **Local only, git-ignored:** `.env` (copies of `KIE_API_KEY` and `FAL_KEY`
+  from the app repo, for test runs: `set -a; source .env; set +a`) and
+  `generations/` (test outputs with sidecars). Never commit either.
+- **Pushing is a release.** Santoso approves each push explicitly; commit
+  locally and ask.
+- **Route tests are run by the "ContentCoach app" session** (the contentcoach
+  repo), with Santoso's yes per paid run. It sends results here as commit id,
+  file paths, call (endpoint, id, fields), measured price (actual or estimated)
+  and size/length. Its open backlog is in
+  `~/.claude/projects/-Users-santoso-Documents-contentcoach/memory/route-test-backlog.md`.
+- **Adapting a recipe from the app** (`skills/generate/models/`): keep only Kie
+  and fal, drop private paths, `.env`, the web app and WaveSpeed/Google, read
+  keys from the user's shell, save to `generations/` in the user's project,
+  write prices as `0.08 USD`. Nano Banana has one combined recipe here.
+- **Prices live in three places that do not update each other:** the recipe,
+  the cost table in `SKILL.md`, and the price-list dialog in `docs/index.html`
+  (ticked box = measured). Change all three together.
+- **Homepage examples:** Nos. 1–8 were made through the app on 26 Sep; Nos. 9
+  and 10 with this skill's own recipe on 27 Sep. Update the pocket total ("9
+  frames and a clip · 0.62 USD") and the intro count when adding one.
+- GitHub settings (not in the repo): `main` is protected against force-push and
+  deletion, the wiki is off, the description and homepage field name
+  skill.contentcoach.se and the user's own Kie/fal key.
+
 ## Rules
 
 - Never commit a key. The skill reads `KIE_API_KEY` and `FAL_KEY` from the environment.
