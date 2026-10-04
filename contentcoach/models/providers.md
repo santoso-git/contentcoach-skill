@@ -100,6 +100,7 @@ from it.
 | Kling 3.0 · fal | `start_image_url` | no | no |
 | MiniMax H3 · fal | `image_url`, optional | **yes** | no |
 | MiniMax H3 · Kie | `first_frame_url`, optional | **yes** | `reference-to-video` endpoint |
+| Seedance 2.0 Mini · Kie | `first_frame_url`, optional | **yes** | `reference_image_urls[]` |
 | Seedance 2.5 · fal | `image_url`, required | no | no |
 | Seedance 2.5 · Kie | `first_frame_url`, optional | **yes** | `reference_image_urls[]` |
 | Grok Video 1.5 · Kie | — | no | `image_urls[]`, up to 7 |

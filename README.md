@@ -3,8 +3,8 @@
 **Homepage, with examples: https://skill.contentcoach.se/**
 
 A skill that makes images and short videos with several models — Nano Banana 2,
-GPT Image 2.5 and Grok Imagine for images; Kling 3.0, MiniMax H3, Grok Video and
-Seedance 2.5 for video — straight from Cursor, Codex, Claude Code or any agent
+GPT Image 2.5 and Grok Imagine for images; Kling 3.0, MiniMax H3, Grok Video,
+Seedance 2.0 Mini and Seedance 2.5 for video — straight from Cursor, Codex, Claude Code or any agent
 that can run `curl`. It calls the providers **Kie AI** and **fal.ai** directly
 with your own API keys. You pay them directly; nothing goes through anyone else.
 
@@ -41,7 +41,7 @@ One is enough. With both, the skill falls back from one to the other.
 - **Kie AI** — cheapest for nearly every model. Create a key at
   https://kie.ai/api-key and top up some credits.
 - **fal.ai** — the fallback, plus a few things only fal does (a seed on Nano
-  Banana, Grok Imagine edits, MiniMax H3 at 480P or 4K). Create a key at
+  Banana, Grok Imagine edits, MiniMax H3 at 480P, 4K or with a seed). Create a key at
   https://fal.ai/dashboard/keys and add a payment method.
 
 Put them in your shell profile (`~/.zshrc` on a Mac, `~/.bashrc` on Linux) —
@@ -136,7 +136,7 @@ anything.
 
 Your prompt and any reference images go straight from your machine to Kie AI or
 fal.ai, under your own account. For Kie, reference images are uploaded to Kie's
-temporary file storage, which deletes them after about a day; fal receives them inline.
+temporary file storage, which deletes them within one to three days; fal receives them inline.
 Results are downloaded into your project straight away, because the providers'
 links expire within hours. Your keys stay in your shell; the skill never writes
 them anywhere.

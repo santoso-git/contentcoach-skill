@@ -1,6 +1,6 @@
 ---
 name: contentcoach
-description: Generate images and short videos with Nano Banana 2, GPT Image 2.5, Grok Imagine, Kling 3.0, MiniMax H3, Grok Video and Seedance 2.5, calling Kie AI and fal.ai directly with the user's own API keys, cheapest route first, with a price quote before anything expensive runs. Use when the user asks to generate, create or edit an image, a thumbnail, a blog header, a social image, a product shot or a mockup, to animate a picture or make a video clip, or mentions ContentCoach.
+description: Generate images and short videos with Nano Banana 2, GPT Image 2.5, Grok Imagine, Kling 3.0, MiniMax H3, Grok Video, Seedance 2.0 Mini and Seedance 2.5, calling Kie AI and fal.ai directly with the user's own API keys, cheapest route first, with a price quote before anything expensive runs. Use when the user asks to generate, create or edit an image, a thumbnail, a blog header, a social image, a product shot or a mockup, to animate a picture or make a video clip, or mentions ContentCoach.
 license: MIT
 ---
 
@@ -58,7 +58,8 @@ installed copy, fetch them from
 | Image — readable text in the picture, transparent background; Sunburst for fine detail | GPT Image 2.5 (Flare, Sunburst) | `gpt-image-2.5.md` |
 | Image — a different look | Grok Imagine 2.0 | `grok-imagine-2.md` |
 | Video — default | Kling 3.0 | `kling-3.md` |
-| Video — cheap at 480p, or needs a seed | MiniMax H3 | `minimax-h3.md` |
+| Video — cheap with sound, keeps the subject from a start frame | Seedance 2.0 Mini | `seedance-2-mini.md` |
+| Video — cheap, dramatic motion, or needs a seed | MiniMax H3 | `minimax-h3.md` |
 | Video — cheapest of all on Kie, Grok's look, or a person from a photo | Grok Imagine Video 1.5 | `grok-imagine-video-1-5.md` |
 | Video — hero shot, or longer than 15 s | Seedance 2.5 | `seedance-2.5.md` |
 
@@ -73,10 +74,9 @@ Cheapest route first, and **say which route ran and why** in the reply.
 - **Kie first** when `KIE_API_KEY` is set. It is cheaper for nearly everything.
 - **fal** when only `FAL_KEY` is set, when Kie fails, or when the job needs
   something only fal does: a seed on Nano Banana, Grok Imagine edits with
-  your own pictures, or MiniMax H3 at 480P or 4K. Two exceptions start on fal
-  because they are cheaper there: **MiniMax H3** (its cheapest tier exists only
-  on fal) and **GPT Image 2.5** (0.0136–0.039 USD measured at every size, against
-  0.03–0.08 on Kie).
+  your own pictures, or MiniMax H3 at 480P, 4K or with a seed. One exception
+  starts on fal because it is cheaper there: **GPT Image 2.5** (0.0136–0.039
+  USD measured at every size, against 0.03–0.08 on Kie).
 - If the only key set cannot run the job, say so and name the key that would.
 
 Never hide a swap between providers or models.
@@ -90,8 +90,9 @@ ask for it rather than approximating.
 
 - **fal** takes a base64 data URI directly. No upload.
 - **Kie** takes only public HTTPS URLs. Upload the local file first with the
-  user's own Kie key and use the URL right away; Kie deletes uploads after
-  about a day:
+  user's own Kie key and use the URL right away; Kie keeps uploads for one to
+  three days. The host is `kieai.redpandaai.co` — the same path on `api.kie.ai`
+  returns 404, whatever Kie's docs show:
 
 ```bash
 curl -sS -X POST https://kieai.redpandaai.co/api/file-stream-upload \
@@ -245,8 +246,9 @@ is which. Check the provider's pricing page before relying on them.
 | GPT Image 2.5, 1K · 2K · 4K | 0.03 · 0.05 · 0.08 | **0.0136** at 1K · with a reference **0.021 · 0.028 · 0.039**, `medium` |
 | Grok Imagine 2.0, 1k | 0.02 | 0.04 `low` · 0.06 `medium` |
 | Kling 3.0, 5 s, no sound | 0.35 at 720p · 0.45 at 1080p | 0.56 at 1080p |
-| MiniMax H3, 5 s | 0.40 at 768P | **0.25 at 480P** · 0.40 at 768P |
+| MiniMax H3, 5 s | **0.20 at 768P** · 0.33 at 2K | 0.25 at 480P · 0.40 at 768P |
 | Grok Video 1.5, 5 s at 480p | 0.06 | 0.41 |
+| Seedance 2.0 Mini, 5 s, with sound | 0.10 at 480p · **0.21 at 720p** (discount until 7 Oct 2026) | — |
 | Seedance 2.5, 5 s | 0.70 at 480p · 1.58 at 720p | 0.70 at 480p · 2.37 at 720p (listed) |
 
 ## Balance

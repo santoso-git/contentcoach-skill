@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>ContentCoach — an image and video skill for your coding agent</title>
-<meta name="description" content="A skill for Cursor, Codex and Claude Code that makes images and short videos with Nano Banana 2, GPT Image 2.5, Grok Imagine, Kling 3.0 and Seedance. Calls Kie AI and fal.ai directly with your own key, instead of a subscription to a generation app.">
+<meta name="description" content="A skill for Cursor, Codex and Claude Code that makes images and short videos with Nano Banana 2, GPT Image 2.5, Grok Imagine, Kling 3.0, MiniMax H3 and Seedance. Calls Kie AI and fal.ai directly with your own key, instead of a subscription to a generation app.">
 <meta property="og:title" content="ContentCoach — an image and video skill for your coding agent">
 <meta property="og:description" content="Install one skill. Ask your agent for a picture or a clip; it comes back as a file in your project.">
 <link rel="canonical" href="https://skill.contentcoach.se/">
@@ -419,8 +419,8 @@ footer .big{font:800 44px/1 var(--display);text-transform:uppercase}
     </div>
     <div class="legend legend-video">
       <div><h3>Kling 3.0</h3><p>The default for video. Animates a still you like, 3–15 seconds, sound optional.</p></div>
-      <div><h3>MiniMax H3</h3><p>Cheap clips at 480p, and the only one that can repeat a take with a seed.</p></div>
-      <div><h3>Grok Video · Seedance 2.5</h3><p>Grok keeps a person recognisable from photos. Seedance for hero shots up to 30 seconds, at a price.</p></div>
+      <div><h3>MiniMax H3</h3><p>Cheap clips with dramatic motion: 768P on Kie at 0.20 USD for five seconds. On fal, the only one that can repeat a take with a seed.</p></div>
+      <div><h3>Grok Video · Seedance</h3><p>Grok keeps a person recognisable from photos. Seedance 2.0 Mini keeps the subject of a start frame, with sound, for 0.21 USD; Seedance 2.5 is for hero shots up to 30 seconds, at a price.</p></div>
     </div>
   </div>
 </section>
@@ -498,7 +498,7 @@ mkdir -p ~/<wbr>.cursor/<wbr>skills &amp;&amp; ln -s ~/<wbr>.contentcoach-skill/
       <div><h3>Cheapest route first</h3><p>With a Kie key the skill starts there, since it is the cheaper provider for nearly every model, and falls back to fal. It always says which provider ran and what it cost.</p></div>
       <div><h3>Drafts first</h3><p>Everything is made at 1K unless you ask. Ask for 2K or 4K once you have a favourite.</p></div>
       <div><h3>Real files, not descriptions</h3><p>For a logo, a product or a face, give the agent the file. A logo described in words comes back wrong every time.</p></div>
-      <div><h3>Where your data goes</h3><p>Prompts and reference images go straight from your machine to Kie AI or fal.ai, under your own account. For Kie, reference images are uploaded to its temporary file storage, which deletes them after about a day; fal receives them inline. Result links expire within hours, so the skill downloads them straight away.</p></div>
+      <div><h3>Where your data goes</h3><p>Prompts and reference images go straight from your machine to Kie AI or fal.ai, under your own account. For Kie, reference images are uploaded to its temporary file storage, which deletes them within one to three days; fal receives them inline. Result links expire within hours, so the skill downloads them straight away.</p></div>
     </div>
   </div>
 </section>
@@ -554,21 +554,24 @@ mkdir -p ~/<wbr>.cursor/<wbr>skills &amp;&amp; ln -s ~/<wbr>.contentcoach-skill/
         <tr style="--i:10"><td>720p, sound</td><td>0.50<small>0.10/s</small></td><td class="none">—</td></tr>
         <tr style="--i:11"><td>1080p, no sound</td><td>0.45<small>0.09/s</small></td><td>0.56<small>0.112/s</small></td></tr>
         <tr style="--i:12"><td>1080p, sound</td><td>0.675<small>0.135/s</small></td><td>0.84<small>0.168/s</small></td></tr>
-        <tr class="grp"><th colspan="3" scope="rowgroup">MiniMax H3<small>the only one with a seed</small></th></tr>
+        <tr class="grp"><th colspan="3" scope="rowgroup">MiniMax H3<small>a seed on fal only</small></th></tr>
         <tr style="--i:13"><td>480P</td><td class="none">—</td><td>0.25<small>0.05/s</small></td></tr>
-        <tr style="--i:14"><td>768P</td><td>0.40<small>0.08/s</small></td><td>0.40<small>0.08/s</small></td></tr>
-        <tr style="--i:15"><td>2K</td><td>0.65<small>0.13/s</small></td><td>0.65<small>0.13/s</small></td></tr>
+        <tr style="--i:14"><td>768P</td><td><span class="box mini x" role="img" aria-label="measured"></span>0.20<small>0.04/s</small></td><td>0.40<small>0.08/s</small></td></tr>
+        <tr style="--i:15"><td>2K</td><td>0.33<small>0.065/s</small></td><td>0.65<small>0.13/s</small></td></tr>
         <tr style="--i:16"><td>4K</td><td class="none">—</td><td>0.80<small>0.16/s</small></td></tr>
         <tr class="grp"><th colspan="3" scope="rowgroup">Grok Video 1.5<small>always with sound</small></th></tr>
         <tr style="--i:17"><td>480p</td><td><span class="box mini x" role="img" aria-label="measured"></span>0.06<small>0.012/s</small></td><td><span class="box mini x" role="img" aria-label="measured"></span>0.41<small>0.08/s + 0.01 per image</small></td></tr>
         <tr style="--i:18"><td>720p</td><td>0.11<small>0.0225/s</small></td><td>0.70<small>0.14/s</small></td></tr>
+        <tr class="grp"><th colspan="3" scope="rowgroup">Seedance 2.0 Mini<small>with sound, Kie only</small></th></tr>
+        <tr style="--i:19"><td>480p</td><td>0.10<small>0.019/s</small></td><td class="none">—</td></tr>
+        <tr style="--i:20"><td>720p</td><td><span class="box mini x" role="img" aria-label="measured"></span>0.21<small>0.041/s</small></td><td class="none">—</td></tr>
         <tr class="grp"><th colspan="3" scope="rowgroup">Seedance 2.5<small>up to 30 seconds</small></th></tr>
-        <tr style="--i:19"><td>480p</td><td><span class="box mini x" role="img" aria-label="measured"></span>0.70<small>0.14/s</small></td><td><span class="box mini x" role="img" aria-label="measured"></span>0.70<small>0.14/s</small></td></tr>
-        <tr style="--i:20"><td>720p</td><td>1.58<small>0.315/s</small></td><td>2.37<small>0.473/s, listed</small></td></tr>
+        <tr style="--i:21"><td>480p</td><td><span class="box mini x" role="img" aria-label="measured"></span>0.70<small>0.14/s</small></td><td><span class="box mini x" role="img" aria-label="measured"></span>0.70<small>0.14/s</small></td></tr>
+        <tr style="--i:22"><td>720p</td><td>1.58<small>0.315/s</small></td><td>2.37<small>0.473/s, listed</small></td></tr>
         </tbody>
       </table>
 
-      <div class="tally" style="--i:21">
+      <div class="tally" style="--i:23">
         <div><b>0.0136 USD</b><span>The cheapest image: GPT Image 2.5 on fal, at 1K.</span></div>
         <div><b>0.06 USD</b><span>The cheapest clip: five seconds of Grok Video on Kie.</span></div>
       </div>
@@ -578,6 +581,7 @@ mkdir -p ~/<wbr>.cursor/<wbr>skills &amp;&amp; ln -s ~/<wbr>.contentcoach-skill/
         <li>GPT Image 2.5 comes as Flare, the default, and Sunburst, slower with finer detail. On Kie both cost the same; Sunburst was measured there at 0.03 USD for 1K, in one to one and a half minutes, and a transparent background works.</li>
         <li>GPT Image 2.5 on fal is measured at every size at medium quality, Flare and Sunburst alike: 0.0136 USD for 1K from text, and 0.021, 0.028 and 0.039 USD at 1K, 2K and 4K when editing a picture. That makes fal the cheaper route for it.</li>
         <li>The longest Seedance clip, 30 seconds at 720p, is 9.45 USD on Kie and listed at 14.19 USD on fal, where 480p measured well below its listed price. The skill quotes every clip and waits for your yes.</li>
+        <li>Seedance 2.0 Mini's price is a Kie discount that ends on 7 October 2026; it may rise after that.</li>
         <li>Both providers also offer 1080p on Grok Video and Seedance. It has no measured price yet, so it is not listed.</li>
         <li>Prices move. The provider's bill is what counts.</li>
       </ul>
