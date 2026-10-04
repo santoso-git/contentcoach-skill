@@ -59,7 +59,7 @@ installed copy, fetch them from
 | Image — a different look | Grok Imagine 2.0 | `grok-imagine-2.md` |
 | Video — default | Kling 3.0 | `kling-3.md` |
 | Video — cheap with sound, keeps the subject from a start frame | Seedance 2.0 Mini | `seedance-2-mini.md` |
-| Video — cheap, dramatic motion, or needs a seed | MiniMax H3 | `minimax-h3.md` |
+| Video — cheap, dramatic motion, or needs a seed; always returns sound, with no switch on either route | MiniMax H3 | `minimax-h3.md` |
 | Video — cheapest of all on Kie, Grok's look, or a person from a photo | Grok Imagine Video 1.5 | `grok-imagine-video-1-5.md` |
 | Video — hero shot, or longer than 15 s | Seedance 2.5 | `seedance-2.5.md` |
 

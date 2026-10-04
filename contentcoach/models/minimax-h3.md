@@ -19,7 +19,7 @@ SKILL.md, *Running a job*; poll every 10–15 s.
 | Likeness | `reference-to-video`: `reference_image_urls[]` — no frame fields there | no |
 | Prompt rewrite | none — Kie has no switch and does not rewrite | `prompt_expansion_mode`, default `balanced` |
 | Seed | none | `seed` |
-| Sound | always an audio track, though no field exists | — |
+| Audio | **always on, on both routes; no switch** | **always on, on both routes; no switch** |
 | Docs | https://kie.ai/model/minimax-h3/text-to-video.md | https://fal.ai/models/minimax/h3/text-to-video |
 
 **Confirmed on Kie, 4 Oct 2026:** image-to-video, 5 s at 768P from a start
@@ -28,6 +28,13 @@ the start frame was not charged as an extra image. **Confirmed on fal** (Aug
 2026): text- and image-to-video, one with an end frame. Those runs sent the
 older `enable_prompt_expansion: false`, which fal's current schema has replaced
 with `prompt_expansion_mode`; the new field is unrun.
+
+**H3 always returns sound.** Every measured clip, two from Kie and four from
+fal (4 Oct 2026), carried an AAC track with real content — mean volume −10 to
+−40 dB, peaks near 0 dB, not a silent placeholder. Neither route has an audio
+field, and sound is not billed separately. Describe the sound you want in the
+prompt; if the clip must be silent, strip the track afterwards with
+`ffmpeg -i in.mp4 -c copy -an out.mp4`. Record `"audio": true` in the sidecar.
 
 ## Cost — quote one of these
 
