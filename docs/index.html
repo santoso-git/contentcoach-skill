@@ -185,6 +185,18 @@ section{padding-block:clamp(64px,9vw,112px)}
 .terms div{break-inside:avoid;padding:14px 0 18px;border-top:1.5px solid var(--ink)}
 .terms h3{font-size:24px;margin-bottom:6px}
 .terms p{margin:0;font-size:15px;line-height:1.5;color:var(--ink)}
+.log{border:2px solid var(--ink);margin:0;padding:0;list-style:none}
+.log>li{display:grid;grid-template-columns:128px minmax(0,1fr);border-top:2px solid var(--ink)}
+.log>li:first-child{border-top:0}
+.log time{border-right:2px solid var(--ink);padding:16px 12px;font:800 34px/1 var(--display);text-transform:uppercase}
+.log time small{display:block;font:500 12px/1.2 var(--mono);letter-spacing:.06em;margin-top:6px}
+.log ul{margin:0;padding:16px clamp(14px,2vw,22px);list-style:none;max-width:72ch}
+.log ul li{padding-left:16px;position:relative;margin-top:6px;font-size:16px;line-height:1.5}
+.log ul li:first-child{margin-top:0}
+.log ul li::before{content:"";position:absolute;left:0;top:.7em;width:7px;height:2px;background:var(--ink)}
+.log b{font-weight:700}
+.log-more{margin:14px 0 0;font-size:15px;color:var(--ink-soft)}
+.log-more a{color:var(--ink);font-weight:600}
 
 footer{background:var(--ink);color:var(--env)}
 footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:18px 32px;padding-block:32px 40px;font:600 14px/1.4 var(--sans)}
@@ -277,6 +289,9 @@ footer .big{font:800 44px/1 var(--display);text-transform:uppercase}
   .order-row,.step{grid-template-columns:64px minmax(0,1fr)}
   .order-row>span:first-child{padding:12px 8px;font-size:11px}
   .step>.lbl{font-size:34px;padding:14px 8px}
+  .log>li{grid-template-columns:76px minmax(0,1fr)}
+  .log time{font-size:22px;padding:14px 8px;white-space:nowrap}
+  .log ul li{font-size:15px}
   .agents label{flex-direction:column;align-items:flex-start;gap:8px;padding:12px 8px}
   .cmd{font-size:12.5px;padding:14px 14px 4px;white-space:pre-wrap;overflow-wrap:break-word}
   .copy{position:static;display:block;margin:6px 14px 14px auto}
@@ -336,7 +351,7 @@ footer .big{font:800 44px/1 var(--display);text-transform:uppercase}
             <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M8 2v11M3 8.5 8 13.5 13 8.5"/></svg></a>
           <button class="quiet pl" type="button" data-open-prices aria-haspopup="dialog">See the price list</button>
           <a class="quiet" href="https://github.com/santoso-git/contentcoach-skill/blob/main/contentcoach/SKILL.md">Read the skill</a>
-          <div class="stamp" aria-hidden="true">Received<b>26 Sep 2026</b></div>
+          <div class="stamp" aria-hidden="true">Updated<b>4 Oct 2026</b></div>
         </div>
       </div>
 
@@ -502,6 +517,33 @@ mkdir -p ~/<wbr>.cursor/<wbr>skills &amp;&amp; ln -s ~/<wbr>.contentcoach-skill/
     </div>
   </div>
 </section>
+<section id="log">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2>What changed</h2>
+      <p>The lab's log, newest first. Last updated <time datetime="2026-10-04">4 October 2026</time>.</p>
+    </div>
+    <ol class="log">
+      <li><time datetime="2026-10-04">4 Oct<small>2026</small></time><ul>
+        <li><b>New: Seedance 2.0 Mini</b> on Kie AI, with sound. 0.21 USD for five seconds at 720p, measured. Kie calls the price a discount that ends on 7 October.</li>
+        <li><b>MiniMax H3 now starts on Kie AI:</b> 0.20 USD for five seconds at 768P, measured, half fal's price.</li>
+        <li>MiniMax H3 always returns sound, on both providers, at no extra cost.</li>
+      </ul></li>
+      <li><time datetime="2026-10-02">2 Oct<small>2026</small></time><ul>
+        <li>Between updates, the skill can check a provider's current price and fields in its free catalogue.</li>
+      </ul></li>
+      <li><time datetime="2026-09-27">27 Sep<small>2026</small></time><ul>
+        <li><b>New: GPT Image 2.5 Sunburst,</b> the slower variant with finer detail. 0.03 USD for 1K on Kie, measured; transparent backgrounds work.</li>
+        <li><b>GPT Image 2.5 now starts on fal.ai,</b> cheaper at every size: from 0.0136 USD for 1K.</li>
+        <li>More measured prices across the price list, and examples Nos. 9 and 10, made with the skill's own recipe.</li>
+      </ul></li>
+      <li><time datetime="2026-09-26">26 Sep<small>2026</small></time><ul>
+        <li><b>First release:</b> recipes for seven models on Kie AI and fal.ai, called with your own key.</li>
+      </ul></li>
+    </ol>
+    <p class="log-more">Every change, in full: <a href="https://github.com/santoso-git/contentcoach-skill/blob/main/CHANGELOG.md">CHANGELOG.md on GitHub</a>.</p>
+  </div>
+</section>
 </main>
 
 <footer>
@@ -510,6 +552,7 @@ mkdir -p ~/<wbr>.cursor/<wbr>skills &amp;&amp; ln -s ~/<wbr>.contentcoach-skill/
     <nav aria-label="Elsewhere">
       <a href="https://github.com/santoso-git/contentcoach-skill">The skill on GitHub</a>
       <a href="https://github.com/santoso-git/contentcoach-skill/blob/main/contentcoach/SKILL.md">SKILL.md</a>
+      <a href="https://github.com/santoso-git/contentcoach-skill/blob/main/CHANGELOG.md">Changelog</a>
       <a href="https://github.com/santoso-git/contentcoach-skill/blob/main/LICENSE">MIT License</a>
     </nav>
   </div>
@@ -521,7 +564,7 @@ mkdir -p ~/<wbr>.cursor/<wbr>skills &amp;&amp; ln -s ~/<wbr>.contentcoach-skill/
       <div class="sheet-head">
         <div>
           <h2 id="prices-title">Price list</h2>
-          <span class="docket">Kie AI and fal.ai · USD · 26 Sep 2026</span>
+          <span class="docket">Kie AI and fal.ai · USD · 4 Oct 2026</span>
         </div>
         <button class="x-close" type="button" data-close-prices><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M3 3l10 10M13 3 3 13"/></svg><span>Close</span></button>
       </div>

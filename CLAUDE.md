@@ -50,6 +50,11 @@ recipe in `contentcoach/models/` from a real run.
 - **Prices live in three places that do not update each other:** the recipe,
   the cost table in `SKILL.md`, and the price-list dialog in `docs/index.html`
   (ticked box = measured). Change all three together.
+- **Every user-facing change gets a dated entry** in `CHANGELOG.md` and in the
+  "What changed" log at the bottom of `docs/index.html`, and moves the dates on
+  the homepage: the stamp ("Updated"), the log's "Last updated" line and the
+  price list's docket. The homepage log keeps short entries; CHANGELOG.md has
+  the full ones.
 - **Homepage examples:** Nos. 1–8 were made through the app on 26 Sep; Nos. 9
   and 10 with this skill's own recipe on 27 Sep. Update the pocket total ("9
   frames and a clip · 0.62 USD") and the intro count when adding one.

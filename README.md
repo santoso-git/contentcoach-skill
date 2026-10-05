@@ -108,6 +108,7 @@ The recipes are kept up to date. Models and prices change every month: when a
 provider renames a model or changes a field or a price, the recipe is fixed, and
 new models get a recipe of their own as they come out. Pull to get them. The
 no-install route always reads the latest version.
+What changed, and when, is in [CHANGELOG.md](CHANGELOG.md).
 
 ## What it costs
 
