@@ -6,6 +6,10 @@ USD and come from real runs unless marked as listed. To get the latest, run
 
 ## 8 Oct 2026
 
+- **Commands.** Start a message with `prompt <brief>` (after `/contentcoach`
+  in Claude Code) and the agent writes the full prompt and names the model,
+  provider and price — **without running anything**. Edit it, then say run.
+  Also `models`, `prices`, `balance` and `help`.
 - **New model: Nano Banana 2.1**, Google's successor to Nano Banana 2 (released
   6 Oct). Same body under a new id: `nano-banana-2-1` on Kie AI,
   `google/nano-banana-2.1` on fal.ai. Measured on Kie at **0.02 USD for 1K**

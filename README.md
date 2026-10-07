@@ -38,6 +38,21 @@ A short ask is enough: your agent writes it out into a full prompt the way each
 model's guide wants it, and shows it to you before anything paid runs. There is
 no extra model, call or key. Paste a finished prompt and it is sent as it is.
 
+### Commands
+
+Start a message with one of these — after `/contentcoach` in Claude Code, or on
+its own in any agent:
+
+| Command | Does |
+|---|---|
+| `prompt <what you want>` | Writes the full prompt and names the model and price, **without running anything**. Edit it, then say "run it". |
+| `models` | Lists the models and which of them your keys can run. |
+| `prices` | Shows the price table. |
+| `balance` | Shows your Kie balance. |
+| `help` | Lists the commands. |
+
+For example: `/contentcoach prompt a 15-second ad for a wooden chair`.
+
 ## 1. Get a key
 
 One is enough. With both, the skill falls back from one to the other.

@@ -13,6 +13,22 @@ folder with a JSON sidecar recording how it was made.
 
 Answer the user in their own language.
 
+## Commands
+
+The user can start a message with one of these words, after `/contentcoach` in
+Claude Code or on its own anywhere. Anything else is an ordinary request.
+
+| Command | What you do |
+|---|---|
+| `prompt <brief>` | Write the prompt for the brief (*Writing the prompt*), name the model, provider, size and price you would use, and **stop. Run nothing, call no provider.** The user edits it or says to run it; a run then follows the usual rules. |
+| `models` | List the models in the table under *Models*, one line each on what it is for, and which ones the set keys can run. |
+| `prices` | Show *Cost at a glance*. No network call. |
+| `balance` | Show the Kie balance (*Balance*). Say that fal has no balance lookup. |
+| `help` | List these commands, one line each. |
+
+`prompt` costs nothing but a reply. Use it whenever the user wants to see or
+shape a prompt before paying for it.
+
 ## Keys
 
 Two environment variables. **One is enough; both give a fallback.**
@@ -135,7 +151,8 @@ the recipe's *How to prompt it*.
 3. **Never describe a logo, a face or a brand colour** (*Reference images*
    above). If the brief names a product page, fetch the product picture and
    pass it as a file.
-4. **Show the prompt.** Put the written prompt in your reply; for anything that
+4. **Show the prompt.** Put the written prompt in your reply (or only the
+   prompt, with `prompt <brief>` under *Commands*); for anything that
    is quoted first (rules 1 and 2), put it in the quote, so the yes covers the
    prompt as well as the price. The user can change it before it runs. The
    sidecar records it exactly as sent.
