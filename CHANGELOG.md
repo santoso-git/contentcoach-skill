@@ -10,6 +10,9 @@ From a first run by an agent that knew only `SKILL.md` and the recipes:
 
 - **Full prompts on the homepage.** Every example has a "Full prompt" button and
   a "Copy prompt" button, so you can paste the same prompt into your agent.
+- **New homepage example, No. 11:** five shots in one 15-second Seedance 2.0
+  Mini clip from a single prompt with a timed shot list (720p, sound, text only,
+  0.615 USD), with one frame per shot beside it.
 - **Seedance 2.0 Mini keeps its price:** 0.21 USD for 5 seconds at 720p,
   measured again on 7 Oct, and Kie no longer calls it a discount. The recipe
   gains a text-to-video body and a section on **several shots in one clip**: up

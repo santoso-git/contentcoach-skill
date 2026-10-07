@@ -1,0 +1,19 @@
+{
+  "prompt": "Warm, cinematic 5-shot sequence in a small neighbourhood bakery before dawn, one continuous morning told through a single cinnamon bun. Natural, realistic, soft practical light; the same bakery, the same baker in a flour-dusted green apron, and the same bun in every shot.\n\nSHOT 1 [0–3s]: Dark street at 5 a.m., light rain. The bakery window glows amber; inside, the baker ties her apron and switches on a row of pendant lamps one by one. Sound: rain on the awning, a light switch, the hum of the oven warming.\n\nSHOT 2 [3–6s]: Close-up on the floured wooden bench: her hands roll out dough, spread butter and cinnamon sugar, roll it into a log and slice it with a knife into thick spirals. Sound: the rolling pin, the soft cut of the knife, a radio murmuring.\n\nSHOT 3 [6–9s]: Inside the oven, through the glass: the buns rise and turn golden, sugar bubbling at the edges. Slow push-in. Sound: the oven fan, a faint crackle of caramelising sugar.\n\nSHOT 4 [9–12s]: The tray comes out onto the counter in a cloud of steam; she brushes the buns with syrup and scatters pearl sugar. Dawn light starts to fill the window behind her. Sound: the tray on steel, the brush, a contented exhale.\n\nSHOT 5 [12–15s]: First customer at the door, the bell rings. The baker hands over one warm bun in a paper bag; the customer tears off a piece, steam rising, and smiles. Outside the rain has stopped. Sound: the door bell, paper rustling, a quiet laugh, birds starting outside.",
+  "kind": "video",
+  "model": "Seedance 2.0 Mini via kie.ai",
+  "provider": "kie.ai",
+  "refs": [],
+  "params": {
+    "aspect_ratio": "16:9",
+    "duration_s": 15,
+    "audio": true,
+    "resolution": "720p"
+  },
+  "cost_usd": 0.615,
+  "cost_source": "actual",
+  "url": "https://assets.contentcoach.se/gen/1791392505-31a6be_warm-cinematic-5-shot-sequence-in-a-small-neighb.mp4",
+  "created": "2026-10-07T17:01:45.233Z",
+  "used_on": "skill homepage No. 11",
+  "prompt_note": "sent through the web app as kind video, model seedance-2-mini, text to video; the page shows a 960x540 re-encode, the shot frames are stills at 1.5, 4.5, 7.5, 10.5 and 13.5 s"
+}

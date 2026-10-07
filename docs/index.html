@@ -129,6 +129,13 @@ section{padding-block:clamp(64px,9vw,112px)}
 .solo .print{--t:.4deg;transform:rotate(var(--t))}
 .solo .print+.print{--t:-.5deg}
 .cutout img{background:var(--env)}
+.shots{display:grid;grid-template-columns:minmax(0,2.2fr) minmax(0,1fr);gap:clamp(20px,3vw,44px);align-items:end}
+.shots .print{--t:-.3deg;transform:rotate(var(--t))}
+.contact{list-style:none;margin:10px 0 0;padding:6px;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:6px;background:var(--ink)}
+.contact img{display:block;width:100%;height:auto;aspect-ratio:16/9;object-fit:cover}
+.contact span{display:block;margin-top:5px;font:500 10.5px/1.25 var(--mono);color:#f5f2e8}
+.contact b{font-weight:700}
+.contact i{font-style:normal}
 .solo-note{margin:0;max-width:40ch;font-size:17px;color:var(--ink-soft)}
 .solo-note b{color:var(--ink)}
 .legend-video{margin-top:18px}
@@ -286,6 +293,7 @@ footer .big{font:800 44px/1 var(--display);text-transform:uppercase}
   .prints .print{flex-basis:40%}
   .legend{grid-template-columns:1fr}
   .solo{grid-template-columns:1fr 1fr}
+  .shots{grid-template-columns:1fr}
   .solo-note{grid-column:1/-1}
 }
 @media (max-width:560px){
@@ -303,6 +311,8 @@ footer .big{font:800 44px/1 var(--display);text-transform:uppercase}
   .slip .say{padding-right:18px}
   .slip .copy{margin:8px 0 0 auto}
   .solo{grid-template-columns:1fr}
+  .contact{grid-template-columns:repeat(5,minmax(0,1fr));gap:4px;padding:4px}
+  .contact i{display:none}
   .rates-scroll{padding-inline:10px;padding-bottom:110px}
   .sheet{--tilt:0deg}
   .x-close span{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
@@ -364,7 +374,7 @@ footer .big{font:800 44px/1 var(--display);text-transform:uppercase}
         <figure class="print p1" style="--ar:16/9"><img src="examples/contentcoach-skill_cup-windowsill_1790429059_720.webp" width="720" height="402" alt=""><figcaption>No. 1 · Nano Banana 2 · 2K</figcaption></figure>
         <figure class="print p2" style="--ar:1/1"><img src="examples/contentcoach-skill_lighthouse-riso_1790429483_720.webp" width="720" height="720" alt=""><figcaption>No. 5 · Grok Imagine 2.0</figcaption></figure>
         <figure class="print p3" style="--ar:4/3"><img src="examples/contentcoach-skill_bakery-sign_1790429269_720.webp" width="720" height="540" alt=""><figcaption>No. 3 · GPT Image 2 · 2K</figcaption></figure>
-        <div class="pocket"><span>Prints enclosed<small>9 frames and a clip · 0.62 USD in all</small></span></div>
+        <div class="pocket"><span>Prints enclosed<small>9 frames and two clips · 1.24 USD in all</small></span></div>
       </div>
     </div>
   </div>
@@ -375,7 +385,7 @@ footer .big{font:800 44px/1 var(--display);text-transform:uppercase}
   <div class="wrap">
     <div class="sec-head">
       <h2>What the models made</h2>
-      <p>Nine images and one clip, each from a single run of the models and providers the skill calls. Beneath each one: the model, the size, what it cost, and the prompt.</p>
+      <p>Nine images and two clips, each from a single run of the models and providers the skill calls. Beneath each one: the model, the size, what it cost, and the prompt.</p>
     </div>
 
     <div class="prints">
@@ -429,6 +439,25 @@ footer .big{font:800 44px/1 var(--display);text-transform:uppercase}
         <figure class="print clip" style="--ar:960/536;--k:1.79"><video src="examples/contentcoach-skill_cup-pushin-kling3_1790437085.mp4" poster="examples/contentcoach-skill_cup-pushin-kling3_1790437085.webp" width="960" height="536" muted loop playsinline autoplay preload="metadata" aria-label="A three-second clip: the camera pushes in slowly on the cup as steam rises."></video>
           <figcaption><span class="back"><span>No. 8</span><span>Kling 3.0</span><span>720p · 3 s · no sound</span><span>from No. 1</span><b>0.21 USD</b></span>
           <p class="prompt"><span>Prompt</span>Slow gentle push-in on the stoneware cup; the wisp of steam curls and drifts upward…</p><p class="prompt prompt-full" hidden><span>Prompt</span>Slow gentle push-in on the stoneware cup; the wisp of steam curls and drifts upward, soft morning light flickers through the birch leaves outside, a faint breeze moves the trees. Calm, still, realistic.</p><div class="ptools"><button class="pfull" type="button" aria-expanded="false">Full prompt</button><button class="pcopy" type="button">Copy prompt</button></div></figcaption></figure>
+      </div>
+
+      <h3 class="edit-head">Five shots in one clip</h3>
+      <div class="shots">
+        <figure class="print clip" style="--ar:16/9"><video src="examples/contentcoach-skill_bakery-five-shots-seedance-mini_1791392505.mp4" poster="examples/contentcoach-skill_bakery-five-shots-seedance-mini_1791392505.webp" width="960" height="540" controls playsinline preload="none" aria-label="A fifteen-second clip with sound in five shots: a baker switches on the lights before dawn, rolls and cuts cinnamon buns, bakes them, brushes them with syrup, and hands the first one to a customer."></video>
+          <ol class="contact" aria-label="One frame from each shot"><li><img src="examples/contentcoach-skill_bakery-five-shots-seedance-mini_1791392505_shot1.webp" width="360" height="203" loading="lazy" alt=""><span><b>1</b> <i>0–3 s · Lights on</i></span></li><li><img src="examples/contentcoach-skill_bakery-five-shots-seedance-mini_1791392505_shot2.webp" width="360" height="203" loading="lazy" alt=""><span><b>2</b> <i>3–6 s · Roll and cut</i></span></li><li><img src="examples/contentcoach-skill_bakery-five-shots-seedance-mini_1791392505_shot3.webp" width="360" height="203" loading="lazy" alt=""><span><b>3</b> <i>6–9 s · In the oven</i></span></li><li><img src="examples/contentcoach-skill_bakery-five-shots-seedance-mini_1791392505_shot4.webp" width="360" height="203" loading="lazy" alt=""><span><b>4</b> <i>9–12 s · Syrup</i></span></li><li><img src="examples/contentcoach-skill_bakery-five-shots-seedance-mini_1791392505_shot5.webp" width="360" height="203" loading="lazy" alt=""><span><b>5</b> <i>12–15 s · First customer</i></span></li></ol>
+          <figcaption><span class="back"><span>No. 11</span><span>Seedance 2.0 Mini</span><span>720p · 15 s · sound</span><span>text only</span><b>0.615 USD</b></span>
+          <p class="prompt"><span>Prompt</span>Warm, cinematic 5-shot sequence in a small neighbourhood bakery before dawn… SHOT 1 [0–3s]: Dark street at 5 a.m., light rain…</p><p class="prompt prompt-full" hidden><span>Prompt</span>Warm, cinematic 5-shot sequence in a small neighbourhood bakery before dawn, one continuous morning told through a single cinnamon bun. Natural, realistic, soft practical light; the same bakery, the same baker in a flour-dusted green apron, and the same bun in every shot.
+
+SHOT 1 [0–3s]: Dark street at 5 a.m., light rain. The bakery window glows amber; inside, the baker ties her apron and switches on a row of pendant lamps one by one. Sound: rain on the awning, a light switch, the hum of the oven warming.
+
+SHOT 2 [3–6s]: Close-up on the floured wooden bench: her hands roll out dough, spread butter and cinnamon sugar, roll it into a log and slice it with a knife into thick spirals. Sound: the rolling pin, the soft cut of the knife, a radio murmuring.
+
+SHOT 3 [6–9s]: Inside the oven, through the glass: the buns rise and turn golden, sugar bubbling at the edges. Slow push-in. Sound: the oven fan, a faint crackle of caramelising sugar.
+
+SHOT 4 [9–12s]: The tray comes out onto the counter in a cloud of steam; she brushes the buns with syrup and scatters pearl sugar. Dawn light starts to fill the window behind her. Sound: the tray on steel, the brush, a contented exhale.
+
+SHOT 5 [12–15s]: First customer at the door, the bell rings. The baker hands over one warm bun in a paper bag; the customer tears off a piece, steam rising, and smiles. Outside the rain has stopped. Sound: the door bell, paper rustling, a quiet laugh, birds starting outside.</p><div class="ptools"><button class="pfull" type="button" aria-expanded="false">Full prompt</button><button class="pcopy" type="button">Copy prompt</button></div></figcaption></figure>
+        <p class="solo-note"><b>One prompt, one run, five shots.</b> A timed shot list, each line with its own sound, played in order in a single 15-second clip, with the same baker and apron throughout. No stitching. The pearl sugar and the torn-off piece did not make it in. Sound on: press play.</p>
       </div>
     </div>
 
@@ -531,6 +560,7 @@ mkdir -p ~/<wbr>.cursor/<wbr>skills &amp;&amp; ln -s ~/<wbr>.contentcoach-skill/
     <ol class="log">
       <li><time datetime="2026-10-07">7 Oct<small>2026</small></time><ul>
         <li><b>Every example now shows its full prompt,</b> with a button that copies it.</li>
+        <li><b>New example, No. 11:</b> five shots in one 15-second Seedance 2.0 Mini clip, from one prompt.</li>
         <li>Seedance 2.0 Mini keeps its price after Kie's discount date. Up to 15 seconds, it plays a timed list of shots in one clip.</li>
         <li>Safer job steps: each job has its own files, a failed submit stops at once, and the file type comes from the result.</li>
       </ul></li>
