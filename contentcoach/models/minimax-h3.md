@@ -59,8 +59,9 @@ none → `text-to-video`, first/last frame → `image-to-video`, likeness →
 (SKILL.md, *Reference images*).
 
 ```bash
+NAME="NAME"   # the job name, see SKILL.md, Running a job
 jq -n --arg p "PROMPT" --arg u "https://…start-frame.jpg" '{model:"minimax-h3/image-to-video",
-  input:{prompt:$p, first_frame_url:$u, duration:5, resolution:"768P"}}' > /tmp/cc-req.json
+  input:{prompt:$p, first_frame_url:$u, duration:5, resolution:"768P"}}' > "/tmp/cc-$NAME.req.json"
 ```
 
 Kie ignores unknown fields, so fal's `image_url` bills a clip that quietly
@@ -77,8 +78,9 @@ not a cheaper route to H3.
 | `prompt_expansion_mode` | `disabled` `fast` `balanced` `quality`, default `balanced`: the model rewrites your prompt. Send `disabled` to keep your wording |
 
 ```bash
+NAME="NAME"   # the job name, see SKILL.md, Running a job
 jq -n --arg p "PROMPT" '{prompt:$p, duration:5, resolution:"480P", aspect_ratio:"16:9",
-  prompt_expansion_mode:"disabled"}' > /tmp/cc-req.json
+  prompt_expansion_mode:"disabled"}' > "/tmp/cc-$NAME.req.json"
 # submit to minimax/h3/text-to-video
 ```
 

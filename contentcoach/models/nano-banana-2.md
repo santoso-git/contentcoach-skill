@@ -32,8 +32,9 @@ the exact string above.
 | `image_input` | array of public HTTPS URLs; upload local files first (SKILL.md) |
 
 ```bash
+NAME="NAME"   # the job name, see SKILL.md, Running a job
 jq -n --arg p "PROMPT HERE" '{model:"nano-banana-2",input:{
-  prompt:$p, aspect_ratio:"16:9", resolution:"1K", output_format:"png"}}' > /tmp/cc-req.json
+  prompt:$p, aspect_ratio:"16:9", resolution:"1K", output_format:"png"}}' > "/tmp/cc-$NAME.req.json"
 # with references, add to input:  image_input:["https://…"]
 ```
 
@@ -55,15 +56,17 @@ unrelated images. For reproducible output, use fal.
 | `image_urls` | `/edit` only. URLs or `data:image/png;base64,…` |
 
 ```bash
-jq -n --arg p "PROMPT HERE" '{prompt:$p, aspect_ratio:"16:9", resolution:"1K", output_format:"png"}' > /tmp/cc-req.json
+NAME="NAME"   # the job name, see SKILL.md, Running a job
+jq -n --arg p "PROMPT HERE" '{prompt:$p, aspect_ratio:"16:9", resolution:"1K", output_format:"png"}' > "/tmp/cc-$NAME.req.json"
 # submit to fal-ai/nano-banana-2
 ```
 
 With a local reference, inlined — submit to `fal-ai/nano-banana-2/edit`:
 
 ```bash
+NAME="NAME"   # the job name, see SKILL.md, Running a job
 jq -n --arg p "PROMPT" --rawfile b64 <(base64 < ref.png | tr -d '\n') \
-  '{prompt:$p, image_urls:["data:image/png;base64,"+$b64], aspect_ratio:"16:9", resolution:"1K"}' > /tmp/cc-req.json
+  '{prompt:$p, image_urls:["data:image/png;base64,"+$b64], aspect_ratio:"16:9", resolution:"1K"}' > "/tmp/cc-$NAME.req.json"
 ```
 
 Keep inlined references under a few MB; downscale first. `width` and `height` in

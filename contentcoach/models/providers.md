@@ -58,12 +58,19 @@ HTTP 200. Fetch the catalogue once and filter locally.
 K="Authorization: Bearer $KIE_API_KEY"
 curl -sS -H "$K" "https://api.kie.ai/api/v1/models?q=kling" -o /tmp/cc-cat.json   # also taskType=Text%20to%20Video, provider=
 jq -r '.data.models[] | "\(.model)\t\(.pricingDesc | split("\n")[0])"' /tmp/cc-cat.json
-curl -sS -H "$K" "https://api.kie.ai/api/v1/models/nano-banana-2/price" | jq -r '.data.pricingDesc'
-curl -sS -H "$K" "https://api.kie.ai/api/v1/models/kling-3.0/video/schema" | jq '.data.openapi'
+M="bytedance/seedance-2-mini"   # the recipe's Kie model id, as sent in the body
+curl -sS -H "$K" "https://api.kie.ai/api/v1/models/$M/price" | jq -r '.data.pricingDesc'
+sleep 1
+curl -sS -H "$K" "https://api.kie.ai/api/v1/models/$M/schema" | jq '.data.openapi'
 ```
 
-`pricingDesc` is prose that matches what Kie bills. An id with a slash goes in
-unencoded, as above. The schema can be `null` for a model Kie has not synced;
+The pattern is `/api/v1/models/{model id}/price` (or `/schema`,
+`/success-rate`) for every model: take the id exactly as the recipe sends it in
+`"model"` — `nano-banana-2`, `grok-imagine-image-2-0/text-to-image`,
+`bytedance/seedance-2-mini` — and put it in **unencoded**, slashes and all.
+`pricingDesc` is prose that matches what Kie bills. The schema can be `null`
+for a model Kie has not synced (Grok Imagine 2.0 was, on 7 Oct 2026); then read
+the model's docs page as above.
 `/success-rate` on the same path shows the last 24 hours, null meaning no
 traffic.
 

@@ -119,6 +119,11 @@ section{padding-block:clamp(64px,9vw,112px)}
 .back b{font-weight:700}
 .prompt{font:400 13.5px/1.45 var(--sans);color:var(--muted);margin:0}
 .prompt span{font:700 11px/1 var(--sans);letter-spacing:.1em;text-transform:uppercase;color:var(--ink);margin-right:6px}
+.prompt-full{color:var(--ink-soft);white-space:pre-line}
+.ptools{display:flex;flex-wrap:wrap;gap:4px 16px}
+.ptools button{background:none;border:0;padding:4px 0;font:700 11px/1.2 var(--sans);letter-spacing:.1em;text-transform:uppercase;color:var(--ink);text-decoration:underline;text-decoration-thickness:1.5px;text-underline-offset:3px;cursor:pointer}
+.ptools button:hover{text-decoration-thickness:3px}
+.ptools button:active,.ptools .done{text-decoration-color:var(--lab);text-decoration-thickness:3px}
 .edit-head{font-size:clamp(28px,3.4vw,40px);margin-top:clamp(16px,2vw,28px)}
 .solo{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr) minmax(0,.9fr);gap:clamp(20px,3vw,44px);align-items:end}
 .solo .print{--t:.4deg;transform:rotate(var(--t))}
@@ -351,7 +356,7 @@ footer .big{font:800 44px/1 var(--display);text-transform:uppercase}
             <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M8 2v11M3 8.5 8 13.5 13 8.5"/></svg></a>
           <button class="quiet pl" type="button" data-open-prices aria-haspopup="dialog">See the price list</button>
           <a class="quiet" href="https://github.com/santoso-git/contentcoach-skill/blob/main/contentcoach/SKILL.md">Read the skill</a>
-          <div class="stamp" aria-hidden="true">Updated<b>4 Oct 2026</b></div>
+          <div class="stamp" aria-hidden="true">Updated<b>7 Oct 2026</b></div>
         </div>
       </div>
 
@@ -377,39 +382,39 @@ footer .big{font:800 44px/1 var(--display);text-transform:uppercase}
       <div class="row">
         <figure class="print" style="--ar:1600/894;--k:1.79"><img src="examples/contentcoach-skill_cup-windowsill_1790429059.webp" width="1600" height="894" loading="lazy" alt="A speckled stoneware coffee cup on a wooden windowsill, steam rising, birch trees outside.">
           <figcaption><span class="back"><span>No. 1</span><span>Nano Banana 2</span><span>2K · 16:9</span><b>0.06 USD</b></span>
-          <p class="prompt"><span>Prompt</span>Product photograph of a handmade stoneware coffee cup with a speckled oatmeal glaze and an uneven rim, standing on a pale wooden windowsill…</p></figcaption></figure>
+          <p class="prompt"><span>Prompt</span>Product photograph of a handmade stoneware coffee cup with a speckled oatmeal glaze and an uneven rim, standing on a pale wooden windowsill…</p><p class="prompt prompt-full" hidden><span>Prompt</span>Product photograph of a handmade stoneware coffee cup with a speckled oatmeal glaze and an uneven rim, standing on a pale wooden windowsill. Low early-morning sun from the left, long soft shadows, a thin wisp of steam rising from the coffee. Behind it, a softly out-of-focus view through old window glass of birch trees. Shot on a 90mm lens at f/2.8, shallow depth of field, natural colour, quiet and calm.</p><div class="ptools"><button class="pfull" type="button" aria-expanded="false">Full prompt</button><button class="pcopy" type="button">Copy prompt</button></div></figcaption></figure>
 
         <figure class="print" style="--ar:1/1;--k:1"><img src="examples/contentcoach-skill_coffee-bag-label_1790429390.webp" width="1600" height="1600" loading="lazy" alt="A kraft coffee bag with a cream label reading Morning Roast, medium roast, Ethiopia Yirgacheffe, 250 g.">
           <figcaption><span class="back"><span>No. 4</span><span>GPT Image 2</span><span>2K · 1:1</span><b>0.05 USD</b></span>
-          <p class="prompt"><span>Prompt</span>Studio product photograph of a matte kraft-paper coffee bag… A cream paper label on the front, printed in black, reads exactly, line by line: MORNING ROAST…</p></figcaption></figure>
+          <p class="prompt"><span>Prompt</span>Studio product photograph of a matte kraft-paper coffee bag… A cream paper label on the front, printed in black, reads exactly, line by line: MORNING ROAST…</p><p class="prompt prompt-full" hidden><span>Prompt</span>Studio product photograph of a matte kraft-paper coffee bag with a flat bottom, standing on warm grey stone, soft window light from the right, gentle shadow. A cream paper label on the front, printed in black, reads exactly, line by line: MORNING ROAST (large bold condensed capitals), then Medium roast, then Ethiopia · Yirgacheffe, then Notes of apricot, jasmine and honey, then at the bottom 250 g. A few roasted coffee beans scattered in front. Every word spelled correctly, crisp print, realistic packaging.</p><div class="ptools"><button class="pfull" type="button" aria-expanded="false">Full prompt</button><button class="pcopy" type="button">Copy prompt</button></div></figcaption></figure>
 
         <figure class="print" style="--ar:720/1290;--k:0.558"><img src="examples/contentcoach-skill_fjord-boots-story_1790429514_720.webp" width="720" height="1290" loading="lazy" alt="Hiking boots on a granite ledge above a fjord filled with morning mist.">
           <figcaption><span class="back"><span>No. 6</span><span>Nano Banana 2</span><span>2K · 9:16</span><b>0.06 USD</b></span>
-          <p class="prompt"><span>Prompt</span>Vertical outdoor photograph for a social media story: worn leather hiking boots resting on a granite ledge…</p></figcaption></figure>
+          <p class="prompt"><span>Prompt</span>Vertical outdoor photograph for a social media story: worn leather hiking boots resting on a granite ledge…</p><p class="prompt prompt-full" hidden><span>Prompt</span>Vertical outdoor photograph for a social media story: worn leather hiking boots resting on a granite ledge in the foreground, seen from above, and far below a Norwegian fjord filled with low morning mist, steep dark mountainsides, first sunlight catching the peaks. No people visible other than the boots. Cool blue shadows, warm golden highlights, crisp detail, wide-angle lens.</p><div class="ptools"><button class="pfull" type="button" aria-expanded="false">Full prompt</button><button class="pcopy" type="button">Copy prompt</button></div></figcaption></figure>
       </div>
 
       <div class="row">
         <figure class="print" style="--ar:4/3;--k:1.333"><img src="examples/contentcoach-skill_bakery-sign_1790429269.webp" width="1600" height="1200" loading="lazy" alt="A bakery storefront at dusk with a painted sign reading Northside Bakery and gold window lettering.">
           <figcaption><span class="back"><span>No. 3</span><span>GPT Image 2</span><span>2K · 4:3</span><b>0.05 USD</b></span>
-          <p class="prompt"><span>Prompt</span>Street photograph of a small neighbourhood bakery storefront at dusk… a hand-painted wooden sign… reads exactly: NORTHSIDE BAKERY…</p></figcaption></figure>
+          <p class="prompt"><span>Prompt</span>Street photograph of a small neighbourhood bakery storefront at dusk… a hand-painted wooden sign… reads exactly: NORTHSIDE BAKERY…</p><p class="prompt prompt-full" hidden><span>Prompt</span>Street photograph of a small neighbourhood bakery storefront at dusk, warm light inside. Above the door, a hand-painted wooden sign in cream serif letters on deep bottle green reads exactly: NORTHSIDE BAKERY. On the large shop window, gold-leaf window lettering reads exactly, on three lines: Sourdough · Cinnamon buns · Coffee — then smaller: Open daily 7–19. Through the glass, shelves of bread loaves. A bicycle leans against the wall. Realistic photograph, 35mm, crisp lettering, every word spelled correctly.</p><div class="ptools"><button class="pfull" type="button" aria-expanded="false">Full prompt</button><button class="pcopy" type="button">Copy prompt</button></div></figcaption></figure>
 
         <figure class="print" style="--ar:1/1;--k:1"><img src="examples/contentcoach-skill_lighthouse-riso_1790429483.webp" width="1600" height="1600" loading="lazy" alt="A two-colour risograph print of a striped lighthouse on a rocky island at dusk.">
           <figcaption><span class="back"><span>No. 5</span><span>Grok Imagine 2.0</span><span>1:1</span><b>0.02 USD</b></span>
-          <p class="prompt"><span>Prompt</span>Risograph print illustration of a small red-and-white lighthouse on a rocky island at dusk… fluorescent coral and deep teal…</p></figcaption></figure>
+          <p class="prompt"><span>Prompt</span>Risograph print illustration of a small red-and-white lighthouse on a rocky island at dusk… fluorescent coral and deep teal…</p><p class="prompt prompt-full" hidden><span>Prompt</span>Risograph print illustration of a small red-and-white lighthouse on a rocky island at dusk, calm sea, a few seabirds, big low moon. Two-colour print in fluorescent coral and deep teal on off-white paper, visible grain, slight misregistration between the colour layers, bold flat shapes, no text.</p><div class="ptools"><button class="pfull" type="button" aria-expanded="false">Full prompt</button><button class="pcopy" type="button">Copy prompt</button></div></figcaption></figure>
 
         <figure class="print" style="--ar:1600/894;--k:1.79"><img src="examples/contentcoach-skill_remote-work-cabin_1790429181.webp" width="1600" height="894" loading="lazy" alt="A pine desk under a cabin window on a rainy afternoon, with a laptop, a notebook and a brass lamp.">
           <figcaption><span class="back"><span>No. 2</span><span>Nano Banana 2</span><span>2K · 16:9</span><b>0.06 USD</b></span>
-          <p class="prompt"><span>Prompt</span>Wide editorial blog header photograph: a small pine desk under the window of a Nordic cabin on a rainy afternoon…</p></figcaption></figure>
+          <p class="prompt"><span>Prompt</span>Wide editorial blog header photograph: a small pine desk under the window of a Nordic cabin on a rainy afternoon…</p><p class="prompt prompt-full" hidden><span>Prompt</span>Wide editorial blog header photograph: a small pine desk under the window of a Nordic cabin on a rainy afternoon. An open laptop, a paper notebook with a pencil, a brass desk lamp glowing warm, a sprig of eucalyptus in a glass jar. Rain streaks on the window, dark green spruce forest outside. No people. Muted, warm and cool contrast, natural light mixed with lamp light, generous empty space on the left for a headline.</p><div class="ptools"><button class="pfull" type="button" aria-expanded="false">Full prompt</button><button class="pcopy" type="button">Copy prompt</button></div></figcaption></figure>
       </div>
 
       <h3 class="edit-head">Run by the skill itself: fine lettering, then no background</h3>
       <div class="solo">
         <figure class="print"><img src="examples/contentcoach-skill_energy-can-sunburst_1790507266.webp" width="1254" height="1254" loading="lazy" alt="A green energy drink can on dark concrete, printed Träningskraft, Energidryck, Citron och ingefära, 330 ml.">
           <figcaption><span class="back"><span>No. 9</span><span>GPT Image 2.5 Sunburst</span><span>1K · 1:1</span><b>0.03 USD</b></span>
-          <p class="prompt"><span>Prompt</span>Studio product photograph of a single slim aluminium energy drink can standing upright on a dark grey concrete surface… Printed on the can, reads exactly, top to bottom: TRÄNINGSKRAFT… then Energidryck · Citron &amp; ingefära, then at the bottom 330 ml…</p></figcaption></figure>
+          <p class="prompt"><span>Prompt</span>Studio product photograph of a single slim aluminium energy drink can standing upright on a dark grey concrete surface… Printed on the can, reads exactly, top to bottom: TRÄNINGSKRAFT… then Energidryck · Citron &amp; ingefära, then at the bottom 330 ml…</p><p class="prompt prompt-full" hidden><span>Prompt</span>Studio product photograph of a single slim aluminium energy drink can standing upright on a dark grey concrete surface, soft light from the left, clean seamless charcoal background. The can is matte deep green with a bright lime stripe. Printed on the can, reads exactly, top to bottom: TRÄNINGSKRAFT (large bold condensed capitals, with the two dots over the A clearly visible), then Energidryck · Citron &amp; ingefära, then at the bottom 330 ml. A few fine condensation beads on the metal. Crisp, correctly spelled print, realistic packaging.</p><div class="ptools"><button class="pfull" type="button" aria-expanded="false">Full prompt</button><button class="pcopy" type="button">Copy prompt</button></div></figcaption></figure>
         <figure class="print cutout"><img src="examples/contentcoach-skill_energy-can-transparent-sunburst_1790507341.webp" width="1254" height="1254" loading="lazy" alt="The same can as a cut-out with a transparent background, shown on the page's yellow.">
           <figcaption><span class="back"><span>No. 10</span><span>GPT Image 2.5 Sunburst</span><span>1K · 1:1 · transparent</span><b>0.03 USD</b></span>
-          <p class="prompt"><span>Prompt</span>Studio product photograph of a single slim aluminium energy drink can standing upright, soft light from the left, isolated on a transparent background with no floor, no surface and no shadow…</p></figcaption></figure>
+          <p class="prompt"><span>Prompt</span>Studio product photograph of a single slim aluminium energy drink can standing upright, soft light from the left, isolated on a transparent background with no floor, no surface and no shadow…</p><p class="prompt prompt-full" hidden><span>Prompt</span>Studio product photograph of a single slim aluminium energy drink can standing upright, soft light from the left, isolated on a transparent background with no floor, no surface and no shadow. The can is matte deep green with a bright lime stripe. Printed on the can, reads exactly, top to bottom: TRÄNINGSKRAFT (large bold condensed capitals, with the two dots over the A clearly visible), then Energidryck · Citron &amp; ingefära, then at the bottom 330 ml. A few fine condensation beads on the metal. Crisp, correctly spelled print, realistic packaging.</p><div class="ptools"><button class="pfull" type="button" aria-expanded="false">Full prompt</button><button class="pcopy" type="button">Copy prompt</button></div></figcaption></figure>
         <p class="solo-note"><b>Made with the skill's own recipe, straight from Kie.</b> Sunburst is the slower variant of GPT Image 2.5, for when fine detail carries the picture. Each can took about a minute, and every letter, ä included, came back as asked. No. 10 asked for a transparent background and arrived as a cut-out PNG; the yellow behind it is this page, not the picture.</p>
       </div>
 
@@ -420,10 +425,10 @@ footer .big{font:800 44px/1 var(--display);text-transform:uppercase}
           <p class="prompt"><span>Given</span>No. 1, as the reference image</p></figcaption></figure>
         <figure class="print" style="--ar:1600/899;--k:1.78"><img src="examples/contentcoach-skill_cup-studio-edit-gpt25_1790437004.webp" width="1600" height="899" loading="lazy" alt="The same cup, glaze and steam, now on a pale sage studio backdrop.">
           <figcaption><span class="back"><span>No. 7</span><span>GPT Image 2.5</span><span>2K · 16:9</span><b>0.05 USD</b></span>
-          <p class="prompt"><span>Prompt</span>Edit this image. Replace the window, the birch trees and the wooden windowsill with a bright seamless studio backdrop in pale sage green… Keep everything else exactly as it is…</p></figcaption></figure>
+          <p class="prompt"><span>Prompt</span>Edit this image. Replace the window, the birch trees and the wooden windowsill with a bright seamless studio backdrop in pale sage green… Keep everything else exactly as it is…</p><p class="prompt prompt-full" hidden><span>Prompt</span>Edit this image. Replace the window, the birch trees and the wooden windowsill with a bright seamless studio backdrop in pale sage green, the cup standing on a matching sage surface, lit by soft even studio light. Keep everything else exactly as it is: the same cup, its speckled glaze, its uneven rim, the coffee, the wisp of steam, the camera angle and the framing.</p><div class="ptools"><button class="pfull" type="button" aria-expanded="false">Full prompt</button><button class="pcopy" type="button">Copy prompt</button></div></figcaption></figure>
         <figure class="print clip" style="--ar:960/536;--k:1.79"><video src="examples/contentcoach-skill_cup-pushin-kling3_1790437085.mp4" poster="examples/contentcoach-skill_cup-pushin-kling3_1790437085.webp" width="960" height="536" muted loop playsinline autoplay preload="metadata" aria-label="A three-second clip: the camera pushes in slowly on the cup as steam rises."></video>
           <figcaption><span class="back"><span>No. 8</span><span>Kling 3.0</span><span>720p · 3 s · no sound</span><span>from No. 1</span><b>0.21 USD</b></span>
-          <p class="prompt"><span>Prompt</span>Slow gentle push-in on the stoneware cup; the wisp of steam curls and drifts upward…</p></figcaption></figure>
+          <p class="prompt"><span>Prompt</span>Slow gentle push-in on the stoneware cup; the wisp of steam curls and drifts upward…</p><p class="prompt prompt-full" hidden><span>Prompt</span>Slow gentle push-in on the stoneware cup; the wisp of steam curls and drifts upward, soft morning light flickers through the birch leaves outside, a faint breeze moves the trees. Calm, still, realistic.</p><div class="ptools"><button class="pfull" type="button" aria-expanded="false">Full prompt</button><button class="pcopy" type="button">Copy prompt</button></div></figcaption></figure>
       </div>
     </div>
 
@@ -521,9 +526,14 @@ mkdir -p ~/<wbr>.cursor/<wbr>skills &amp;&amp; ln -s ~/<wbr>.contentcoach-skill/
   <div class="wrap">
     <div class="sec-head">
       <h2>What changed</h2>
-      <p>The lab's log, newest first. Last updated <time datetime="2026-10-04">4 October 2026</time>.</p>
+      <p>The lab's log, newest first. Last updated <time datetime="2026-10-07">7 October 2026</time>.</p>
     </div>
     <ol class="log">
+      <li><time datetime="2026-10-07">7 Oct<small>2026</small></time><ul>
+        <li><b>Every example now shows its full prompt,</b> with a button that copies it.</li>
+        <li>Seedance 2.0 Mini keeps its price after Kie's discount date. Up to 15 seconds, it plays a timed list of shots in one clip.</li>
+        <li>Safer job steps: each job has its own files, a failed submit stops at once, and the file type comes from the result.</li>
+      </ul></li>
       <li><time datetime="2026-10-04">4 Oct<small>2026</small></time><ul>
         <li><b>New: Seedance 2.0 Mini</b> on Kie AI, with sound. 0.21 USD for five seconds at 720p, measured. Kie calls the price a discount that ends on 7 October.</li>
         <li><b>MiniMax H3 now starts on Kie AI:</b> 0.20 USD for five seconds at 768P, measured, half fal's price.</li>
@@ -564,7 +574,7 @@ mkdir -p ~/<wbr>.cursor/<wbr>skills &amp;&amp; ln -s ~/<wbr>.contentcoach-skill/
       <div class="sheet-head">
         <div>
           <h2 id="prices-title">Price list</h2>
-          <span class="docket">Kie AI and fal.ai · USD · 4 Oct 2026</span>
+          <span class="docket">Kie AI and fal.ai · USD · 7 Oct 2026</span>
         </div>
         <button class="x-close" type="button" data-close-prices><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M3 3l10 10M13 3 3 13"/></svg><span>Close</span></button>
       </div>
@@ -624,7 +634,7 @@ mkdir -p ~/<wbr>.cursor/<wbr>skills &amp;&amp; ln -s ~/<wbr>.contentcoach-skill/
         <li>GPT Image 2.5 comes as Flare, the default, and Sunburst, slower with finer detail. On Kie both cost the same; Sunburst was measured there at 0.03 USD for 1K, in one to one and a half minutes, and a transparent background works.</li>
         <li>GPT Image 2.5 on fal is measured at every size at medium quality, Flare and Sunburst alike: 0.0136 USD for 1K from text, and 0.021, 0.028 and 0.039 USD at 1K, 2K and 4K when editing a picture. That makes fal the cheaper route for it.</li>
         <li>The longest Seedance clip, 30 seconds at 720p, is 9.45 USD on Kie and listed at 14.19 USD on fal, where 480p measured well below its listed price. The skill quotes every clip and waits for your yes.</li>
-        <li>Seedance 2.0 Mini's price is a Kie discount that ends on 7 October 2026; it may rise after that.</li>
+        <li>Seedance 2.0 Mini's price was first sold as a Kie discount ending on 7 October 2026. Kie still charged it after that date.</li>
         <li>Both providers also offer 1080p on Grok Video and Seedance. It has no measured price yet, so it is not listed.</li>
         <li>Prices move. The provider's bill is what counts.</li>
       </ul>
@@ -686,6 +696,20 @@ mkdir -p ~/<wbr>.cursor/<wbr>skills &amp;&amp; ln -s ~/<wbr>.contentcoach-skill/
   dlg.addEventListener('cancel',function(e){e.preventDefault();closePrices();});
   dlg.addEventListener('close',function(){dlg.classList.remove('in','out'); document.documentElement.style.overflow='';});
   dlg.addEventListener('click',function(e){ if(!e.target.closest('.sheet')) closePrices(); });
+
+  document.addEventListener('click',function(e){
+    var t=e.target.closest('.pfull,.pcopy'); if(!t) return;
+    var cap=t.closest('figcaption'), short=cap.querySelector('.prompt:not(.prompt-full)'), full=cap.querySelector('.prompt-full');
+    if(t.classList.contains('pfull')){
+      var open=t.getAttribute('aria-expanded')!=='true';
+      t.setAttribute('aria-expanded',open); t.textContent=open?'Short prompt':'Full prompt';
+      full.hidden=!open; short.hidden=open; return;
+    }
+    var text=full.textContent.replace(/^Prompt/,'');
+    function done(){t.textContent='Copied';t.classList.add('done');setTimeout(function(){t.textContent='Copy prompt';t.classList.remove('done')},1600)}
+    function pick(){full.hidden=false;short.hidden=true;var r=document.createRange();r.selectNodeContents(full);var sel=getSelection();sel.removeAllRanges();sel.addRange(r);t.textContent='Selected'}
+    try{navigator.clipboard.writeText(text).then(done,pick)}catch(err){pick()}
+  });
 
   document.addEventListener('click',function(e){
     var b=e.target.closest('.copy'); if(!b) return;

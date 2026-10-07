@@ -42,8 +42,9 @@ so its price is still the published one. fal's image-to-video is unrun.
 ## Kie AI
 
 ```bash
+NAME="NAME"   # the job name, see SKILL.md, Running a job
 jq -n --arg p "PROMPT" --arg img "https://…first-frame.png" '{model:"kling-3.0/video",input:{
-  prompt:$p, duration:5, mode:"std", sound:false, multi_shots:false, image_urls:[$img]}}' > /tmp/cc-req.json
+  prompt:$p, duration:5, mode:"std", sound:false, multi_shots:false, image_urls:[$img]}}' > "/tmp/cc-$NAME.req.json"
 ```
 
 - `sound`, `duration`, `mode` and `multi_shots` are all required. Send
@@ -57,9 +58,10 @@ jq -n --arg p "PROMPT" --arg img "https://…first-frame.png" '{model:"kling-3.0
 Submit to `fal-ai/kling-video/v3/pro/image-to-video`:
 
 ```bash
+NAME="NAME"   # the job name, see SKILL.md, Running a job
 jq -n --arg p "PROMPT" --arg img "https://… or data:image/png;base64,…" '{prompt:$p,
   start_image_url:$img, duration:"5", generate_audio:false,
-  negative_prompt:"blur, distort, low quality"}' > /tmp/cc-req.json
+  negative_prompt:"blur, distort, low quality"}' > "/tmp/cc-$NAME.req.json"
 ```
 
 One billable unit is one second.

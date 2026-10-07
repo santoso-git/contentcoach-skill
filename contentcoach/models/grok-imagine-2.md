@@ -22,9 +22,15 @@ USD** measured. Kie's body has no resolution field — one size, one price.
 
 ## Kie AI
 
+| Field | Notes |
+|---|---|
+| `aspect_ratio` | `1:1` `2:3` `3:2` `16:9` `9:16`, default `1:1` — fewer than fal; no `4:3`, `3:4` or `4:5` |
+| Output | **JPEG**: Kie has no format field, and the result URL ends in `.jpg`. The poll block in SKILL.md names the file from the URL |
+
 ```bash
+NAME="NAME"   # the job name, see SKILL.md, Running a job
 jq -n --arg p "PROMPT" '{model:"grok-imagine-image-2-0/text-to-image",
-  input:{prompt:$p, aspect_ratio:"1:1"}}' > /tmp/cc-req.json
+  input:{prompt:$p, aspect_ratio:"1:1"}}' > "/tmp/cc-$NAME.req.json"
 ```
 
 ## fal.ai
@@ -39,8 +45,9 @@ jq -n --arg p "PROMPT" '{model:"grok-imagine-image-2-0/text-to-image",
 | `image_urls` | `/edit` only, up to 3 |
 
 ```bash
+NAME="NAME"   # the job name, see SKILL.md, Running a job
 jq -n --arg p "PROMPT" '{prompt:$p, aspect_ratio:"1:1", resolution:"1k", quality:"low",
-  output_format:"png"}' > /tmp/cc-req.json
+  output_format:"png"}' > "/tmp/cc-$NAME.req.json"
 # submit to xai/grok-imagine-image/v2.0/text-to-image
 ```
 

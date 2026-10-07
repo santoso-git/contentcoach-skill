@@ -115,7 +115,8 @@ Downscale files over about 4 MB first (`sips -Z 2048 file.png` on macOS).
    Video costs roughly ten times an image; Seedance up to sixty.
 2. **Quote before anything above a plain draft.** Several images at once,
    anything at 2K or 4K, or GPT Image 2.5 on fal: say the price first and
-   wait for a yes.
+   wait for a yes. Any other single image at 1K needs no quote — say what it
+   cost in the reply afterwards.
 3. **Draft cheap, finish pretty.** Iterate at 1K. Rerun only the winning prompt
    at 2K or 4K once the user has picked a favourite. Never draft at 4K.
 4. **Always send the fields whose defaults are dear.** Several models default to
@@ -126,50 +127,75 @@ Downscale files over about 4 MB first (`sips -Z 2048 file.png` on macOS).
    `model not found` the id has been renamed: look it up in the provider's free
    catalogue (`models/providers.md`, *Checking a price or a field live*) or on
    its model page, copy the id fresh, and run once. Do not probe candidate ids.
-7. **Build request JSON with `jq -n --arg`**, never by string interpolation.
-   Prompts contain quotes that corrupt a hand-built body.
+7. **Build all JSON with `jq -n --arg`** — the request body and the sidecar —
+   never by string interpolation. Prompts contain quotes that corrupt a
+   hand-built body.
 8. **Every tool call starts a fresh shell.** Variables set in one call are gone
-   in the next, so each block below starts by setting what it needs. Poll one
-   job per call, in loops of about 100 seconds; if it is still running, run
-   the poll block again.
+   in the next, so each block below starts by setting what it needs, and the
+   job's name is pasted in as a literal (see *Running a job*). Poll one job per
+   call, in loops of about 100 seconds; if it is still running, the block says
+   so — run it again.
 
 ## Running a job
 
-Every recipe gives the model id, the endpoint and the request body. The body is
-built with `jq -n --arg` into `/tmp/cc-req.json`; then one of these three
-patterns sends it, waits and downloads. Choose the output name first,
-`generations/{short-description}_{unix-timestamp}.{ext}`, and reuse it.
+Every recipe gives the model id, the endpoint and the request body. Each job
+goes through the same steps, one tool call each: build the body, submit, poll
+and download, write the sidecar.
+
+**Name the job first, once.** Run `date +%s` and choose
+`NAME="{short-description}_{timestamp}"`, for example
+`NAME="lighthouse-riso_1791400000"` — lowercase, hyphens inside the
+description. Every block below and in the recipes starts with that line; paste
+the same literal into each one, since a fresh shell has forgotten it. All of
+the job's temporary files are `/tmp/cc-$NAME.*`, so two agents on one machine
+never read each other's body or result.
 
 **Kie AI — submit:**
 
 ```bash
+NAME="NAME"
 curl -sS -X POST https://api.kie.ai/api/v1/jobs/createTask \
   -H "Authorization: Bearer $KIE_API_KEY" -H "Content-Type: application/json" \
-  --data @/tmp/cc-req.json | tee /tmp/cc-submit.json | jq -r '.data.taskId // empty'
-# no task id printed: read /tmp/cc-submit.json for the error
+  --data @"/tmp/cc-$NAME.req.json" -o "/tmp/cc-$NAME.submit.json"
+TID=$(jq -r '.data.taskId // empty' "/tmp/cc-$NAME.submit.json")
+if [ -n "$TID" ]; then echo "task id: $TID"; else echo "SUBMIT FAILED — nothing to poll:"; jq -c '{code, msg}' "/tmp/cc-$NAME.submit.json"; fi
 ```
 
-**Kie AI — poll and download** (fill in the two values):
+Stop on `SUBMIT FAILED`: there is no job, so do not poll. Read the error with
+the table at the end of this file.
+
+**Kie AI — poll and download** (fill in `NAME` and the task id):
 
 ```bash
-TID="TASK_ID"; OUT="generations/NAME.png"
-for i in $(seq 1 12); do
+NAME="NAME"; TID="TASK_ID"
+REC="/tmp/cc-$NAME.rec.json"; ST=""
+case "$TID" in ""|TASK_ID) echo "no task id — submit first"; ST=none;; esac
+[ "$ST" = none ] || for i in $(seq 1 12); do
   curl -sS -H "Authorization: Bearer $KIE_API_KEY" \
-    "https://api.kie.ai/api/v1/jobs/recordInfo?taskId=$TID" -o /tmp/cc-rec.json
-  ST=$(jq -r '.data.state' /tmp/cc-rec.json)
+    "https://api.kie.ai/api/v1/jobs/recordInfo?taskId=$TID" -o "$REC"
+  ST=$(jq -r '.data.state // empty' "$REC")
   case "$ST" in success|fail) break;; esac
   sleep 8
 done
-echo "state: $ST"
-if [ "$ST" = success ]; then
-  mkdir -p generations
-  curl -sS -o "$OUT" "$(jq -r '.data.resultJson // "{}"' /tmp/cc-rec.json | jq -r '.resultUrls[0] // empty')"
-fi
-jq '.data | {creditsConsumed, failMsg}' /tmp/cc-rec.json
+case "$ST" in
+  success)
+    URL=$(jq -r '.data.resultJson // "{}"' "$REC" | jq -r '.resultUrls[0] // empty')
+    EXT=$(printf '%s' "${URL%%\?*}" | sed -n 's/.*\.\([A-Za-z0-9]*\)$/\1/p' | tr 'A-Z' 'a-z')
+    mkdir -p generations; OUT="generations/$NAME.${EXT:-png}"
+    if [ -n "$URL" ]; then curl -sS -o "$OUT" "$URL" && echo "saved: $OUT"; else echo "no result URL:"; jq -r .data.resultJson "$REC"; fi
+    jq -r '"cost: \(.data.creditsConsumed) credits = \((.data.creditsConsumed * 0.005 * 10000 | round) / 10000) USD"' "$REC" ;;
+  fail) jq -r '"FAILED: \(.data.failMsg)"' "$REC" ;;
+  none) ;;
+  *) echo "still running (state: ${ST:-unknown}) — run this block again" ;;
+esac
 ```
 
-`resultJson` is a JSON **string**, so it is parsed twice. Cost is
-`creditsConsumed × 0.005` USD.
+`resultJson` is a JSON **string**, so it is parsed twice. The file extension
+comes from the result URL: Kie returns a `.jpg` for some image models even when
+the recipe asks for nothing, so never assume `.png`. Cost is
+`creditsConsumed × 0.005` USD, rounded as above (plain multiplication prints
+`0.20500000000000002`). **`creditsConsumed` reads 0 while a job is waiting** —
+it is not a free run; read it only after `success`.
 
 Kie reports errors in the body: check `code`, not the HTTP status — a 429 or a
 rejected job can arrive with HTTP 200. Keep Kie replies in files as above and
@@ -180,26 +206,37 @@ once anyway.
 **fal.ai — submit to the queue:**
 
 ```bash
+NAME="NAME"
 curl -sS -X POST "https://queue.fal.run/MODEL_ID" \
   -H "Authorization: Key $FAL_KEY" -H "Content-Type: application/json" \
-  --data @/tmp/cc-req.json | tee /tmp/cc-submit.json | jq -r '.status_url, .response_url'
+  --data @"/tmp/cc-$NAME.req.json" -o "/tmp/cc-$NAME.submit.json"
+jq -r '.status_url // empty, .response_url // empty' "/tmp/cc-$NAME.submit.json" | grep . \
+  || { echo "SUBMIT FAILED — nothing to poll:"; jq -c . "/tmp/cc-$NAME.submit.json"; }
 ```
 
-**fal.ai — poll and download** (paste the two URLs the submit printed):
+**fal.ai — poll and download** (fill in `NAME` and the two URLs the submit printed):
 
 ```bash
-STATUS_URL="…"; RESPONSE_URL="…"; OUT="generations/NAME.png"
-for i in $(seq 1 10); do
-  ST=$(curl -sS -H "Authorization: Key $FAL_KEY" "$STATUS_URL" | jq -r .status)
+NAME="NAME"; STATUS_URL="…"; RESPONSE_URL="…"
+ST=""
+case "$STATUS_URL" in https://*) ;; *) echo "no status URL — submit first"; ST=none;; esac
+[ "$ST" = none ] || for i in $(seq 1 10); do
+  ST=$(curl -sS -H "Authorization: Key $FAL_KEY" "$STATUS_URL" | jq -r '.status // empty')
   [ "$ST" = COMPLETED ] && break
   sleep 10
 done
-echo "status: $ST"
 if [ "$ST" = COMPLETED ]; then
-  curl -sS -H "Authorization: Key $FAL_KEY" "$RESPONSE_URL" -o /tmp/cc-resp.json -D /tmp/cc-headers.txt
-  URL=$(jq -r '.images[0].url // .video.url // empty' /tmp/cc-resp.json)
-  if [ -n "$URL" ]; then mkdir -p generations; curl -sS -o "$OUT" "$URL"; else jq .detail /tmp/cc-resp.json; fi
-  grep -i x-fal-billable-units /tmp/cc-headers.txt
+  RESP="/tmp/cc-$NAME.resp.json"
+  curl -sS -H "Authorization: Key $FAL_KEY" "$RESPONSE_URL" -o "$RESP" -D "/tmp/cc-$NAME.headers.txt"
+  URL=$(jq -r '.images[0].url // .video.url // empty' "$RESP")
+  if [ -n "$URL" ]; then
+    EXT=$(printf '%s' "${URL%%\?*}" | sed -n 's/.*\.\([A-Za-z0-9]*\)$/\1/p' | tr 'A-Z' 'a-z')
+    mkdir -p generations; OUT="generations/$NAME.${EXT:-png}"
+    curl -sS -o "$OUT" "$URL" && echo "saved: $OUT"
+  else echo "FAILED:"; jq -c .detail "$RESP"; fi
+  grep -i x-fal-billable-units "/tmp/cc-$NAME.headers.txt"
+elif [ "$ST" != none ]; then
+  echo "still running (status: ${ST:-unknown}) — run this block again"
 fi
 ```
 
@@ -212,28 +249,35 @@ is a failed job — report the `detail`.
 ## Save it — right away
 
 Result URLs expire within hours; the patterns above download at once into
-`generations/` in the current project. Keep it flat, no subfolders, with names
-like `{short-description}_{unix-timestamp}.{ext}`, lowercase with hyphens inside
-the description.
+`generations/` in the current project, flat, no subfolders, as
+`generations/NAME.{ext}`.
 
-Then write `NAME.json` beside `NAME.ext` — same basename:
+Then write the sidecar, `generations/NAME.json`, beside it — same basename.
+Build it with `jq -n` too, since the prompt is in it:
 
-```json
-{
-  "model": "nano-banana-2",
-  "provider": "kie",
-  "prompt": "the full text prompt exactly as sent",
-  "refs": ["logo.png"],
-  "params": { "aspect_ratio": "16:9", "resolution": "1K" },
-  "cost_usd": 0.04,
-  "created": "2026-09-26T09:41:00Z"
-}
+```bash
+NAME="NAME"
+jq -n --arg prompt "THE FULL PROMPT EXACTLY AS SENT" \
+  --arg model "MODEL_ID" --arg provider "kie" \
+  --argjson refs '[]' --argjson params '{"aspect_ratio":"16:9","resolution":"1K"}' \
+  --argjson cost 0.04 --arg created "$(date -u +%Y-%m-%dT%H:%M:%SZ)" \
+  '{model:$model, provider:$provider, prompt:$prompt, refs:$refs, params:$params,
+    cost_usd:$cost, created:$created}' > "generations/$NAME.json"
 ```
 
-Record the real cost where the provider reports it (`creditsConsumed` × 0.005
-on Kie, `x-fal-billable-units` on fal — its unit differs per model, see the
-recipe), otherwise the quoted one. Show the user the saved path, and the image
-if you can display it.
+- `model`: the provider's model id exactly as sent, e.g.
+  `grok-imagine-image-2-0/text-to-image` or `bytedance/seedance-2-mini`.
+- `provider`: `kie` or `fal`.
+- `refs`: the local file names of any reference images or frames, `[]` when
+  there are none.
+- `params`: the fields you sent besides the prompt and the images; add
+  `"audio": true` for a clip with sound.
+- `cost_usd`: the real cost where the provider reports it (`creditsConsumed` ×
+  0.005 on Kie, rounded; `x-fal-billable-units` on fal — its unit differs per
+  model, see the recipe), otherwise the quoted one.
+- `created`: the time the job finished, in UTC.
+
+Show the user the saved path, and the image if you can display it.
 
 ## Cost at a glance
 
@@ -248,7 +292,7 @@ is which. Check the provider's pricing page before relying on them.
 | Kling 3.0, 5 s, no sound | 0.35 at 720p · 0.45 at 1080p | 0.56 at 1080p |
 | MiniMax H3, 5 s | **0.20 at 768P** · 0.33 at 2K | 0.25 at 480P · 0.40 at 768P |
 | Grok Video 1.5, 5 s at 480p | 0.06 | 0.41 |
-| Seedance 2.0 Mini, 5 s, with sound | 0.10 at 480p · **0.21 at 720p** (discount until 7 Oct 2026) | — |
+| Seedance 2.0 Mini, 5 s, with sound | 0.10 at 480p · **0.21 at 720p** | — |
 | Seedance 2.5, 5 s | 0.70 at 480p · 1.58 at 720p | 0.70 at 480p · 2.37 at 720p (listed) |
 
 ## Balance

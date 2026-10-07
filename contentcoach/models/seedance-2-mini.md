@@ -25,7 +25,9 @@ poll block two or three times.
 
 **Confirmed on Kie, 4 Oct 2026:** 5 s at 720p from a start frame, sound on,
 `aspect_ratio: "3:4"` → 834×1112, 5.09 s with an AAC audio track, in about three
-minutes; 41 credits = **0.205 USD, as listed**.
+minutes; 41 credits = **0.205 USD, as listed**. **7 Oct 2026:** 5 s at 720p with
+sound, 41 credits again; and a 15 s text-to-video at 720p,
+16:9, sound on → 1280×720, 15.1 s, 123 credits = **0.615 USD**.
 
 ## Cost — quote one of these
 
@@ -38,18 +40,20 @@ minutes; 41 credits = **0.205 USD, as listed**.
 
 About **an eighth of Seedance 2.5** at 720p (0.315 USD/s on Kie).
 
-**Kie labels this price a limited-time discount ending 7 Oct 2026, 06:00 UTC.**
-After that, look the price up in Kie's free catalogue (`models/providers.md`,
-*Checking a price or a field live*, field `pricingDesc`) before quoting. The
+Kie first sold this price as a discount ending 7 Oct 2026; its catalogue still
+showed the same rates after that date (7 Oct, 15:43 UTC) without calling them a
+discount. If a run bills differently, check `pricingDesc` in Kie's free
+catalogue (`models/providers.md`, *Checking a price or a field live*). The
 "with video" rates in Kie's listing are for a *video input*, billed on input
 plus output seconds — not the sound switch.
 
 ## Body
 
 ```bash
+NAME="NAME"   # the job name, see SKILL.md, Running a job
 jq -n --arg p "PROMPT" --arg u "https://…start-frame.jpg" '{model:"bytedance/seedance-2-mini", input:{
   prompt:$p, first_frame_url:$u, resolution:"720p", aspect_ratio:"adaptive",
-  duration:5, generate_audio:true}}' > /tmp/cc-req.json
+  duration:5, generate_audio:true}}' > "/tmp/cc-$NAME.req.json"
 ```
 
 - **Send `aspect_ratio: "adaptive"` with a start frame.** The default is 16:9,
@@ -58,7 +62,32 @@ jq -n --arg p "PROMPT" --arg u "https://…start-frame.jpg" '{model:"bytedance/s
   images*).
 - Kie ignores fields it does not know, so fal's names (`image_url`,
   `end_image_url`) bill a clip that quietly dropped the picture.
-- Without a start frame, drop `first_frame_url` and pick a fixed ratio.
+
+**Text to video** — no picture, so a fixed ratio:
+
+```bash
+NAME="NAME"   # the job name, see SKILL.md, Running a job
+jq -n --arg p "PROMPT" '{model:"bytedance/seedance-2-mini", input:{
+  prompt:$p, resolution:"720p", aspect_ratio:"16:9",
+  duration:5, generate_audio:true}}' > "/tmp/cc-$NAME.req.json"
+```
+
+## Several shots in one clip
+
+Up to 15 seconds, a timed shot list in one prompt is enough — no stitching.
+Open with a sentence on the whole piece, then one paragraph per shot with its
+time span and, if wanted, its sound:
+
+```
+SHOT 1 [0–3s]: … Sound: …
+SHOT 2 [3–7s]: …
+```
+
+In a test on 7 Oct 2026 (15 s, 720p, 16:9, sound on, 0.615 USD), the model
+played five such shots in order in a single clip and kept the same cup and
+clouds across all five, through scene changes from a café to a mountain farm and
+back. Stitch clips with `ffmpeg` only for 20–30 seconds, or when each shot must
+start from its own product picture.
 
 ## When to use it
 

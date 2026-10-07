@@ -53,13 +53,14 @@ drop the reference. That is prompt behaviour, not a missing capability.
 ## Bodies
 
 ```bash
+NAME="NAME"   # the job name, see SKILL.md, Running a job
 # Kie — text to video; add image_urls:["https://…"] for pictures of the subject
 jq -n --arg p "PROMPT" '{model:"grok-imagine-video-1-5-preview",input:{
-  prompt:$p, duration:5, resolution:"480p", aspect_ratio:"16:9"}}' > /tmp/cc-req.json
+  prompt:$p, duration:5, resolution:"480p", aspect_ratio:"16:9"}}' > "/tmp/cc-$NAME.req.json"
 
 # fal — likeness; submit to xai/grok-imagine-video/v1.5/reference-to-video
 jq -n --arg p "@Image1 walks through rain" --arg r "https://…" '{prompt:$p,
-  reference_image_urls:[$r], duration:5, resolution:"480p", aspect_ratio:"9:16"}' > /tmp/cc-req.json
+  reference_image_urls:[$r], duration:5, resolution:"480p", aspect_ratio:"9:16"}' > "/tmp/cc-$NAME.req.json"
 ```
 
 Kie calls the model `preview` — the kind of id that gets renamed. On `model not

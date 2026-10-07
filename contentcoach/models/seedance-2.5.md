@@ -51,8 +51,9 @@ Kie ignores unknown fields, so fal's `image_url` here would bill a clip that
 quietly dropped the image. Use Kie's names.
 
 ```bash
+NAME="NAME"   # the job name, see SKILL.md, Running a job
 jq -n --arg p "PROMPT" --arg f "https://…first-frame.png" '{model:"bytedance/seedance-2-5",
-  input:{prompt:$p, duration:5, resolution:"480p", first_frame_url:$f}}' > /tmp/cc-req.json
+  input:{prompt:$p, duration:5, resolution:"480p", first_frame_url:$f}}' > "/tmp/cc-$NAME.req.json"
 ```
 
 For "keep this character, new motion", pass the photo in `reference_image_urls`
@@ -61,7 +62,8 @@ instead of as a frame — only Kie can do that.
 ## fal.ai
 
 ```bash
-jq -n --arg p "PROMPT" '{prompt:$p, resolution:"480p", duration:"5", aspect_ratio:"16:9"}' > /tmp/cc-req.json
+NAME="NAME"   # the job name, see SKILL.md, Running a job
+jq -n --arg p "PROMPT" '{prompt:$p, resolution:"480p", duration:"5", aspect_ratio:"16:9"}' > "/tmp/cc-$NAME.req.json"
 # submit to bytedance/seedance-2.5/text-to-video
 ```
 

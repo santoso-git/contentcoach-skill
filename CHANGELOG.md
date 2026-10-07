@@ -4,6 +4,33 @@ Changes to the skill, its recipes and its prices, newest first. Prices are in
 USD and come from real runs unless marked as listed. To get the latest, run
 `git -C ~/.contentcoach-skill pull`; the no-install route always reads `main`.
 
+## 7 Oct 2026
+
+From a first run by an agent that knew only `SKILL.md` and the recipes:
+
+- **Full prompts on the homepage.** Every example has a "Full prompt" button and
+  a "Copy prompt" button, so you can paste the same prompt into your agent.
+- **Seedance 2.0 Mini keeps its price:** 0.21 USD for 5 seconds at 720p,
+  measured again on 7 Oct, and Kie no longer calls it a discount. The recipe
+  gains a text-to-video body and a section on **several shots in one clip**: up
+  to 15 seconds, a timed shot list in one prompt plays in order, with no
+  stitching (measured: 15 s at 720p with sound, 0.615 USD).
+- **Safer job steps in `SKILL.md`:**
+  - Each job is named once (`NAME`), and its temporary files are
+    `/tmp/cc-$NAME.*`, so two agents on one machine no longer overwrite each
+    other's request or result.
+  - A failed submit stops at once instead of polling an empty task id.
+  - A poll that is not finished says "run this block again".
+  - The saved file takes its extension from the result URL, since Kie returns a
+    JPEG for Grok Imagine 2.0.
+  - Kie's cost is rounded.
+  - `creditsConsumed` reads 0 while a job waits; it is not a free run.
+- **A sidecar template**, built with `jq -n --arg`, with what goes in each
+  field.
+- Rule 2 says outright that a single 1K draft needs no quote.
+- Grok Imagine 2.0 lists Kie's aspect ratios (`1:1 2:3 3:2 16:9 9:16`).
+- `providers.md` gives the catalogue lookup as one pattern for every model id.
+
 ## 4 Oct 2026
 
 - **New model: Seedance 2.0 Mini** (Kie AI). 4–15 seconds at 480p or 720p,

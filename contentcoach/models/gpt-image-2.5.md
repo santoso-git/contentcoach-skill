@@ -55,8 +55,9 @@ and silently ignored, so the run succeeds with an image that ignored the
 references.
 
 ```bash
+NAME="NAME"   # the job name, see SKILL.md, Running a job
 jq -n --arg p "PROMPT" '{model:"gpt-image-2-5-flare-text-to-image",
-  input:{prompt:$p, aspect_ratio:"1:1", resolution:"1K"}}' > /tmp/cc-req.json
+  input:{prompt:$p, aspect_ratio:"1:1", resolution:"1K"}}' > "/tmp/cc-$NAME.req.json"
 # references:  model "gpt-image-2-5-flare-image-to-image", add input.input_urls:["https://…"]
 # cut-out:     add input.background:"transparent"
 ```
@@ -69,8 +70,9 @@ The last four are 1K only. There is no `4:5`.
 The prefix is **`openai/`, not `fal-ai/`**. `fal-ai/…` returns `model not found`.
 
 ```bash
+NAME="NAME"   # the job name, see SKILL.md, Running a job
 jq -n --arg p "PROMPT" '{prompt:$p, image_size:{width:1360,height:768}, quality:"medium",
-  output_format:"png", num_images:1}' > /tmp/cc-req.json
+  output_format:"png", num_images:1}' > "/tmp/cc-$NAME.req.json"
 # submit to openai/gpt-image-2.5/flare/text-to-image
 # with references: add image_urls:["https://… or data:image/png;base64,…"], submit to …/flare/edit
 # cut-out: add background:"transparent"
