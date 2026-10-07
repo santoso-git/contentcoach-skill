@@ -1,6 +1,6 @@
 ---
 name: contentcoach
-description: Generate images and short videos with Nano Banana 2, GPT Image 2.5, Grok Imagine, Kling 3.0, MiniMax H3, Grok Video, Seedance 2.0 Mini and Seedance 2.5, calling Kie AI and fal.ai directly with the user's own API keys, cheapest route first, with a price quote before anything expensive runs. Use when the user asks to generate, create or edit an image, a thumbnail, a blog header, a social image, a product shot or a mockup, to animate a picture or make a video clip, or mentions ContentCoach.
+description: Generate images and short videos with Nano Banana 2 and 2.1, GPT Image 2.5, Grok Imagine, Kling 3.0, MiniMax H3, Grok Video, Seedance 2.0 Mini and Seedance 2.5, calling Kie AI and fal.ai directly with the user's own API keys, cheapest route first, with a price quote before anything expensive runs. Use when the user asks to generate, create or edit an image, a thumbnail, a blog header, a social image, a product shot or a mockup, to animate a picture or make a video clip, or mentions ContentCoach.
 license: MIT
 ---
 
@@ -55,6 +55,7 @@ installed copy, fetch them from
 | Task | Model | Recipe |
 |---|---|---|
 | Image — default, drafts, edits with references | Nano Banana 2 | `nano-banana-2.md` |
+| Image — the newer Nano Banana, half the price on Kie; on request or for cheap drafts | Nano Banana 2.1 | `nano-banana-2.1.md` |
 | Image — readable text in the picture, transparent background; Sunburst for fine detail | GPT Image 2.5 (Flare, Sunburst) | `gpt-image-2.5.md` |
 | Image — a different look | Grok Imagine 2.0 | `grok-imagine-2.md` |
 | Video — default | Kling 3.0 | `kling-3.md` |
@@ -321,6 +322,7 @@ is which. Check the provider's pricing page before relying on them.
 | Job | Kie | fal |
 |---|---|---|
 | Nano Banana 2, 1K · 2K · 4K | 0.04 · 0.06 · 0.09 | 0.08 · 0.12 · 0.16 |
+| Nano Banana 2.1, 1K · 2K · 4K | **0.02** · 0.03 · 0.045 | 0.08 at 1K |
 | GPT Image 2.5, 1K · 2K · 4K | 0.03 · 0.05 · 0.08 | **0.0136** at 1K · with a reference **0.021 · 0.028 · 0.039**, `medium` |
 | Grok Imagine 2.0, 1k | 0.02 | 0.04 `low` · 0.06 `medium` |
 | Kling 3.0, 5 s, no sound | 0.35 at 720p · 0.45 at 1080p | 0.56 at 1080p |

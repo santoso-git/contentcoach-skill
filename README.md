@@ -2,8 +2,8 @@
 
 **Homepage, with examples: https://skill.contentcoach.se/**
 
-A skill that makes images and short videos with several models — Nano Banana 2,
-GPT Image 2.5 and Grok Imagine for images; Kling 3.0, MiniMax H3, Grok Video,
+A skill that makes images and short videos with several models — Nano Banana 2
+and 2.1, GPT Image 2.5 and Grok Imagine for images; Kling 3.0, MiniMax H3, Grok Video,
 Seedance 2.0 Mini and Seedance 2.5 for video — straight from Cursor, Codex, Claude Code or any agent
 that can run `curl`. It calls the providers **Kie AI** and **fal.ai** directly
 with your own API keys. You pay them directly; nothing goes through anyone else.

@@ -4,6 +4,15 @@ Changes to the skill, its recipes and its prices, newest first. Prices are in
 USD and come from real runs unless marked as listed. To get the latest, run
 `git -C ~/.contentcoach-skill pull`; the no-install route always reads `main`.
 
+## 8 Oct 2026
+
+- **New model: Nano Banana 2.1**, Google's successor to Nano Banana 2 (released
+  6 Oct). Same body under a new id: `nano-banana-2-1` on Kie AI,
+  `google/nano-banana-2.1` on fal.ai. Measured on Kie at **0.02 USD for 1K**
+  (2K 0.03 and 4K 0.045 listed), half Nano Banana 2's price there; 0.08 USD at
+  1K on fal, which also takes a seed. Nano Banana 2 stays the default until the
+  two have been compared side by side. Editing with references is not yet run.
+
 ## 7 Oct 2026
 
 From a first run by an agent that knew only `SKILL.md` and the recipes:

@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>ContentCoach — an image and video skill for your coding agent</title>
-<meta name="description" content="A skill for Cursor, Codex and Claude Code that makes images and short videos with Nano Banana 2, GPT Image 2.5, Grok Imagine, Kling 3.0, MiniMax H3 and Seedance. Calls Kie AI and fal.ai directly with your own key, instead of a subscription to a generation app.">
+<meta name="description" content="A skill for Cursor, Codex and Claude Code that makes images and short videos with Nano Banana 2 and 2.1, GPT Image 2.5, Grok Imagine, Kling 3.0, MiniMax H3 and Seedance. Calls Kie AI and fal.ai directly with your own key, instead of a subscription to a generation app.">
 <meta property="og:title" content="ContentCoach — an image and video skill for your coding agent">
 <meta property="og:description" content="Install one skill. Ask your agent for a picture or a clip; it comes back as a file in your project.">
 <link rel="canonical" href="https://skill.contentcoach.se/">
@@ -366,7 +366,7 @@ footer .big{font:800 44px/1 var(--display);text-transform:uppercase}
             <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M8 2v11M3 8.5 8 13.5 13 8.5"/></svg></a>
           <button class="quiet pl" type="button" data-open-prices aria-haspopup="dialog">See the price list</button>
           <a class="quiet" href="https://github.com/santoso-git/contentcoach-skill/blob/main/contentcoach/SKILL.md">Read the skill</a>
-          <div class="stamp" aria-hidden="true">Updated<b>7 Oct 2026</b></div>
+          <div class="stamp" aria-hidden="true">Updated<b>8 Oct 2026</b></div>
         </div>
       </div>
 
@@ -462,7 +462,7 @@ SHOT 5 [12–15s]: First customer at the door, the bell rings. The baker hands o
     </div>
 
     <div class="legend">
-      <div><h3>Nano Banana 2</h3><p>The default. Photos, scenes, products, and editing a picture you already have.</p></div>
+      <div><h3>Nano Banana 2</h3><p>The default. Photos, scenes, products, and editing a picture you already have. Its successor, 2.1, costs half as much on Kie: 0.02 USD at 1K.</p></div>
       <div><h3>GPT Image 2.5</h3><p>When words inside the image must be readable, and for careful edits. No. 7 is 2.5, Nos. 9 and 10 its slower Sunburst variant; Nos. 3 and 4 were made with 2, its predecessor.</p></div>
       <div><h3>Grok Imagine 2.0</h3><p>Cheap, with a looser, stylised hand.</p></div>
     </div>
@@ -556,9 +556,12 @@ mkdir -p ~/<wbr>.cursor/<wbr>skills &amp;&amp; ln -s ~/<wbr>.contentcoach-skill/
   <div class="wrap">
     <div class="sec-head">
       <h2>What changed</h2>
-      <p>The lab's log, newest first. Last updated <time datetime="2026-10-07">7 October 2026</time>.</p>
+      <p>The lab's log, newest first. Last updated <time datetime="2026-10-08">8 October 2026</time>.</p>
     </div>
     <ol class="log">
+      <li><time datetime="2026-10-08">8 Oct<small>2026</small></time><ul>
+        <li><b>New: Nano Banana 2.1,</b> Google's successor to Nano Banana 2. On Kie AI 0.02 USD at 1K, measured, half Nano Banana 2's price there.</li>
+      </ul></li>
       <li><time datetime="2026-10-07">7 Oct<small>2026</small></time><ul>
         <li><b>Every example now shows its full prompt,</b> with a button that copies it.</li>
         <li><b>Your agent writes the prompt:</b> a short ask is written out by each model's own guide, with no extra call or key. A finished prompt goes through untouched.</li>
@@ -606,7 +609,7 @@ mkdir -p ~/<wbr>.cursor/<wbr>skills &amp;&amp; ln -s ~/<wbr>.contentcoach-skill/
       <div class="sheet-head">
         <div>
           <h2 id="prices-title">Price list</h2>
-          <span class="docket">Kie AI and fal.ai · USD · 7 Oct 2026</span>
+          <span class="docket">Kie AI and fal.ai · USD · 8 Oct 2026</span>
         </div>
         <button class="x-close" type="button" data-close-prices><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M3 3l10 10M13 3 3 13"/></svg><span>Close</span></button>
       </div>
@@ -620,13 +623,17 @@ mkdir -p ~/<wbr>.cursor/<wbr>skills &amp;&amp; ln -s ~/<wbr>.contentcoach-skill/
         <tr style="--i:1"><td>1K</td><td><span class="box mini x" role="img" aria-label="measured"></span>0.04</td><td><span class="box mini x" role="img" aria-label="measured"></span>0.08</td></tr>
         <tr style="--i:2"><td>2K</td><td><span class="box mini x" role="img" aria-label="measured"></span>0.06</td><td><span class="box mini x" role="img" aria-label="measured"></span>0.12</td></tr>
         <tr style="--i:3"><td>4K</td><td><span class="box mini x" role="img" aria-label="measured"></span>0.09</td><td><span class="box mini x" role="img" aria-label="measured"></span>0.16</td></tr>
+        <tr class="grp"><th colspan="3" scope="rowgroup">Nano Banana 2.1<small>new 6 Oct; quality not yet compared</small></th></tr>
+        <tr style="--i:4"><td>1K</td><td><span class="box mini x" role="img" aria-label="measured"></span>0.02</td><td><span class="box mini x" role="img" aria-label="measured"></span>0.08</td></tr>
+        <tr style="--i:5"><td>2K</td><td>0.03</td><td class="none">—</td></tr>
+        <tr style="--i:6"><td>4K</td><td>0.045</td><td class="none">—</td></tr>
         <tr class="grp"><th colspan="3" scope="rowgroup">GPT Image 2.5</th></tr>
-        <tr style="--i:4"><td>1K</td><td><span class="box mini x" role="img" aria-label="measured"></span>0.03</td><td><span class="box mini x" role="img" aria-label="measured"></span>0.0136<small>0.021 with a reference</small></td></tr>
-        <tr style="--i:5"><td>2K</td><td><span class="box mini x" role="img" aria-label="measured"></span>0.05</td><td><span class="box mini x" role="img" aria-label="measured"></span>0.028<small>with a reference</small></td></tr>
-        <tr style="--i:6"><td>4K</td><td>0.08</td><td><span class="box mini x" role="img" aria-label="measured"></span>0.039<small>with a reference</small></td></tr>
+        <tr style="--i:7"><td>1K</td><td><span class="box mini x" role="img" aria-label="measured"></span>0.03</td><td><span class="box mini x" role="img" aria-label="measured"></span>0.0136<small>0.021 with a reference</small></td></tr>
+        <tr style="--i:8"><td>2K</td><td><span class="box mini x" role="img" aria-label="measured"></span>0.05</td><td><span class="box mini x" role="img" aria-label="measured"></span>0.028<small>with a reference</small></td></tr>
+        <tr style="--i:9"><td>4K</td><td>0.08</td><td><span class="box mini x" role="img" aria-label="measured"></span>0.039<small>with a reference</small></td></tr>
         <tr class="grp"><th colspan="3" scope="rowgroup">Grok Imagine 2.0</th></tr>
-        <tr style="--i:7"><td>1k</td><td><span class="box mini x" role="img" aria-label="measured"></span>0.02<small>one size</small></td><td><span class="box mini x" role="img" aria-label="measured"></span>0.04 low<small>0.06 medium</small></td></tr>
-        <tr style="--i:8"><td>2k</td><td class="none">—</td><td>0.06 low<small>0.08 medium</small></td></tr>
+        <tr style="--i:10"><td>1k</td><td><span class="box mini x" role="img" aria-label="measured"></span>0.02<small>one size</small></td><td><span class="box mini x" role="img" aria-label="measured"></span>0.04 low<small>0.06 medium</small></td></tr>
+        <tr style="--i:11"><td>2k</td><td class="none">—</td><td>0.06 low<small>0.08 medium</small></td></tr>
         </tbody>
       </table>
 
@@ -635,28 +642,28 @@ mkdir -p ~/<wbr>.cursor/<wbr>skills &amp;&amp; ln -s ~/<wbr>.contentcoach-skill/
         <thead><tr><th scope="col">Size</th><th scope="col">Kie AI</th><th scope="col">fal.ai</th></tr></thead>
         <tbody>
         <tr class="grp"><th colspan="3" scope="rowgroup">Kling 3.0</th></tr>
-        <tr style="--i:9"><td>720p, no sound</td><td><span class="box mini x" role="img" aria-label="measured"></span>0.35<small>0.07/s</small></td><td class="none">—</td></tr>
-        <tr style="--i:10"><td>720p, sound</td><td>0.50<small>0.10/s</small></td><td class="none">—</td></tr>
-        <tr style="--i:11"><td>1080p, no sound</td><td>0.45<small>0.09/s</small></td><td>0.56<small>0.112/s</small></td></tr>
-        <tr style="--i:12"><td>1080p, sound</td><td>0.675<small>0.135/s</small></td><td>0.84<small>0.168/s</small></td></tr>
+        <tr style="--i:12"><td>720p, no sound</td><td><span class="box mini x" role="img" aria-label="measured"></span>0.35<small>0.07/s</small></td><td class="none">—</td></tr>
+        <tr style="--i:13"><td>720p, sound</td><td>0.50<small>0.10/s</small></td><td class="none">—</td></tr>
+        <tr style="--i:14"><td>1080p, no sound</td><td>0.45<small>0.09/s</small></td><td>0.56<small>0.112/s</small></td></tr>
+        <tr style="--i:15"><td>1080p, sound</td><td>0.675<small>0.135/s</small></td><td>0.84<small>0.168/s</small></td></tr>
         <tr class="grp"><th colspan="3" scope="rowgroup">MiniMax H3<small>always with sound; a seed on fal only</small></th></tr>
-        <tr style="--i:13"><td>480P</td><td class="none">—</td><td>0.25<small>0.05/s</small></td></tr>
-        <tr style="--i:14"><td>768P</td><td><span class="box mini x" role="img" aria-label="measured"></span>0.20<small>0.04/s</small></td><td>0.40<small>0.08/s</small></td></tr>
-        <tr style="--i:15"><td>2K</td><td>0.33<small>0.065/s</small></td><td>0.65<small>0.13/s</small></td></tr>
-        <tr style="--i:16"><td>4K</td><td class="none">—</td><td>0.80<small>0.16/s</small></td></tr>
+        <tr style="--i:16"><td>480P</td><td class="none">—</td><td>0.25<small>0.05/s</small></td></tr>
+        <tr style="--i:17"><td>768P</td><td><span class="box mini x" role="img" aria-label="measured"></span>0.20<small>0.04/s</small></td><td>0.40<small>0.08/s</small></td></tr>
+        <tr style="--i:18"><td>2K</td><td>0.33<small>0.065/s</small></td><td>0.65<small>0.13/s</small></td></tr>
+        <tr style="--i:19"><td>4K</td><td class="none">—</td><td>0.80<small>0.16/s</small></td></tr>
         <tr class="grp"><th colspan="3" scope="rowgroup">Grok Video 1.5<small>always with sound</small></th></tr>
-        <tr style="--i:17"><td>480p</td><td><span class="box mini x" role="img" aria-label="measured"></span>0.06<small>0.012/s</small></td><td><span class="box mini x" role="img" aria-label="measured"></span>0.41<small>0.08/s + 0.01 per image</small></td></tr>
-        <tr style="--i:18"><td>720p</td><td>0.11<small>0.0225/s</small></td><td>0.70<small>0.14/s</small></td></tr>
+        <tr style="--i:20"><td>480p</td><td><span class="box mini x" role="img" aria-label="measured"></span>0.06<small>0.012/s</small></td><td><span class="box mini x" role="img" aria-label="measured"></span>0.41<small>0.08/s + 0.01 per image</small></td></tr>
+        <tr style="--i:21"><td>720p</td><td>0.11<small>0.0225/s</small></td><td>0.70<small>0.14/s</small></td></tr>
         <tr class="grp"><th colspan="3" scope="rowgroup">Seedance 2.0 Mini<small>with sound, Kie only</small></th></tr>
-        <tr style="--i:19"><td>480p</td><td>0.10<small>0.019/s</small></td><td class="none">—</td></tr>
-        <tr style="--i:20"><td>720p</td><td><span class="box mini x" role="img" aria-label="measured"></span>0.21<small>0.041/s</small></td><td class="none">—</td></tr>
+        <tr style="--i:22"><td>480p</td><td>0.10<small>0.019/s</small></td><td class="none">—</td></tr>
+        <tr style="--i:23"><td>720p</td><td><span class="box mini x" role="img" aria-label="measured"></span>0.21<small>0.041/s</small></td><td class="none">—</td></tr>
         <tr class="grp"><th colspan="3" scope="rowgroup">Seedance 2.5<small>up to 30 seconds</small></th></tr>
-        <tr style="--i:21"><td>480p</td><td><span class="box mini x" role="img" aria-label="measured"></span>0.70<small>0.14/s</small></td><td><span class="box mini x" role="img" aria-label="measured"></span>0.70<small>0.14/s</small></td></tr>
-        <tr style="--i:22"><td>720p</td><td>1.58<small>0.315/s</small></td><td>2.37<small>0.473/s, listed</small></td></tr>
+        <tr style="--i:24"><td>480p</td><td><span class="box mini x" role="img" aria-label="measured"></span>0.70<small>0.14/s</small></td><td><span class="box mini x" role="img" aria-label="measured"></span>0.70<small>0.14/s</small></td></tr>
+        <tr style="--i:25"><td>720p</td><td>1.58<small>0.315/s</small></td><td>2.37<small>0.473/s, listed</small></td></tr>
         </tbody>
       </table>
 
-      <div class="tally" style="--i:23">
+      <div class="tally" style="--i:26">
         <div><b>0.0136 USD</b><span>The cheapest image: GPT Image 2.5 on fal, at 1K.</span></div>
         <div><b>0.06 USD</b><span>The cheapest clip: five seconds of Grok Video on Kie.</span></div>
       </div>
@@ -667,6 +674,7 @@ mkdir -p ~/<wbr>.cursor/<wbr>skills &amp;&amp; ln -s ~/<wbr>.contentcoach-skill/
         <li>GPT Image 2.5 on fal is measured at every size at medium quality, Flare and Sunburst alike: 0.0136 USD for 1K from text, and 0.021, 0.028 and 0.039 USD at 1K, 2K and 4K when editing a picture. That makes fal the cheaper route for it.</li>
         <li>The longest Seedance clip, 30 seconds at 720p, is 9.45 USD on Kie and listed at 14.19 USD on fal, where 480p measured well below its listed price. The skill quotes every clip and waits for your yes.</li>
         <li>Seedance 2.0 Mini's price was first sold as a Kie discount ending on 7 October 2026. Kie still charged it after that date.</li>
+        <li>Nano Banana 2.1 on fal has no measured price above 1K yet, so 2K and 4K are not listed.</li>
         <li>Both providers also offer 1080p on Grok Video and Seedance. It has no measured price yet, so it is not listed.</li>
         <li>Prices move. The provider's bill is what counts.</li>
       </ul>
