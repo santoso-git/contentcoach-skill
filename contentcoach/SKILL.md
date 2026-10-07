@@ -20,14 +20,17 @@ Claude Code or on its own anywhere. Anything else is an ordinary request.
 
 | Command | What you do |
 |---|---|
-| `prompt <brief>` | Write the prompt for the brief (*Writing the prompt*), name the model, provider, size and price you would use, and **stop. Run nothing, call no provider.** The user edits it or says to run it; a run then follows the usual rules. |
+| `prompt <brief>` | Write the prompt for the brief (*Writing the prompt*), name the model, provider, size and price you would use, and **stop. Run nothing, call no provider.** The user edits it or says to run it; a run then follows the usual rules. Works whether auto mode is on or off. |
+| `auto on` · `auto off` | Turn auto mode on or off: save `auto_prompt` as `true` or `false` (*Writing the prompt*) and confirm in one line. |
 | `models` | List the models in the table under *Models*, one line each on what it is for, and which ones the set keys can run. |
 | `prices` | Show *Cost at a glance*. No network call. |
 | `balance` | Show the Kie balance (*Balance*). Say that fal has no balance lookup. |
 | `help` | List these commands, one line each. |
 
 `prompt` costs nothing but a reply. Use it whenever the user wants to see or
-shape a prompt before paying for it.
+shape a prompt before paying for it. When the user asks in their own words —
+"improve this prompt", "write it out", "always do that" — treat it as the
+matching command.
 
 ## Keys
 
@@ -125,18 +128,51 @@ Downscale files over about 4 MB first (`sips -Z 2048 file.png` on macOS).
 
 ## Writing the prompt
 
-You write the prompt the model gets; the user's words are the brief. This is
-what turns a one-line request into a good result, and it costs nothing extra:
-no second model, no extra call, no extra key — just your own reply, following
-the recipe's *How to prompt it*.
+You can write the prompt the model gets out of the user's brief: subject,
+light, camera, motion, sound, the way each recipe's *How to prompt it* says.
+It costs nothing extra — no second model, no extra call, no extra key, just
+your own reply. **But only when the user wants it.** By default the user's
+words are the prompt.
 
-1. **A finished prompt goes through untouched.** If the user pasted a full
-   prompt — for example one copied from the homepage — or says "exactly",
-   "verbatim" or "as written", send it as given. Only the fields (ratio,
-   resolution, duration, sound) are yours to set. The same prompt should give
-   the same kind of result.
-2. **A short brief gets written out**, in English, following the recipe's
-   *How to prompt it*. In short:
+**The setting** is `auto_prompt` in `generations/.contentcoach.json` in the
+current project. Read it before the first job:
+
+```bash
+jq -r 'if has("auto_prompt") then .auto_prompt else "unset" end' generations/.contentcoach.json 2>/dev/null || echo unset
+```
+
+- **`true` — auto is on.** Write out every short brief before it runs.
+- **`false` — the user said no.** Send their words as they are. Do not ask
+  again.
+- **`unset` — never asked.** The first time a short brief arrives (not a
+  finished prompt), ask once, before running anything:
+
+  > Want me to write this out into a full prompt first — light, camera,
+  > composition — the way this model's guide recommends? I'd show it to you
+  > before it runs. I can also do that automatically from now on (auto mode).
+  > Yes, this time · Yes, always · No
+
+  - *Yes, this time:* write it out, show it, run on their go-ahead. Leave the
+    setting unset, and do not ask again in this conversation.
+  - *Yes, always:* save `true`, then write it out.
+  - *No:* save `false`, send their words as written, and tell them: "You can
+    get a prompt written out any time with `prompt <what you want>`, and turn
+    on auto mode later with `auto on`."
+
+Save the setting with `jq` (create the file if it is missing):
+
+```bash
+mkdir -p generations; F=generations/.contentcoach.json
+jq -n --argjson v true '{auto_prompt:$v}' > "$F"   # true or false
+```
+
+**Rules for writing a prompt** — in auto mode, after a yes, or for `prompt`:
+
+1. **A finished prompt goes through untouched**, even in auto mode. If the
+   user pasted a full prompt — for example one copied from the homepage — or
+   says "exactly", "verbatim" or "as written", send it as given. Only the
+   fields (ratio, resolution, duration, sound) are yours to set.
+2. **Write in English, following the recipe's *How to prompt it*.** In short:
    - **Image:** subject, setting, light, lens or style, composition, and room
      for a headline if it is a header. Words in the picture go to GPT Image 2.5,
      in quotes, every word spelled out — and only words the user gave.
@@ -151,11 +187,13 @@ the recipe's *How to prompt it*.
 3. **Never describe a logo, a face or a brand colour** (*Reference images*
    above). If the brief names a product page, fetch the product picture and
    pass it as a file.
-4. **Show the prompt.** Put the written prompt in your reply (or only the
-   prompt, with `prompt <brief>` under *Commands*); for anything that
-   is quoted first (rules 1 and 2), put it in the quote, so the yes covers the
-   prompt as well as the price. The user can change it before it runs. The
-   sidecar records it exactly as sent.
+4. **Show the prompt before it runs.** Put it in your reply; for anything that
+   is quoted first (*Rules* 1 and 2), put it in the quote, so the yes covers the
+   prompt as well as the price. In auto mode, show a single 1K image's prompt
+   as you run it. The sidecar records the prompt exactly as sent.
+
+Even without auto mode, every prompt you send — the user's own words or one
+you wrote — is the one shown in the quote for a clip.
 
 ## Rules
 

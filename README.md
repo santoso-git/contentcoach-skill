@@ -34,9 +34,11 @@ hand.
 - *Build a landing page for my bakery with your design skill, and make the hero
   image and three product shots for it with ContentCoach.*
 
-A short ask is enough: your agent writes it out into a full prompt the way each
-model's guide wants it, and shows it to you before anything paid runs. There is
-no extra model, call or key. Paste a finished prompt and it is sent as it is.
+Your words are sent as you wrote them. If you like, your agent writes a short
+ask out into a full prompt the way each model's guide wants it, and shows it to
+you before anything paid runs — no extra model, call or key. The first time you
+ask in a short sentence it offers this once: yes this time, yes always (auto
+mode), or no. A pasted, finished prompt is always sent as it is.
 
 ### Commands
 
@@ -46,6 +48,7 @@ its own in any agent:
 | Command | Does |
 |---|---|
 | `prompt <what you want>` | Writes the full prompt and names the model and price, **without running anything**. Edit it, then say "run it". |
+| `auto on` · `auto off` | Writes out every short ask from now on, or stops. Saved in `generations/.contentcoach.json`. |
 | `models` | Lists the models and which of them your keys can run. |
 | `prices` | Shows the price table. |
 | `balance` | Shows your Kie balance. |

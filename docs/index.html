@@ -526,7 +526,7 @@ mkdir -p ~/<wbr>.cursor/<wbr>skills &amp;&amp; ln -s ~/<wbr>.contentcoach-skill/
           <p class="say say-2">Put our logo from logo.png on a square post announcing the autumn menu, with the words "Autumn menu" readable.</p>
           <p class="say say-2">Build a landing page for my bakery with your design skill, and make the hero image and three product shots for it with ContentCoach.</p>
           <p class="say say-2"><code>prompt</code> a 15-second ad for a wooden chair</p>
-          <p class="hint">Start with <code>prompt</code> to see the prompt your agent would write, and the price, without running anything; <code>models</code>, <code>prices</code> and <code>balance</code> work the same way. In Claude Code, put <code>/contentcoach</code> first. Before a clip, or anything at 2K or 4K, the skill tells you the model, the provider, the price and the prompt it wrote, and waits for your yes. Everything lands in <code>generations/</code> in your open project, next to a <code>.json</code> that records the prompt, the model and the cost.</p>
+          <p class="hint">Start with <code>prompt</code> to see the prompt your agent would write, and the price, without running anything; <code>auto on</code> has it write out every short ask; <code>models</code>, <code>prices</code> and <code>balance</code> work the same way. In Claude Code, put <code>/contentcoach</code> first. Before a clip, or anything at 2K or 4K, the skill tells you the model, the provider, the price and the prompt it will send, and waits for your yes. Everything lands in <code>generations/</code> in your open project, next to a <code>.json</code> that records the prompt, the model and the cost.</p>
         </div>
       </div>
     </div>
@@ -540,7 +540,7 @@ mkdir -p ~/<wbr>.cursor/<wbr>skills &amp;&amp; ln -s ~/<wbr>.contentcoach-skill/
       <p>Printed on the back of the envelope, so nobody is surprised.</p>
     </div>
     <div class="terms">
-      <div><h3>Your agent writes the prompt</h3><p>Ask in a sentence. The agent you already use writes it out the way each model's own guide wants it: subject, light, camera, motion, sound, and a timed shot list for a short story. No extra model, no extra call, no extra key; it costs a few hundred tokens of your agent's reply. You see the prompt before anything paid runs, and can change it. A finished prompt, such as one copied from the examples above, goes through untouched.</p></div>
+      <div><h3>Your agent writes the prompt, if you want</h3><p>Your words are sent as you wrote them. The first time you ask in a short sentence, the agent offers to write it out the way the model's own guide wants it: subject, light, camera, motion, sound, a timed shot list for a short story. Say yes once, yes always (<code>auto on</code>), or no; it asks only once. <code>prompt</code> does it on demand without running anything. No extra model, no extra call, no extra key: just a few hundred tokens of the agent you already use. A finished prompt, such as one copied from the examples above, goes through untouched.</p></div>
       <div><h3>Instead of a generation app</h3><p>No subscription to Higgsfield, Runway or a similar app. The skill runs the same kind of models through your own Kie AI or fal.ai account, and you pay per image or clip at the provider's price.</p></div>
       <div><h3>Alongside your other skills</h3><p>Your agent can use it in the same task as its other skills. A design skill builds a landing page, and this one makes the hero image, the product shots and a short clip for it, saved straight into the project.</p></div>
       <div><h3>Kept up to date</h3><p>Models and prices change every month. When a provider renames a model or changes a field or a price, the recipe is fixed, and new models get a recipe of their own as they come out. Run <code>git -C ~/.contentcoach-skill pull</code> to get them; the no-install route always reads the latest. Between updates, the skill can check a provider's current price and fields in its free catalogue.</p></div>
@@ -561,12 +561,13 @@ mkdir -p ~/<wbr>.cursor/<wbr>skills &amp;&amp; ln -s ~/<wbr>.contentcoach-skill/
     </div>
     <ol class="log">
       <li><time datetime="2026-10-08">8 Oct<small>2026</small></time><ul>
-        <li><b>Commands:</b> <code>prompt</code> writes the prompt and quotes the price without running anything; also <code>models</code>, <code>prices</code>, <code>balance</code> and <code>help</code>.</li>
+        <li><b>Commands:</b> <code>prompt</code> writes the prompt and quotes the price without running anything; <code>auto on</code> writes out every short ask; also <code>models</code>, <code>prices</code>, <code>balance</code> and <code>help</code>.</li>
+        <li><b>Prompt writing is opt-in:</b> your words are sent as written unless you say yes. The agent asks once.</li>
         <li><b>New: Nano Banana 2.1,</b> Google's successor to Nano Banana 2. On Kie AI 0.02 USD at 1K, measured, half Nano Banana 2's price there.</li>
       </ul></li>
       <li><time datetime="2026-10-07">7 Oct<small>2026</small></time><ul>
         <li><b>Every example now shows its full prompt,</b> with a button that copies it.</li>
-        <li><b>Your agent writes the prompt:</b> a short ask is written out by each model's own guide, with no extra call or key. A finished prompt goes through untouched.</li>
+        <li><b>Your agent can write the prompt:</b> a short ask written out by each model's own guide, with no extra call or key.</li>
         <li><b>New example, No. 11:</b> five shots in one 15-second Seedance 2.0 Mini clip, from one prompt.</li>
         <li>Seedance 2.0 Mini keeps its price after Kie's discount date. Up to 15 seconds, it plays a timed list of shots in one clip.</li>
         <li>Safer job steps: each job has its own files, a failed submit stops at once, and the file type comes from the result.</li>
