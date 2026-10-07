@@ -34,6 +34,10 @@ hand.
 - *Build a landing page for my bakery with your design skill, and make the hero
   image and three product shots for it with ContentCoach.*
 
+A short ask is enough: your agent writes it out into a full prompt the way each
+model's guide wants it, and shows it to you before anything paid runs. There is
+no extra model, call or key. Paste a finished prompt and it is sent as it is.
+
 ## 1. Get a key
 
 One is enough. With both, the skill falls back from one to the other.

@@ -73,6 +73,26 @@ Keep inlined references under a few MB; downscale first. `width` and `height` in
 the response come back `null` — read dimensions from the downloaded file. One
 billable unit is one 1K image, 0.08 USD.
 
+## How to prompt it
+
+From Google's own guide for the model:
+
+- **Write a scene, not a keyword list:** one to three sentences, 40–80 words,
+  in the order subject → action → setting → composition → style.
+- **Be specific about material:** "navy blue tweed", not "a suit jacket".
+- **Camera and light language helps**, even when the user never mentioned
+  photography: framing (low angle, aerial view), lens and focus (macro, shallow
+  depth of field at f/1.8), designed light (golden-hour backlight, a single
+  softbox), a film stock or colour grade.
+- **Say what you want, not what you don't:** "an empty street", not "no cars".
+- **With references:** name each image by its role, in order ("using the first
+  image as the product and the second as the fabric"), then the new scene. For
+  an edit, open with the verb — remove, replace, change, place — and say what
+  stays the same. Don't re-describe what an image already shows.
+- Words in the picture: in quotes, with the lettering described — the word
+  "GLOW" in a flowing brush script. For more than a word or two, use GPT
+  Image 2.5.
+
 ## Changing an image you already made
 
 No seed comes back, so rerunning a prompt gives a *new* picture, not the same

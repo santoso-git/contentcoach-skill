@@ -66,8 +66,18 @@ jq -n --arg p "PROMPT" --arg img "https://… or data:image/png;base64,…" '{pr
 
 One billable unit is one second.
 
-## Prompting
+## How to prompt it
 
-Describe motion, not only the scene: what moves, how the camera moves, the
-light. With a start frame, the picture already says what is there — spend the
-prompt on what happens.
+- **A fuller description than most:** subject, visible action, scene, camera,
+  light and mood, 40–70 words.
+- **Describe what is visible.** Not "magic" but "swirling blue particles";
+  not an inner state but the movement that shows it.
+- **Camera in ordinary words:** close-up, wide shot, low angle, slow push-in,
+  pan, tracking shot — and the pacing ("a slow push-in as she thinks").
+- **With a start frame**, the picture already says what is there: spend the
+  prompt on what happens, and keep the person's clothes and props as they are.
+- **One continuous shot**, no shot markers: Kie's body sends
+  `multi_shots: false`.
+- With sound on, one short line of ambience tied to the action.
+- Describe what should be there rather than what should not; only fal has a
+  `negative_prompt` field.

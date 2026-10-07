@@ -120,9 +120,28 @@ slowness is Kie's. Kie's price for 2K and 4K is from its pricing page, 27 Sep
 2026 (search the table for the model name; the page loads prices in the browser,
 so `curl` does not see them).
 
-## Notes
+## How to prompt it
 
-- State the layout literally — what sits where, at what size — rather than a
-  mood.
-- For a word with diacritics, quote it and name them: `the word "TÄVLING" with
-  an umlaut over the A`.
+From 799 working GPT Image 2 prompts (a public CC0 collection), measured:
+
+- **The text is the point.** Put the exact words in quotes — a hand-painted
+  sign reading "NORTHSIDE BAKERY" — and name the lettering style next to them:
+  carved, neon tube, letterpress, embroidered. Never paraphrase the words.
+- **Only the words the user gave.** No invented tagline, subtitle or date; it
+  looks finished and says something nobody approved. If the layout needs a
+  second line that was not given, leave room and say so: "space below for a
+  subtitle, no text there".
+- **Don't compress.** The median working prompt is about 1,000 characters.
+  Cut only words that carry no visual information.
+- **Say where things sit** — top, lower left, centred, foreground — rather
+  than describing a mood. The model follows placement better than atmosphere.
+- **Light is the atmosphere control:** overcast daylight, hard rim light, a
+  single softbox, sodium street light. Camera words land too (85mm, f/1.4).
+- **Exclusions go in the prompt**, since there is no negative field: "no text
+  anywhere else, no watermark".
+- **An edit is a command:** what changes, and what must stay identical.
+- Prose, not JSON, unless the subject is a labelled diagram.
+- A word with diacritics: quote it and name them, `the word "TÄVLING" with an
+  umlaut over the A`.
+- For a cut-out, send `background: "transparent"` **and** say "isolated on a
+  transparent background, no floor, no shadow".

@@ -53,3 +53,15 @@ jq -n --arg p "PROMPT" '{prompt:$p, aspect_ratio:"1:1", resolution:"1k", quality
 
 - Record `revised_prompt` from the response in the sidecar when it is not `null`.
 - **One billable unit is 0.01 USD** on this model: a `1k`/`low` image bills 4.
+
+## How to prompt it
+
+- **Name the finished asset first** — a product shot, a poster, a hero banner,
+  a portrait — before any description.
+- Then subject → setting → composition (distance, lens, angle, focal point) →
+  light → style → the details that must be exact. One paragraph, 30–70 words.
+- **Style words come last.** A prompt that opens with "cinematic" or
+  "premium" gives an attractive picture with no focus.
+- For photorealism, exact nouns and visible details, and state what generators
+  break: scale, hands, faces, reflections.
+- At most one short text element, in quotes, with where it sits.

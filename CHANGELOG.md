@@ -8,6 +8,13 @@ USD and come from real runs unless marked as listed. To get the latest, run
 
 From a first run by an agent that knew only `SKILL.md` and the recipes:
 
+- **Your agent writes the prompt.** A new section in `SKILL.md`, *Writing the
+  prompt*, and a *How to prompt it* section in every recipe, from each model's
+  own guide. A short ask ("a blog header about remote work") is written out —
+  subject, light, camera, motion, sound, a timed shot list for a short story —
+  by the agent you already use: no extra model, call or key. The prompt is
+  shown before anything paid runs, and the quote for a clip includes it. A
+  finished prompt, pasted or marked "exactly", is sent untouched.
 - **Full prompts on the homepage.** Every example has a "Full prompt" button and
   a "Copy prompt" button, so you can paste the same prompt into your agent.
 - **New homepage example, No. 11:** five shots in one 15-second Seedance 2.0

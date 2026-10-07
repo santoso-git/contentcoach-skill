@@ -106,10 +106,44 @@ the user would not want reachable while it lasts.
 
 Downscale files over about 4 MB first (`sips -Z 2048 file.png` on macOS).
 
+## Writing the prompt
+
+You write the prompt the model gets; the user's words are the brief. This is
+what turns a one-line request into a good result, and it costs nothing extra:
+no second model, no extra call, no extra key — just your own reply, following
+the recipe's *How to prompt it*.
+
+1. **A finished prompt goes through untouched.** If the user pasted a full
+   prompt — for example one copied from the homepage — or says "exactly",
+   "verbatim" or "as written", send it as given. Only the fields (ratio,
+   resolution, duration, sound) are yours to set. The same prompt should give
+   the same kind of result.
+2. **A short brief gets written out**, in English, following the recipe's
+   *How to prompt it*. In short:
+   - **Image:** subject, setting, light, lens or style, composition, and room
+     for a headline if it is a header. Words in the picture go to GPT Image 2.5,
+     in quotes, every word spelled out — and only words the user gave.
+   - **Edit:** what changes, then "keep everything else exactly as it is", and
+     name what must survive (the face, the label, the composition).
+   - **Video:** subject, motion, setting, look, one camera move, and sound when
+     sound is on. One continuous shot by default. For a short ad or story on
+     Seedance 2.0 Mini, up to 15 s: a summary sentence, then a timed shot list
+     (`models/seedance-2-mini.md`, *Several shots in one clip*).
+   - Never invent a brand name, a tagline or a spoken line the user did not
+     give.
+3. **Never describe a logo, a face or a brand colour** (*Reference images*
+   above). If the brief names a product page, fetch the product picture and
+   pass it as a file.
+4. **Show the prompt.** Put the written prompt in your reply; for anything that
+   is quoted first (rules 1 and 2), put it in the quote, so the yes covers the
+   prompt as well as the price. The user can change it before it runs. The
+   sidecar records it exactly as sent.
+
 ## Rules
 
 1. **Quote before video.** Before every video run, state model, provider,
-   duration, resolution, sound on or off, and the cost in USD from the recipe.
+   duration, resolution, sound on or off, the cost in USD from the recipe, and
+   the prompt you will send.
    Then stop and wait for an explicit yes. Quoting is not approval. **One yes
    covers exactly one run** — if the clip is wrong, quote again before a retry.
    Video costs roughly ten times an image; Seedance up to sixty.

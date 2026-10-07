@@ -86,3 +86,16 @@ jq -n --arg p "PROMPT" '{prompt:$p, duration:5, resolution:"480P", aspect_ratio:
 
 `x-fal-billable-units` in the headers is the real cost, but confirm what one
 unit means for this model before trusting it — it differs per model.
+
+## How to prompt it
+
+- **Long and structured is fine** — up to about 7,000 characters. Don't
+  compress for its own sake; H3 fills gaps on its own otherwise.
+- **Timecode any sequence** against the real length: "[0–2 seconds] overhead
+  shot, she lifts the lid. [2–5 seconds] push in to her hands." Without it a
+  multi-beat clip drifts, and the last beat is cut off.
+- **Direct the sound** like a shot, since there always is sound: instruments,
+  timing, intent — "low drone, one restrained hit as the title locks" — or
+  name the ambience you want.
+- Lock a person by naming what must persist: hair, clothes, colours, props.
+- Negative direction works here: "hard cuts only, no dissolves".

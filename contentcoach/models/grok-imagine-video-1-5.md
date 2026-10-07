@@ -65,3 +65,21 @@ jq -n --arg p "@Image1 walks through rain" --arg r "https://…" '{prompt:$p,
 
 Kie calls the model `preview` — the kind of id that gets renamed. On `model not
 found`, open the model page and copy the id fresh.
+
+## How to prompt it
+
+From xAI's own guide, which is unusually specific:
+
+- **Order matters:** the motion verb or camera move first, then light, then
+  atmosphere, then sound. Earlier words weigh more.
+- **Length is a choice:** with a reference that already carries the light and
+  colour, 1–8 words; without one, 20–60. Never 10–15 — neither the picture nor
+  the text is in control.
+- **Always a motion verb** (turn, walk, drift, rise, spin); without one the
+  clip barely moves.
+- **Camera:** it follows explicit moves well — "camera slowly pushes in". To
+  hold still, write exactly "camera not moving"; "steady shot" drifts.
+- **Sound** is always on: physical impacts and ambience come through best.
+  Put it last. Spoken lines are unreliable; add one only if the user asked.
+- Don't ask for 4K or 8K (it stops at 720p), and don't re-describe the
+  reference.

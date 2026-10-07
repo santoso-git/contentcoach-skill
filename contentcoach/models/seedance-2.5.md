@@ -71,3 +71,17 @@ Image-to-video takes `image_url` (one image, max 30 MB) and optional
 `end_image_url`, and only `aspect_ratio: "auto"`. Record the returned `seed` in
 the sidecar. fal prices Seedance on a token formula, so a billable unit may not
 be a second — check before trusting it.
+
+## How to prompt it
+
+- **Bind references first:** "@Image1 is the woman: face, hair and red coat.
+  @Image2 is the café." An unbound reference leaves the model guessing.
+- Then **one summary sentence**: subject, place, event, style, camera move.
+- **Longer than 8 seconds: a timeline** of whole-second blocks with no gaps —
+  "[0–6s] … [6–12s] … [12–15s] …". A gap is left ungoverned, not filled in.
+  Beats of 6–8 seconds; a long beat may carry more than one camera move.
+- Repeat the fixed traits (clothes, hair, colours) briefly at each beat, and
+  end with one sentence on what stays constant.
+- Sound beat by beat; dialogue only if the user gave it, as
+  `Dialogue (name): "line"`.
+- Negatives only for sound and subtitles ("no music", "no subtitles").

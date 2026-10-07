@@ -72,11 +72,30 @@ jq -n --arg p "PROMPT" '{model:"bytedance/seedance-2-mini", input:{
   duration:5, generate_audio:true}}' > "/tmp/cc-$NAME.req.json"
 ```
 
+## How to prompt it
+
+- Subject → motion → setting → look → camera → sound, 40–90 words (per shot,
+  in a shot list).
+- **Verbs, not adjectives:** spend the words on what moves and how, and give
+  the physics a consequence — "leaves scatter on each step".
+- **One camera move per shot**, in precise terms: dolly, pan, tilt, crane,
+  push-in, rack focus, locked-off, tracking alongside. Never "epic cinematic
+  camera".
+- **Over-direct the sound:** name each sound and what makes it ("the hiss of
+  steam"). An open prompt gets a music score, so write "no music" when only
+  ambience is wanted.
+- Dialogue only if the user wrote it, short, in quotes, with a tone.
+- Likeness references are cited as `@Image1`, `@Image2` in the order sent,
+  each with its role: "@Image1 for her face and red coat".
+- No quality filler (stunning, 8k, masterpiece).
+
 ## Several shots in one clip
 
 Up to 15 seconds, a timed shot list in one prompt is enough — no stitching.
-Open with a sentence on the whole piece, then one paragraph per shot with its
-time span and, if wanted, its sound:
+Open with a sentence on the whole piece and what stays the same throughout,
+then one paragraph per shot with its time span and, if wanted, its sound —
+**up to five shots in 15 seconds**, two to four seconds each, covering the clip
+without gaps:
 
 ```
 SHOT 1 [0–3s]: … Sound: …
