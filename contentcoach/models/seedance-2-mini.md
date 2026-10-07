@@ -27,7 +27,8 @@ poll block two or three times.
 `aspect_ratio: "3:4"` → 834×1112, 5.09 s with an AAC audio track, in about three
 minutes; 41 credits = **0.205 USD, as listed**. **7 Oct 2026:** 5 s at 720p with
 sound, 41 credits again; and a 15 s text-to-video at 720p,
-16:9, sound on → 1280×720, 15.1 s, 123 credits = **0.615 USD**.
+16:9, sound on → 1280×720, 15.1 s, 123 credits = **0.615 USD**, in 157
+seconds by Kie's own clock; a second 15 s clip took 150–170 s.
 
 ## Cost — quote one of these
 
