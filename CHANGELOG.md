@@ -6,6 +6,13 @@ USD and come from real runs unless marked as listed. To get the latest, run
 
 ## 9 Oct 2026
 
+- **The docs are written for agents to read.** README gains *For agents: read
+  the docs before you run* — which file holds what, how to read "confirmed",
+  "measured", "listed" and "unrun", and that a run beats the docs. `SKILL.md`
+  says the same under *Models*. Seedance 2.0 Mini's recipe compares it with
+  2.5 (cheap and quick, less lifelike), and MiniMax H3 marks Kie's
+  reference-to-video as not yet run.
+
 - **No invented text.** When the user gave no words for the picture, a
   written-out prompt now ends with "No text, signs, labels or logos anywhere
   in the image." In a before/after test, Nano Banana 2 turned "the hero image

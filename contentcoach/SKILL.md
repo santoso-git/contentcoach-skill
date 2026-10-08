@@ -83,6 +83,12 @@ installed copy, fetch them from
 | Video — cheapest of all on Kie, Grok's look, or a person from a photo | Grok Imagine Video 1.5 | `grok-imagine-video-1-5.md` |
 | Video — hero shot, or longer than 15 s | Seedance 2.5 | `seedance-2.5.md` |
 
+**How to read a recipe.** "Confirmed" and "measured" lines come from real runs
+and win over anything you remember. "Listed" is the provider's own price, not a
+run. "Unrun" or "not yet run" means nobody has tested it: say so in the quote,
+and expect surprises. When a run disagrees with a recipe, trust the run and tell
+the user. `CHANGELOG.md` at the repository root says what changed and why.
+
 Before any reference image, and before handing a still to a video model, read
 `models/providers.md`. A still means three different things to a video model, and the
 two providers disagree on nearly every convention.

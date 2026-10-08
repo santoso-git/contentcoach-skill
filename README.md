@@ -23,6 +23,26 @@ image, the product shots and a short clip for it, saved straight into the projec
 Paste it into Claude Code, Cursor or Codex. The sections below do the same by
 hand.
 
+## For agents: read the docs before you run
+
+Everything learned from real runs is written down here, so an agent that reads
+the files knows what we know. Read them; don't call a provider from memory.
+
+| File | What it holds |
+|---|---|
+| [`contentcoach/SKILL.md`](contentcoach/SKILL.md) | The rules (quote before video, one yes per run), routing, the commands, *Writing the prompt*, the job steps to copy, the sidecar, the cost table, errors |
+| [`contentcoach/models/*.md`](contentcoach/models/) | One recipe per model: exact ids and fields, the traps that bill a broken job, measured prices and timings, *How to prompt it*, and what is not yet tested |
+| [`contentcoach/models/providers.md`](contentcoach/models/providers.md) | How Kie and fal differ, what a still means to each video model, and free catalogue lookups for a price or field that looks stale |
+| [`CHANGELOG.md`](CHANGELOG.md) | What changed and why, with the test behind it |
+
+- **Read `SKILL.md` and the model's recipe before every job**, and
+  `CHANGELOG.md` after an update.
+- **Trust what is marked confirmed or measured.** "Listed" is the provider's
+  price, not a run; "unrun" or "not yet run" means nobody has tested it — say
+  so when you quote it.
+- **When a run disagrees with the docs, the run wins.** Tell the user, and if
+  you can, open an issue or a pull request so the recipe can be fixed.
+
 ## Things to ask for
 
 - *Make a 16:9 blog header about remote work: a small desk in a Nordic cabin,
@@ -154,6 +174,10 @@ anything.
   slow push-in, five seconds"*.
 - **Draft first:** everything is made at 1K by default. Ask for 2K or 4K once
   you have a favourite.
+- **A short ask or a full prompt?** A written-out prompt gives you control —
+  the layout you asked for, no invented brand names or signs — more than a
+  prettier picture; for a simple scene the difference is small. Try
+  `prompt <what you want>` to see it before paying.
 
 ## What goes where
 

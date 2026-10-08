@@ -112,7 +112,9 @@ start from its own product picture.
 ## When to use it
 
 - Drafts, and most image-to-video work where the picture has to survive the
-  motion.
+  motion. It is cheap and quick (15 s in about two and a half minutes for
+  0.615 USD) but less lifelike than Seedance 2.5, where the same 15 s at 720p
+  is about 4.73 USD: try a story and its timing on Mini, keep the take on 2.5.
 - Seedance 2.5 when the clip must be longer than 15 s or it is the hero shot;
   Mini stops at 15 s and 720p.
 - In the same test MiniMax H3 at 768P on Kie (0.20 USD for 5 s) gave the more

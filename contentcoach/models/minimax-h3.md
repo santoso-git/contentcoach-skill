@@ -27,7 +27,8 @@ frame → 768×1024, 5.18 s with an AAC audio track; 40 credits = **0.20 USD**, 
 the start frame was not charged as an extra image. **Confirmed on fal** (Aug
 2026): text- and image-to-video, one with an end frame. Those runs sent the
 older `enable_prompt_expansion: false`, which fal's current schema has replaced
-with `prompt_expansion_mode`; the new field is unrun.
+with `prompt_expansion_mode`; the new field is unrun. **Kie's
+`reference-to-video` (likeness) is not yet run.**
 
 **H3 always returns sound.** Every measured clip, two from Kie and four from
 fal (4 Oct 2026), carried an AAC track with real content — mean volume −10 to
