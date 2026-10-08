@@ -69,4 +69,6 @@ as for every fal app.
 ## How to prompt it
 
 Google's Nano Banana guide applies unchanged; nothing specific to 2.1 has been
-published. See `nano-banana-2.md`, *How to prompt it*.
+published. See `nano-banana-2.md`, *How to prompt it* — including the one
+negative it needs: with no words from the user, end with "No text, signs,
+labels or logos anywhere in the image."

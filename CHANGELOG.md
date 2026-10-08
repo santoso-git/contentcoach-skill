@@ -4,6 +4,16 @@ Changes to the skill, its recipes and its prices, newest first. Prices are in
 USD and come from real runs unless marked as listed. To get the latest, run
 `git -C ~/.contentcoach-skill pull`; the no-install route always reads `main`.
 
+## 9 Oct 2026
+
+- **No invented text.** When the user gave no words for the picture, a
+  written-out prompt now ends with "No text, signs, labels or logos anywhere
+  in the image." In a before/after test, Nano Banana 2 turned "the hero image
+  for a landing page for my bakery" into a web page with a made-up bakery
+  name, headline and button. A hero image is a photograph with room for a
+  headline, never a page layout. In `SKILL.md`, *Writing the prompt*, and the
+  Nano Banana 2 and 2.1 recipes.
+
 ## 8 Oct 2026
 
 - **Prompt writing is opt-in.** By default the user's words are the prompt.

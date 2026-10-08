@@ -175,7 +175,12 @@ jq -n --argjson v true '{auto_prompt:$v}' > "$F"   # true or false
 2. **Write in English, following the recipe's *How to prompt it*.** In short:
    - **Image:** subject, setting, light, lens or style, composition, and room
      for a headline if it is a header. Words in the picture go to GPT Image 2.5,
-     in quotes, every word spelled out — and only words the user gave.
+     in quotes, every word spelled out — and only words the user gave. **If
+     the user gave no words, end the prompt with "No text, signs, labels or
+     logos anywhere in the image."** Otherwise Nano Banana invents signs,
+     prices and brand names in shops, cafés and hero images. A hero image for a
+     landing page is a photograph, never a page layout with a headline, buttons
+     or a menu — but leave the empty space a headline needs.
    - **Edit:** what changes, then "keep everything else exactly as it is", and
      name what must survive (the face, the label, the composition).
    - **Video:** subject, motion, setting, look, one camera move, and sound when
@@ -191,6 +196,10 @@ jq -n --argjson v true '{auto_prompt:$v}' > "$F"   # true or false
    is quoted first (*Rules* 1 and 2), put it in the quote, so the yes covers the
    prompt as well as the price. In auto mode, show a single 1K image's prompt
    as you run it. The sidecar records the prompt exactly as sent.
+
+What writing the prompt buys is control — no invented copy, the layout you
+asked for — more than beauty; for a simple scene the difference is small
+(before/after test, 9 Oct 2026).
 
 Even without auto mode, every prompt you send — the user's own words or one
 you wrote — is the one shown in the quote for a clip.

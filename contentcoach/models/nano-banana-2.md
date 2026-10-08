@@ -85,6 +85,12 @@ From Google's own guide for the model:
   depth of field at f/1.8), designed light (golden-hour backlight, a single
   softbox), a film stock or colour grade.
 - **Say what you want, not what you don't:** "an empty street", not "no cars".
+  The one exception is text: **if the user gave no words, end with "No text,
+  signs, labels or logos anywhere in the image."** Shop, café and hero scenes
+  otherwise come back with invented signs, prices and a brand name — in a
+  test, "the hero image for a landing page for my bakery" became a whole web
+  page with a made-up bakery name, headline and button. A hero image is a
+  photograph with room for a headline, never a page layout.
 - **With references:** name each image by its role, in order ("using the first
   image as the product and the second as the fabric"), then the new scene. For
   an edit, open with the verb — remove, replace, change, place — and say what
