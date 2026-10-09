@@ -133,6 +133,7 @@ section{padding-block:clamp(64px,9vw,112px)}
 .cutout img{background:var(--env)}
 .shots{display:grid;grid-template-columns:minmax(0,2.2fr) minmax(0,1fr);gap:clamp(20px,3vw,44px);align-items:end}
 .shots-notes{display:grid;gap:14px}
+.shots.sq{grid-template-columns:minmax(0,1.25fr) minmax(0,1fr)}
 .shots .print{--t:-.3deg;transform:rotate(var(--t))}
 .contact{list-style:none;margin:10px 0 0;padding:6px;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:6px;background:var(--ink)}
 .contact img{display:block;width:100%;height:auto;aspect-ratio:16/9;object-fit:cover}
@@ -296,7 +297,7 @@ footer .big{font:800 44px/1 var(--display);text-transform:uppercase}
   .prints .print{flex-basis:40%}
   .legend{grid-template-columns:1fr}
   .solo{grid-template-columns:1fr 1fr}
-  .shots{grid-template-columns:1fr}
+  .shots,.shots.sq{grid-template-columns:1fr}
   .solo-note{grid-column:1/-1}
 }
 @media (max-width:560px){
@@ -378,7 +379,7 @@ footer .big{font:800 44px/1 var(--display);text-transform:uppercase}
         <figure class="print p1" style="--ar:16/9"><img src="examples/contentcoach-skill_cup-windowsill_1790429059_720.webp" width="720" height="402" alt=""><figcaption>No. 1 · Nano Banana 2 · 2K</figcaption></figure>
         <figure class="print p2" style="--ar:1/1"><img src="examples/contentcoach-skill_lighthouse-riso_1790429483_720.webp" width="720" height="720" alt=""><figcaption>No. 5 · Grok Imagine 2.0</figcaption></figure>
         <figure class="print p3" style="--ar:4/3"><img src="examples/contentcoach-skill_bakery-sign_1790429269_720.webp" width="720" height="540" alt=""><figcaption>No. 3 · GPT Image 2 · 2K</figcaption></figure>
-        <div class="pocket"><span>Prints enclosed<small>9 frames and two clips · 1.24 USD in all</small></span></div>
+        <div class="pocket"><span>Prints enclosed<small>10 frames and two clips · 1.28 USD in all</small></span></div>
       </div>
     </div>
   </div>
@@ -389,7 +390,7 @@ footer .big{font:800 44px/1 var(--display);text-transform:uppercase}
   <div class="wrap">
     <div class="sec-head">
       <h2>What the models made</h2>
-      <p>Nine images and two clips, each from a single run of the models and providers the skill calls. Beneath each one: the model, the size, what it cost, and the prompt.</p>
+      <p>Ten images and two clips, each from a single run of the models and providers the skill calls. Beneath each one: the model, the size, what it cost, and the prompt.</p>
     </div>
 
     <div class="prints">
@@ -463,6 +464,16 @@ SHOT 4 [9–12s]: The tray comes out onto the counter in a cloud of steam; she b
 SHOT 5 [12–15s]: First customer at the door, the bell rings. The baker hands over one warm bun in a paper bag; the customer tears off a piece, steam rising, and smiles. Outside the rain has stopped. Sound: the door bell, paper rustling, a quiet laugh, birds starting outside.</p><div class="ptools"><button class="pfull" type="button" aria-expanded="false">Full prompt</button><button class="pcopy" type="button">Copy prompt</button></div></figcaption></figure>
         <div class="shots-notes"><p class="solo-note"><b>One prompt, one run, five shots.</b> A timed shot list, each line with its own sound, played in order in a single 15-second clip, with the same baker and apron throughout. No stitching. The pearl sugar and the torn-off piece did not make it in.</p>
         <p class="solo-note"><b>The cheap, quick Seedance.</b> Mini is less lifelike than Seedance 2.5, but this 15-second clip was ready in about two and a half minutes, and the same clip at 720p costs about 4.73 USD on 2.5, nearly eight times as much. Use Mini to try out a story and its timing, and 2.5 for the take you keep. Sound on: press play.</p></div>
+      </div>
+
+      <h3 class="edit-head">Spell it out: six arms, six jobs</h3>
+      <div class="shots sq">
+        <figure class="print"><img src="examples/contentcoach-skill_octopus-barista-six-arms_1791539313.webp" width="1024" height="1024" loading="lazy" alt="A cartoon octopus barista behind a café counter, using six arms at once: pulling an espresso, steaming milk, writing an order, wiping the counter, handing over a cup, and scratching its head.">
+          <figcaption><span class="back"><span>No. 12</span><span>Nano Banana 2</span><span>1K · 1:1</span><span>prompt by Claude Haiku</span><b>0.04 USD</b></span>
+          <p class="prompt asked"><span>Asked</span>A square cartoon of an octopus barista with six arms: one pulls an espresso, one steams milk, one takes an order, one wipes the counter, one hands over a cup, and one scratches its head while it thinks about the menu.</p>
+          <p class="prompt"><span>Prompt</span>A square cartoon illustration of a friendly octopus barista standing behind a café counter, with six arms and each arm doing a different job…</p><p class="prompt prompt-full" hidden><span>Prompt</span>A square cartoon illustration of a friendly octopus barista standing behind a café counter, with six arms and each arm doing a different job: one arm pulls an espresso shot from a coffee machine, one steams milk in a metal jug, one takes an order on a notepad, one wipes the counter with a cloth, one hands a cup of coffee across the counter, and one arm scratches its head while it thinks about the menu. All six arms clearly visible and distinct. Bright flat cartoon style with bold outlines and warm café colours, soft even light, the whole octopus centred and in frame. No text, signs, labels or logos anywhere in the image.</p><div class="ptools"><button class="pfull" type="button" aria-expanded="false">Full prompt</button><button class="pcopy" type="button">Copy prompt</button></div></figcaption></figure>
+        <div class="shots-notes"><p class="solo-note"><b>Name every part, and count it.</b> The ask gave each of the six arms its own job, and all six came back. The agent kept every one in the prompt it wrote, said "all six arms clearly visible and distinct", and asked for no text, so the menu board stayed blank.</p>
+        <p class="solo-note"><b>Written by a small model.</b> The prompt came from Claude Haiku, reading only the skill, with auto mode on. One run, no retries.</p></div>
       </div>
     </div>
 
@@ -566,6 +577,7 @@ mkdir -p ~/<wbr>.cursor/<wbr>skills &amp;&amp; ln -s ~/<wbr>.contentcoach-skill/
     </div>
     <ol class="log">
       <li><time datetime="2026-10-09">9 Oct<small>2026</small></time><ul>
+        <li><b>New example, No. 12:</b> an octopus barista with six arms and six jobs, all six in the picture, from a prompt Claude Haiku wrote.</li>
         <li><b>Works with smaller agent models:</b> Claude Haiku, reading only the skill, wrote prompts that kept a product from its reference, got every count right and invented no text.</li>
         <li><b>Docs for agents:</b> the README now says which file holds what we have learned from real runs, and how to tell a measured price from a listed or untested one.</li>
         <li><b>No invented text:</b> when you give no words for the picture, the prompt the agent writes asks for none, so a shop or a hero image does not come back with a made-up brand name, prices or a button.</li>
@@ -752,7 +764,7 @@ mkdir -p ~/<wbr>.cursor/<wbr>skills &amp;&amp; ln -s ~/<wbr>.contentcoach-skill/
 
   document.addEventListener('click',function(e){
     var t=e.target.closest('.pfull,.pcopy'); if(!t) return;
-    var cap=t.closest('figcaption'), short=cap.querySelector('.prompt:not(.prompt-full)'), full=cap.querySelector('.prompt-full');
+    var cap=t.closest('figcaption'), short=cap.querySelector('.prompt:not(.prompt-full):not(.asked)'), full=cap.querySelector('.prompt-full');
     if(t.classList.contains('pfull')){
       var open=t.getAttribute('aria-expanded')!=='true';
       t.setAttribute('aria-expanded',open); t.textContent=open?'Short prompt':'Full prompt';

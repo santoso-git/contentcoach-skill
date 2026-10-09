@@ -58,8 +58,10 @@ recipe in `contentcoach/models/` from a real run.
 - **Homepage examples:** Nos. 1–8 were made through the app on 26 Sep; Nos. 9
   and 10 with this skill's own recipe on 27 Sep; No. 11 (five shots in one
   Seedance 2.0 Mini clip) through the app on 7 Oct, with a prompt written for
-  it — never publish a prompt copied from another product's examples. Update
-  the pocket total ("9 frames and two clips · 1.24 USD") and the intro count
+  it — never publish a prompt copied from another product's examples; No. 12
+  (octopus barista, six arms) with this skill on 9 Oct, its prompt written by
+  a Claude Haiku agent from a one-line brief (the sidecar keeps both). Update
+  the pocket total ("10 frames and two clips · 1.28 USD") and the intro count
   when adding one.
 - GitHub settings (not in the repo): `main` is protected against force-push and
   deletion, the wiki is off, the description and homepage field name

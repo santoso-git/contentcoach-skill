@@ -6,6 +6,10 @@ USD and come from real runs unless marked as listed. To get the latest, run
 
 ## 9 Oct 2026
 
+- **New homepage example, No. 12:** the octopus barista from the Haiku test —
+  six arms, six jobs, all six in the picture — shown with the one-line ask and
+  the full prompt the agent wrote, as an example of spelling out every part.
+
 - **Tested with a small agent model.** Claude Haiku, given only `SKILL.md` and
   the recipes, ran four requests end to end (three images, 0.12 USD, and one
   `prompt`). Two rules were added first, from the app's own Haiku tests: a
