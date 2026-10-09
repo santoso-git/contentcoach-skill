@@ -174,6 +174,10 @@ anything.
   slow push-in, five seconds"*.
 - **Draft first:** everything is made at 1K by default. Ask for 2K or 4K once
   you have a favourite.
+- **Any agent model will do.** The prompt is written by the agent you already
+  use, following the skill's rules — no extra model or key. Smaller, cheaper
+  models such as Claude Haiku handle it well (tested), and every improvement in
+  your agent improves your prompts too.
 - **A short ask or a full prompt?** A written-out prompt gives you control —
   the layout you asked for, no invented brand names or signs — more than a
   prettier picture; for a simple scene the difference is small. Try

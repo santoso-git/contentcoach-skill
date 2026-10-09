@@ -545,7 +545,7 @@ mkdir -p ~/<wbr>.cursor/<wbr>skills &amp;&amp; ln -s ~/<wbr>.contentcoach-skill/
       <p>Printed on the back of the envelope, so nobody is surprised.</p>
     </div>
     <div class="terms">
-      <div><h3>Your agent writes the prompt, if you want</h3><p>Your words are sent as you wrote them. The first time you ask in a short sentence, the agent offers to write it out the way the model's own guide wants it: subject, light, camera, motion, sound, a timed shot list for a short story. Say yes once, yes always (<code>auto on</code>), or no; it asks only once. <code>prompt</code> does it on demand without running anything. No extra model, no extra call, no extra key: just a few hundred tokens of the agent you already use. A finished prompt, such as one copied from the examples above, goes through untouched.</p></div>
+      <div><h3>Your agent writes the prompt, if you want</h3><p>Your words are sent as you wrote them. The first time you ask in a short sentence, the agent offers to write it out the way the model's own guide wants it: subject, light, camera, motion, sound, a timed shot list for a short story. Say yes once, yes always (<code>auto on</code>), or no; it asks only once. <code>prompt</code> does it on demand without running anything. No extra model, no extra call, no extra key: just a few hundred tokens of the agent you already use. It works well with smaller, cheaper agent models such as Claude Haiku, and it gets better as the agent you already use gets better. A finished prompt, such as one copied from the examples above, goes through untouched.</p></div>
       <div><h3>Instead of a generation app</h3><p>No subscription to Higgsfield, Runway or a similar app. The skill runs the same kind of models through your own Kie AI or fal.ai account, and you pay per image or clip at the provider's price.</p></div>
       <div><h3>Alongside your other skills</h3><p>Your agent can use it in the same task as its other skills. A design skill builds a landing page, and this one makes the hero image, the product shots and a short clip for it, saved straight into the project.</p></div>
       <div><h3>Kept up to date</h3><p>Models and prices change every month. When a provider renames a model or changes a field or a price, the recipe is fixed, and new models get a recipe of their own as they come out. Run <code>git -C ~/.contentcoach-skill pull</code> to get them; the no-install route always reads the latest. Between updates, the skill can check a provider's current price and fields in its free catalogue.</p></div>
@@ -566,6 +566,7 @@ mkdir -p ~/<wbr>.cursor/<wbr>skills &amp;&amp; ln -s ~/<wbr>.contentcoach-skill/
     </div>
     <ol class="log">
       <li><time datetime="2026-10-09">9 Oct<small>2026</small></time><ul>
+        <li><b>Works with smaller agent models:</b> Claude Haiku, reading only the skill, wrote prompts that kept a product from its reference, got every count right and invented no text.</li>
         <li><b>Docs for agents:</b> the README now says which file holds what we have learned from real runs, and how to tell a measured price from a listed or untested one.</li>
         <li><b>No invented text:</b> when you give no words for the picture, the prompt the agent writes asks for none, so a shop or a hero image does not come back with a made-up brand name, prices or a button.</li>
       </ul></li>

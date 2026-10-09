@@ -186,9 +186,24 @@ jq -n --argjson v true '{auto_prompt:$v}' > "$F"   # true or false
      logos anywhere in the image."** Otherwise Nano Banana invents signs,
      prices and brand names in shops, cafés and hero images. A hero image for a
      landing page is a photograph, never a page layout with a headline, buttons
-     or a menu — but leave the empty space a headline needs.
-   - **Edit:** what changes, then "keep everything else exactly as it is", and
-     name what must survive (the face, the label, the composition).
+     or a menu — but leave the empty space a headline needs. With a product
+     reference whose label is part of it, write instead "Keep the label
+     exactly as in the reference; no other text, signs or logos anywhere in
+     the image."
+   - **A reference image is one of two cases — decide which first.**
+     - *Edit this picture:* say what changes, then "keep everything else
+       exactly as it is", and name what must survive (the face, the label, the
+       composition).
+     - *Put this person or product in a new scene* — the brief says me, I, my,
+       our, we, us, or names the product in the photo ("me as a café owner",
+       "our bottle on a beach"): the prompt **must begin with "Using the person
+       in the reference image"** (or "the product"), then describe the new
+       scene. A softer opening is not enough: smaller models then invent a new
+       person or product.
+   - **Everything in the brief, and the right count.** Every part of the brief
+     must be in the prompt — check it against the brief before you show it. A
+     number means that many things: "six arms" is six arms, each with its own
+     job if the brief gives them jobs.
    - **Video:** subject, motion, setting, look, one camera move, and sound when
      sound is on. One continuous shot by default. For a short ad or story on
      Seedance 2.0 Mini, up to 15 s: a summary sentence, then a timed shot list
@@ -202,6 +217,11 @@ jq -n --argjson v true '{auto_prompt:$v}' > "$F"   # true or false
    is quoted first (*Rules* 1 and 2), put it in the quote, so the yes covers the
    prompt as well as the price. In auto mode, show a single 1K image's prompt
    as you run it. The sidecar records the prompt exactly as sent.
+
+These rules were tested with Claude Haiku as the agent (9 Oct 2026): it read
+only this file and the recipes, and wrote prompts that kept a product from its
+reference, gave all six arms their six jobs, added no invented text and laid
+out a five-shot clip. A small, cheap agent model is enough.
 
 What writing the prompt buys is control — no invented copy, the layout you
 asked for — more than beauty; for a simple scene the difference is small

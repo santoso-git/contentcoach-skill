@@ -6,6 +6,16 @@ USD and come from real runs unless marked as listed. To get the latest, run
 
 ## 9 Oct 2026
 
+- **Tested with a small agent model.** Claude Haiku, given only `SKILL.md` and
+  the recipes, ran four requests end to end (three images, 0.12 USD, and one
+  `prompt`). Two rules were added first, from the app's own Haiku tests: a
+  reference image is either *edit this picture* or *put this person/product in
+  a new scene* — the latter must open "Using the person (or product) in the
+  reference image" — and every part of the brief must be in the prompt, with
+  counts matching ("six arms" gets six jobs). Haiku followed both, invented no
+  text and wrote a five-shot list. One gap it found is fixed: with a product
+  whose label is part of the reference, keep the label and add no other text.
+
 - **The docs are written for agents to read.** README gains *For agents: read
   the docs before you run* — which file holds what, how to read "confirmed",
   "measured", "listed" and "unrun", and that a run beats the docs. `SKILL.md`
