@@ -50,6 +50,15 @@ recipe in `contentcoach/models/` from a real run.
 - **Prices live in three places that do not update each other:** the recipe,
   the cost table in `SKILL.md`, and the price-list dialog in `docs/index.html`
   (ticked box = measured). Change all three together.
+- **The docs are for agents.** Every learning from a run or test — a field, a
+  price, a timing, a prompt rule, a trap — goes into `SKILL.md` or the recipe
+  (and `CHANGELOG.md`), not only the homepage or a session's memory. Mark
+  what is unverified as "unrun" or "listed". README's *For agents* section
+  tells readers to trust the docs this way.
+- **Testing the docs:** give a cheap subagent (Claude Code `haiku`) only
+  `SKILL.md` and the recipes, a scratch project with `generations/` and the
+  `.env` keys, and a few briefs; then read what it guessed. Paid runs need
+  Santoso's yes like any other.
 - **Every user-facing change gets a dated entry** in `CHANGELOG.md` and in the
   "What changed" log at the bottom of `docs/index.html`, and moves the dates on
   the homepage: the stamp ("Updated"), the log's "Last updated" line and the
