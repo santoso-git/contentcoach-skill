@@ -4,6 +4,27 @@ Changes to the skill, its recipes and its prices, newest first. Prices are in
 USD and come from real runs unless marked as listed. To get the latest, run
 `git -C ~/.contentcoach-skill pull`; the no-install route always reads `main`.
 
+## 14 Oct 2026
+
+From a review of the scripts by another model, each point checked against the
+files:
+
+- **A downscaled reference no longer overwrites the original.** `sips -Z 2048
+  file.png` rewrote the user's file in place; it now writes a copy to
+  `/tmp/cc-$NAME.ref.png` (`--out`), and Linux gets the same step with
+  ImageMagick (`magick`, or `convert` on Debian and Ubuntu, with
+  `-resize '2048x2048>'`).
+- **Local references to fal always go through `--rawfile`.** A base64 string
+  passed with `--arg` fails with "Argument list too long" once the picture
+  passes about 100 KB on Linux. The pattern now sits in `SKILL.md`, *Reference
+  images*, and the Kling 3.0 and GPT Image 2.5 recipes point to it.
+- **Temporary files are removed** with the sidecar: `rm -f /tmp/cc-$NAME.*`.
+  A request carrying base64 references runs to megabytes.
+- **GPT Image 2.5 on fal at 1K needs no quote** when `quality` is `medium`
+  (measured 0.0136–0.0207 USD, cheaper than Nano Banana 2's 0.04). The rule
+  dated from before the price was measured. Above `medium` it is still quoted;
+  fal defaults to `high`, roughly four times the price.
+
 ## 9 Oct 2026
 
 - **New homepage example, No. 12:** the octopus barista from the Haiku test —

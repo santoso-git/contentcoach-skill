@@ -114,7 +114,18 @@ edit — goes in as a file. **Never describe a logo, a face or a brand colour in
 words**; the model gets it wrong every time. If a needed reference is missing,
 ask for it rather than approximating.
 
-- **fal** takes a base64 data URI directly. No upload.
+- **fal** takes a base64 data URI directly. No upload. Read the file into jq
+  with `--rawfile`, never `--arg`: a base64 string on the command line fails
+  with "Argument list too long" once the picture passes about 100 KB on Linux.
+  The same pattern serves every fal field that takes an image; mind whether
+  it wants a list (`image_urls:["data:…"+$b64]`) or a single string
+  (`start_image_url:("data:…"+$b64)` on Kling):
+
+```bash
+jq -n --arg p "PROMPT" --rawfile b64 <(base64 < ref.png | tr -d '\n') \
+  '{prompt:$p, image_urls:["data:image/png;base64,"+$b64]}' > "/tmp/cc-$NAME.req.json"
+```
+
 - **Kie** takes only public HTTPS URLs. Upload the local file first with the
   user's own Kie key and use the URL right away; Kie keeps uploads for one to
   three days. The host is `kieai.redpandaai.co` — the same path on `api.kie.ai`
@@ -130,7 +141,16 @@ Confirmed 27 Sep 2026: the upload returns a public URL on
 `tempfile.redpandaai.co` that anyone with the link can fetch, so upload nothing
 the user would not want reachable while it lasts.
 
-Downscale files over about 4 MB first (`sips -Z 2048 file.png` on macOS).
+Downscale files over about 4 MB first, to a copy — never over the user's
+original — and send the copy:
+
+```bash
+sips -Z 2048 logo.png --out "/tmp/cc-$NAME.ref.png"          # macOS
+magick logo.png -resize '2048x2048>' "/tmp/cc-$NAME.ref.png"  # Linux, ImageMagick 7
+convert logo.png -resize '2048x2048>' "/tmp/cc-$NAME.ref.png" # Linux, ImageMagick 6 (Debian, Ubuntu)
+```
+
+Name the original in the sidecar's `refs`, not the copy.
 
 ## Writing the prompt
 
@@ -239,9 +259,12 @@ you wrote — is the one shown in the quote for a clip.
    covers exactly one run** — if the clip is wrong, quote again before a retry.
    Video costs roughly ten times an image; Seedance up to sixty.
 2. **Quote before anything above a plain draft.** Several images at once,
-   anything at 2K or 4K, or GPT Image 2.5 on fal: say the price first and
-   wait for a yes. Any other single image at 1K needs no quote — say what it
-   cost in the reply afterwards.
+   anything at 2K or 4K, or GPT Image 2.5 on fal above `quality: "medium"`:
+   say the price first and wait for a yes. Any other single image at 1K needs
+   no quote — that includes GPT Image 2.5 on fal at `medium`, measured at
+   0.0136–0.0207 USD — and say what it cost in the reply afterwards. fal's
+   GPT Image defaults to `high`, roughly four times the price, so send
+   `medium` every time.
 3. **Draft cheap, finish pretty.** Iterate at 1K. Rerun only the winning prompt
    at 2K or 4K once the user has picked a favourite. Never draft at 4K.
 4. **Always send the fields whose defaults are dear.** Several models default to
@@ -388,6 +411,7 @@ jq -n --arg prompt "THE FULL PROMPT EXACTLY AS SENT" \
   --argjson cost 0.04 --arg created "$(date -u +%Y-%m-%dT%H:%M:%SZ)" \
   '{model:$model, provider:$provider, prompt:$prompt, refs:$refs, params:$params,
     cost_usd:$cost, created:$created}' > "generations/$NAME.json"
+rm -f /tmp/cc-"$NAME".*   # the job's temporary files; a request with base64 refs runs to megabytes
 ```
 
 - `model`: the provider's model id exactly as sent, e.g.

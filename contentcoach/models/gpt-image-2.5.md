@@ -74,7 +74,8 @@ NAME="NAME"   # the job name, see SKILL.md, Running a job
 jq -n --arg p "PROMPT" '{prompt:$p, image_size:{width:1360,height:768}, quality:"medium",
   output_format:"png", num_images:1}' > "/tmp/cc-$NAME.req.json"
 # submit to openai/gpt-image-2.5/flare/text-to-image
-# with references: add image_urls:["https://… or data:image/png;base64,…"], submit to …/flare/edit
+# with references: add image_urls:["https://…"], submit to …/flare/edit
+#   a local file goes in as base64 via --rawfile (SKILL.md, Reference images), never --arg
 # cut-out: add background:"transparent"
 ```
 

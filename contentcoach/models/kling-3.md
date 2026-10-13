@@ -59,9 +59,11 @@ Submit to `fal-ai/kling-video/v3/pro/image-to-video`:
 
 ```bash
 NAME="NAME"   # the job name, see SKILL.md, Running a job
-jq -n --arg p "PROMPT" --arg img "https://… or data:image/png;base64,…" '{prompt:$p,
+jq -n --arg p "PROMPT" --arg img "https://…" '{prompt:$p,
   start_image_url:$img, duration:"5", generate_audio:false,
   negative_prompt:"blur, distort, low quality"}' > "/tmp/cc-$NAME.req.json"
+# a local frame: --rawfile b64 <(base64 < frame.png | tr -d '\n') and
+#   start_image_url:("data:image/png;base64,"+$b64) — never --arg (SKILL.md, Reference images)
 ```
 
 One billable unit is one second.
