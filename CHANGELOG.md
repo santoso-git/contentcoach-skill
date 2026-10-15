@@ -11,7 +11,8 @@ USD and come from real runs unless marked as listed. To get the latest, run
   dropped from 0.08 to 0.06 USD per second** (listed): 0.30 USD for 5 seconds,
   0.90 for 15. Kie's 768P at 0.20 is still cheaper, so the route is unchanged.
   fal's catalogue lists Kling 3.0 at 0.14 USD per second, but its model page
-  keeps 0.112 with sound off, the recipe's figure.
+  keeps 0.112 with sound off, the recipe's figure. `providers.md` now shows
+  how to read a fal model page's own price text, free and without a key.
 
 ## 14 Oct 2026
 

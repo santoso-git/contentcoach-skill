@@ -85,7 +85,7 @@ curl -sS -H "$F" "https://api.fal.ai/v1/models?endpoint_id=fal-ai/nano-banana-2&
 # search: https://api.fal.ai/v1/models?q=kling
 ```
 
-Three traps in fal's catalogue:
+Four traps in fal's catalogue:
 
 - **It answers any well-formed id**, real or invented, with a stub priced per
   "compute second". Only an entry whose `metadata.status` is set is a real model.
@@ -94,6 +94,17 @@ Three traps in fal's catalogue:
   Seedance 2.5 is priced per 1,000 tokens. Use the recipe's measured prices.
 - **A burst is throttled with an error reply.** Wait and retry; it does not mean
   there is no price.
+
+- **The catalogue can disagree with the model page.** On 15 Oct 2026 it listed
+  Kling 3.0 pro at 0.14 USD per second while the page said 0.112 with sound
+  off. The page's own wording is the `pricingInfoOverride` string in its HTML,
+  which also gives per-resolution prices the catalogue flattens (MiniMax H3);
+  free to read, no key:
+
+```bash
+curl -sSL "https://fal.ai/models/minimax/h3/text-to-video" \
+  | grep -oE 'pricingInfoOverride\\?":\\?"[^\\"]*' | head -1
+```
 
 A catalogue price is a list price. When a run reports a different figure,
 `creditsConsumed` or `x-fal-billable-units` wins, and the recipe should be fixed

@@ -49,7 +49,9 @@ recipe in `contentcoach/models/` from a real run.
   write prices as `0.08 USD`. Nano Banana has one combined recipe here.
 - **Prices live in three places that do not update each other:** the recipe,
   the cost table in `SKILL.md`, and the price-list dialog in `docs/index.html`
-  (ticked box = measured). Change all three together.
+  (ticked box = measured). Change all three together. To check them all, use
+  the free lookups in `models/providers.md`: Kie's catalogue, fal's pricing
+  endpoint and fal's model pages (last full check 15 Oct 2026).
 - **The docs are for agents.** Every learning from a run or test — a field, a
   price, a timing, a prompt rule, a trap — goes into `SKILL.md` or the recipe
   (and `CHANGELOG.md`), not only the homepage or a session's memory. Mark
