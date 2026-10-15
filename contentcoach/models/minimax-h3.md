@@ -44,11 +44,12 @@ prompt; if the clip must be silent, strip the track afterwards with
 | **Kie `768P`** | **0.04 USD** | **0.20 USD** | 0.60 USD |
 | Kie `2K` (its default, listed) | 0.065 USD | 0.33 USD | 0.98 USD |
 | fal `480P` | 0.05 USD | 0.25 USD | 0.75 USD |
-| fal `768P` | 0.08 USD | 0.40 USD | 1.20 USD |
+| fal `768P` | 0.06 USD | 0.30 USD | 0.90 USD |
 | fal `2K` (its default) | 0.13 USD | 0.65 USD | 1.95 USD |
 | fal `4K` | 0.16 USD | 0.80 USD | 2.40 USD |
 
-Kie is half fal's price at the tiers they share. Go to fal only for 480P, 4K or
+fal's prices are its listed ones (15 Oct 2026). Kie is half fal's price at
+2K and two thirds of it at 768P. Go to fal only for 480P, 4K or
 a seed.
 
 ## Kie AI

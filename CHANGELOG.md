@@ -4,6 +4,15 @@ Changes to the skill, its recipes and its prices, newest first. Prices are in
 USD and come from real runs unless marked as listed. To get the latest, run
 `git -C ~/.contentcoach-skill pull`; the no-install route always reads `main`.
 
+## 15 Oct 2026
+
+- **Prices checked against both providers' catalogues and model pages.** Every
+  Kie price in the recipes matches Kie's list. On fal, **MiniMax H3 at 768P
+  dropped from 0.08 to 0.06 USD per second** (listed): 0.30 USD for 5 seconds,
+  0.90 for 15. Kie's 768P at 0.20 is still cheaper, so the route is unchanged.
+  fal's catalogue lists Kling 3.0 at 0.14 USD per second, but its model page
+  keeps 0.112 with sound off, the recipe's figure.
+
 ## 14 Oct 2026
 
 From a review of the scripts by another model, each point checked against the
