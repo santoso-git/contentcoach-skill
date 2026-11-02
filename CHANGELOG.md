@@ -6,6 +6,10 @@ USD and come from real runs unless marked as listed. To get the latest, run
 
 ## 2 Nov 2026
 
+- **Seedance 2.5 on fal moved to `bytedance/seedance-2.5/us/…`.** The old
+  ids are no longer listed in fal's catalogue; the `/us/` text-, image- and
+  reference-to-video ids are active with the same schema and price. Not yet
+  run through the new path.
 - **The body is checked against the provider's schema before every paid
   submit.** Kie accepts a field it does not know, drops it and bills the run
   anyway, so a misnamed field (fal's `image_url` where Kie wants

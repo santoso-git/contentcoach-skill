@@ -13,7 +13,7 @@ many minutes, so expect to run the poll block several times.
 
 | Field | Kie AI (first) | fal.ai |
 |---|---|---|
-| Model id | `bytedance/seedance-2-5` | `bytedance/seedance-2.5/text-to-video` · `…/image-to-video` |
+| Model id | `bytedance/seedance-2-5` | `bytedance/seedance-2.5/us/text-to-video` · `…/us/image-to-video` · `…/us/reference-to-video` |
 | Body | nested in `input` | flat |
 | Duration | a number, up to 30 | `"4"`–`"30"`, a string; default `"auto"` — **always set it**, or the price is unknowable |
 | Resolution | `480p` `720p` | `480p` `720p`, default `720p` |
@@ -23,7 +23,7 @@ many minutes, so expect to run the poll block several times.
 | Aspect "follow the image" | `adaptive` | `auto` |
 | Sound | `generate_audio`, default true | `generate_audio`, default true |
 | Seed | none | none — reports the one it used |
-| Docs | https://kie.ai/model/bytedance/seedance-2-5.md | https://fal.ai/models/bytedance/seedance-2.5/text-to-video |
+| Docs | https://kie.ai/model/bytedance/seedance-2-5.md | https://fal.ai/models/bytedance/seedance-2.5/us/text-to-video |
 
 Sound does not change the price on either route. Both list 1080p too, unpriced
 here; quote it only after reading the provider's price page.
@@ -64,8 +64,15 @@ instead of as a frame — only Kie can do that.
 ```bash
 NAME="NAME"   # the job name, see SKILL.md, Running a job
 jq -n --arg p "PROMPT" '{prompt:$p, resolution:"480p", duration:"5", aspect_ratio:"16:9"}' > "/tmp/cc-$NAME.req.json"
-# submit to bytedance/seedance-2.5/text-to-video
+# submit to bytedance/seedance-2.5/us/text-to-video
 ```
+
+**The ids moved under `/us/`** (seen 2 Nov 2026). The old
+`bytedance/seedance-2.5/text-to-video` has no status in fal's catalogue, so it
+is no longer a listed model; the `/us/` ids are active, with the same input
+schema and the same price. No run has gone through `/us/` yet: poll at the
+`status_url` and `response_url` the submit returns, as for every fal app, and
+the first paid run confirms the path.
 
 Image-to-video takes `image_url` (one image, max 30 MB) and optional
 `end_image_url`, and only `aspect_ratio: "auto"`. Record the returned `seed` in
