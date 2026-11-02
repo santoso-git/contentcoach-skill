@@ -64,7 +64,8 @@ sleep 1
 curl -sS -H "$K" "https://api.kie.ai/api/v1/models/$M/schema" | jq '.data.openapi'
 ```
 
-The pattern is `/api/v1/models/{model id}/price` (or `/schema`,
+SKILL.md's schema check (*Running a job*) reads these same schemas before every
+paid submit. The pattern is `/api/v1/models/{model id}/price` (or `/schema`,
 `/success-rate`) for every model: take the id exactly as the recipe sends it in
 `"model"` — `nano-banana-2`, `grok-imagine-image-2-0/text-to-image`,
 `bytedance/seedance-2-mini` — and put it in **unencoded**, slashes and all.

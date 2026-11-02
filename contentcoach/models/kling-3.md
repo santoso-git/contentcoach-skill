@@ -44,10 +44,11 @@ so its price is still the published one. fal's image-to-video is unrun.
 ```bash
 NAME="NAME"   # the job name, see SKILL.md, Running a job
 jq -n --arg p "PROMPT" --arg img "https://…first-frame.png" '{model:"kling-3.0/video",input:{
-  prompt:$p, duration:5, mode:"std", sound:false, multi_shots:false, image_urls:[$img]}}' > "/tmp/cc-$NAME.req.json"
+  prompt:$p, duration:"5", mode:"std", sound:false, multi_shots:false, image_urls:[$img]}}' > "/tmp/cc-$NAME.req.json"
 ```
 
-- `sound`, `duration`, `mode` and `multi_shots` are all required. Send
+- `sound`, `duration`, `mode` and `multi_shots` are all required.
+  `duration` is a string, `"3"` to `"15"`, in Kie's schema (2 Nov 2026). Send
   `multi_shots: false` explicitly, and `sound: false` unless sound was quoted.
 - Without a frame, send `aspect_ratio` and drop `image_urls`.
 - A last frame alone is not possible: index 0 is always the first frame.

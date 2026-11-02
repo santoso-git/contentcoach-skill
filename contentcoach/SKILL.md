@@ -277,7 +277,8 @@ you wrote — is the one shown in the quote for a clip.
    its model page, copy the id fresh, and run once. Do not probe candidate ids.
 7. **Build all JSON with `jq -n --arg`** — the request body and the sidecar —
    never by string interpolation. Prompts contain quotes that corrupt a
-   hand-built body.
+   hand-built body. Then check the body against the provider's schema
+   (*Running a job*) before anything paid is submitted.
 8. **Every tool call starts a fresh shell.** Variables set in one call are gone
    in the next, so each block below starts by setting what it needs, and the
    job's name is pasted in as a literal (see *Running a job*). Poll one job per
@@ -287,8 +288,8 @@ you wrote — is the one shown in the quote for a clip.
 ## Running a job
 
 Every recipe gives the model id, the endpoint and the request body. Each job
-goes through the same steps, one tool call each: build the body, submit, poll
-and download, write the sidecar.
+goes through the same steps, one tool call each: build the body, check it
+against the provider's schema, submit, poll and download, write the sidecar.
 
 **Name the job first, once.** Run `date +%s` and choose
 `NAME="{short-description}_{timestamp}"`, for example
@@ -297,6 +298,51 @@ description. Every block below and in the recipes starts with that line; paste
 the same literal into each one, since a fresh shell has forgotten it. All of
 the job's temporary files are `/tmp/cc-$NAME.*`, so two agents on one machine
 never read each other's body or result.
+
+**Check the body against the schema — free, before every paid submit.** Kie
+accepts a field it does not know, drops it and bills the run anyway: fal's
+`image_url` sent where Kie wants `first_frame_url` returns a paid clip without
+the picture. Both providers publish each model's input schema, and reading it
+costs nothing. Check the body you are about to send, not the recipe's example:
+
+```bash
+NAME="NAME"; P="kie"   # kie, or fal with EP set to the exact endpoint you will submit to
+EP=""
+B="/tmp/cc-$NAME.req.json"; SC="/tmp/cc-$NAME.schema.json"
+if [ "$P" = kie ]; then
+  curl -sS -H "Authorization: Bearer $KIE_API_KEY" "https://api.kie.ai/api/v1/models/$(jq -r .model "$B")/schema" -o "$SC"
+  jq --slurpfile b "$B" '.data.openapi as $r | {r: $r, b: $b[0].input,
+    s: (try $r.paths["/api/v1/jobs/createTask"].post.requestBody.content["application/json"].schema.properties.input catch null)}' "$SC" > "$SC.n"
+else
+  curl -sS -H "Authorization: Key $FAL_KEY" "https://api.fal.ai/v1/models?endpoint_id=$EP&expand=openapi-3.0" -o "$SC"
+  jq --slurpfile b "$B" '.models[0].openapi as $r | {r: $r, b: $b[0],
+    s: (try ($r.components.schemas | to_entries | map(select(.key | endswith("Input")))[0].value) catch null)}' "$SC" > "$SC.n"
+fi
+jq -r '.r as $r
+  | def res($x): if ($x | type) == "object" and $x["$ref"] then $r | getpath($x["$ref"] | ltrimstr("#/") | split("/")) else $x end;
+    def enums($p): res($p) as $q | ($q.enum // ([$q.anyOf[]? | res(.) | select(.type != "null")]
+      | if length > 0 and all(.enum) then map(.enum) | add else null end));
+  res(.s) as $s | .b as $in
+  | if $s == null or $s.properties == null then "NO SCHEMA: check the model id or endpoint before you submit"
+    else ([$in | to_entries[] | .key as $k | .value as $v | enums($s.properties[$k]) as $e
+        | if $s.properties[$k] == null then "STOP  unknown field: \($k)"
+          elif $e != null and ($v | type) != "array" and ($e | map(tostring) | index([$v | tostring]) | not) then "STOP  \($k)=\($v | tojson) not one of \($e | tojson)"
+          elif $e != null and ($v | type) != "array" and ($e | index([$v]) | not) then "WARN  \($k)=\($v | tojson): the schema lists \($e | tojson); send that type"
+          else empty end]
+      + [($s.required // [])[] | select($in[.] == null) | "WARN  required field missing: \(.)"])
+    | if length == 0 then "schema ok" else .[] end end' "$SC.n"
+```
+
+- **`STOP`** — a field the schema does not have, or a value outside its list.
+  Fix the body and run the check again; never submit past a `STOP`.
+- **`WARN`** — a required field is missing, or a value has the wrong type
+  (`5` where the schema lists `"5"`). Kie over-declares required fields: Grok
+  Video 1.5 lists `image_urls` although it also does text-to-video, and Kling
+  lists `multi_shots`. Send what the recipe says and go on.
+- **`NO SCHEMA`** — the id or endpoint is wrong, or the provider has not
+  synced it. Check the id against the recipe; fal's catalogue can also come
+  back empty in a quick series, so wait a few seconds and run it once more.
+  Kie answers `429` to more than one lookup per second.
 
 **Kie AI — submit:**
 
@@ -463,5 +509,6 @@ usually an empty balance, not a bad key. Check the balance before blaming auth.
 | 401, or Kie `200` with `401` in the body | Key missing or wrong. On Kie's balance check, a missing `Content-Type` header also does this. |
 | 402, 403 `TOP_UP`, or "insufficient credits" | Empty balance. Tell the user to top up at the provider. |
 | 422 "model … not supported" / `model not found` | Renamed id. See rule 6. |
+| Schema check prints `STOP` | The body has a field the model does not take, or a value it does not allow. Kie would bill the run and silently drop it. Fix the body before submitting. |
 | fal `COMPLETED` but the body has `detail` instead of `images` or `video` | The job failed on the caller's side, usually a reference fal could not download. Report the `detail` text. |
 | Kie `state: fail` | Read `failMsg` and tell the user. Try once more at most. |

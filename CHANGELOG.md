@@ -4,6 +4,22 @@ Changes to the skill, its recipes and its prices, newest first. Prices are in
 USD and come from real runs unless marked as listed. To get the latest, run
 `git -C ~/.contentcoach-skill pull`; the no-install route always reads `main`.
 
+## 2 Nov 2026
+
+- **The body is checked against the provider's schema before every paid
+  submit.** Kie accepts a field it does not know, drops it and bills the run
+  anyway, so a misnamed field (fal's `image_url` where Kie wants
+  `first_frame_url`) returns a paid result without the picture. A new step in
+  `SKILL.md`, *Running a job*, reads the model's published input schema from
+  Kie or fal — free — and compares the body actually being sent, field by
+  field, with plain `jq`. A field the schema lacks or a value outside its list
+  stops the job; a missing required field or a wrong type only warns, since
+  Kie over-declares required fields. The idea comes from the ContentCoach
+  app, which took it from OpenMontage's fal adapter.
+- **Every recipe body passed** against 17 endpoints except one: Kling 3.0 on
+  Kie sent `duration: 5`, a number, where the schema lists strings `"3"` to
+  `"15"`. The recipe now sends `"5"`.
+
 ## 15 Oct 2026
 
 - **Prices checked against both providers' catalogues and model pages.** Every
