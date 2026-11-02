@@ -10,6 +10,13 @@ USD and come from real runs unless marked as listed. To get the latest, run
   ids are no longer listed in fal's catalogue; the `/us/` text-, image- and
   reference-to-video ids are active with the same schema and price. Not yet
   run through the new path.
+- **Nano Banana 2 still runs.** Google's coverage said it would shut down on
+  29 Oct; on 2 Nov Kie showed a 100 % success rate and fal listed it as
+  active. It stays the default; the 2.1 recipe says to switch if it starts
+  failing.
+- **Grok Video at 1080p, listed:** 0.25 USD per second on fal, 1.25 for 5 s.
+  Kie's price text labels its third rate "720p" (8 credits, 0.04 USD per
+  second), so its 1080p price is not quoted until a run shows it.
 - **The body is checked against the provider's schema before every paid
   submit.** Kie accepts a field it does not know, drops it and bills the run
   anyway, so a misnamed field (fal's `image_url` where Kie wants

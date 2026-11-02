@@ -15,9 +15,8 @@ SKILL.md, *Running a job*.
 | Images | `image_urls[]`, up to 7 | `image_url` (first frame) or `reference_image_urls[]` (likeness, up to 7) |
 | Docs | https://kie.ai/model/grok-imagine-video-1-5-preview.md | https://fal.ai/models/xai/grok-imagine-video/v1.5/text-to-video |
 
-The defaults disagree, so **always send duration and resolution**. Both
-providers also list 1080p, but no run has priced it; quote it only after reading
-the provider's price page.
+The defaults disagree, so **always send duration and resolution**. 1080p is
+listed but not yet run on either provider; see the cost table.
 
 ## Cost
 
@@ -28,6 +27,7 @@ Measured 21 Aug 2026, one 5-second 480p clip from a picture on each route:
 |---|---|---|
 | 480p | 0.012 USD | 0.08 USD |
 | 720p | 0.0225 USD | 0.14 USD |
+| 1080p, listed | unclear, see below | 0.25 USD |
 
 5 s at 720p: 0.11 USD on Kie, 0.70 on fal. Also measured on Kie: 8 s and 10 s
 at 480p, 0.096 and 0.12 USD — the same 0.012 per second. Runs so far: Kie text-
@@ -35,6 +35,12 @@ and image-to-video, fal text-to-video; fal's image- and reference-to-video are
 unrun. fal adds 0.01 USD per image,
 including the required frame. The 720p rows are extrapolated from the published
 tables, which held exactly at 480p.
+
+**1080p (listed 2 Nov 2026, unrun):** fal 0.25 USD per second, 1.25 for 5 s.
+Kie's schema takes `1080p`, but its price text names three rates — 480p,
+720p and "8 credits per second for 720p (0.04 USD)" — so the third rate's
+label is a typo or a second 720p tier. Do not quote Kie 1080p from it; run
+once, read `creditsConsumed`, and fix this line.
 
 ## What an image means
 

@@ -7,9 +7,10 @@ cheapest Nano Banana there is: 0.02 USD at 1K**, half of Nano Banana 2 there.
 **Quality is not yet proven.** Google's own benchmarks put it above Nano Banana
 2; no independent comparison exists yet. Nano Banana 2 stays the default until
 the two have been compared side by side. Use 2.1 when the user asks for it, or
-for cheap drafts. Google's launch coverage says Nano Banana 2 shuts down on 29
-Oct 2026; Kie and fal resell Google's model, so expect theirs to stop too unless
-they say otherwise.
+for cheap drafts. Google's launch coverage said Nano Banana 2 would shut down
+on 29 Oct 2026, but on Kie and fal it still runs: on 2 Nov 2026 Kie's
+`/success-rate` showed 100 % and fal listed it as active. If a Nano Banana 2
+job starts failing with `model not found`, switch to 2.1 and say so.
 
 Send the body with the patterns in SKILL.md, *Running a job*.
 

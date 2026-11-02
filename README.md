@@ -2,11 +2,16 @@
 
 **Homepage, with examples: https://skill.contentcoach.se/**
 
-A skill that makes images and short videos with several models — Nano Banana 2
-and 2.1, GPT Image 2.5 and Grok Imagine for images; Kling 3.0, MiniMax H3, Grok Video,
-Seedance 2.0 Mini and Seedance 2.5 for video — straight from Cursor, Codex, Claude Code or any agent
-that can run `curl`. It calls the providers **Kie AI** and **fal.ai** directly
-with your own API keys. You pay them directly; nothing goes through anyone else.
+A lightweight skill specialised in one thing: making images and short videos
+from your AI agent. It is plain text — one `SKILL.md` and a recipe per model —
+run with `curl` and `jq`. No server, no package to install, no account
+anywhere but the provider's.
+
+It covers Nano Banana 2 and 2.1, GPT Image 2.5 and Grok Imagine for images, and
+Kling 3.0, MiniMax H3, Grok Video, Seedance 2.0 Mini and Seedance 2.5 for video,
+from Cursor, Codex, Claude Code or any agent that can run `curl`. It calls the
+providers **Kie AI** and **fal.ai** directly with your own API keys. You pay
+them directly; nothing goes through anyone else.
 
 **Instead of a generation app.** You don't need a subscription to Higgsfield,
 Runway or a similar app. The skill runs the same kind of models through your own
@@ -158,8 +163,11 @@ You pay Kie and fal at their own prices. A draft image is 0.01–0.08 USD; a
 five-second video clip is 0.06–2.37 USD depending on model and provider. **Video
 costs roughly ten times an image, so the skill quotes every clip and waits for
 your yes before it runs**, and it does the same before anything at 2K or 4K. The full
-table is in [`SKILL.md`](contentcoach/SKILL.md). The prices are measured from
-real runs; when one looks stale, the skill can look up the provider's current
+table is in [`SKILL.md`](contentcoach/SKILL.md). Most prices are measured from
+real runs, and the rest are marked as the provider's list price. Before anything
+paid is sent, the agent checks the request against the model's published
+schema, free, so a misspelt field cannot bill a run that ignored it. When a
+price looks stale, the skill can look up the provider's current
 list price and fields in Kie's and fal's free catalogues before it spends
 anything.
 
