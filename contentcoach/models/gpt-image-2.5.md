@@ -121,6 +121,23 @@ slowness is Kie's. Kie's price for 2K and 4K is from its pricing page, 27 Sep
 2026 (search the table for the model name; the page loads prices in the browser,
 so `curl` does not see them).
 
+## GPT Image 2.6 — tried, not used
+
+OpenAI's successor is on both providers (Kie `gpt-image-2-6/{flare,sunburst}-…`,
+fal `openai/gpt-image-2.6/{flare,sunburst}/…`), with new fields such as
+`mask_url`, `markup` and GIF or SVG output. Compared side by side on 10 Nov
+2026 — one edit with two references at 1024×1280, `quality: medium`:
+
+| Run | Cost (USD, actual) | Time |
+|---|---|---|
+| 2.5 Flare edit, fal | 0.0358 | 39 s |
+| 2.6 Flare edit, fal | 0.0619 | 18 s |
+| 2.6 Flare image-to-image, Kie | 0.0559 | 30 s |
+
+2.6 cost about 1.6–1.7 times as much and was faster on fal. **2.5 on fal was
+judged the best of the three, so 2.5 stays the model here** and 2.6 has no
+recipe. Use it only if the user names it, and quote it first.
+
 ## How to prompt it
 
 From 799 working GPT Image 2 prompts (a public CC0 collection), measured:

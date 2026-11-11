@@ -80,7 +80,7 @@ installed copy, fetch them from
 | Video — default | Kling 3.0 | `kling-3.md` |
 | Video — cheap with sound, keeps the subject from a start frame | Seedance 2.0 Mini | `seedance-2-mini.md` |
 | Video — cheap, dramatic motion, or needs a seed; always returns sound, with no switch on either route | MiniMax H3 | `minimax-h3.md` |
-| Video — cheapest of all on Kie, Grok's look, or a person from a photo | Grok Imagine Video 1.5 | `grok-imagine-video-1-5.md` |
+| Video — cheapest of all on Kie, Grok's look, a person from photos (fal), or from a first to a last picture (Kie) | Grok Imagine Video 1.5 | `grok-imagine-video-1-5.md` |
 | Video — hero shot, or longer than 15 s | Seedance 2.5 | `seedance-2.5.md` |
 
 **How to read a recipe.** "Confirmed" and "measured" lines come from real runs
@@ -485,9 +485,9 @@ is which. Check the provider's pricing page before relying on them.
 | Nano Banana 2.1, 1K · 2K · 4K | **0.02** · 0.03 · 0.045 | 0.08 at 1K |
 | GPT Image 2.5, 1K · 2K · 4K | 0.03 · 0.05 · 0.08 | **0.0136** at 1K · with a reference **0.021 · 0.028 · 0.039**, `medium` |
 | Grok Imagine 2.0, 1k | 0.02 | 0.04 `low` · 0.06 `medium` |
-| Kling 3.0, 5 s, no sound | 0.35 at 720p · 0.45 at 1080p | 0.56 at 1080p |
+| Kling 3.0, 5 s, no sound | 0.38 at 720p · 0.505 at 1080p (raised 10 Nov) | 0.56 at 1080p |
 | MiniMax H3, 5 s | **0.20 at 768P** · 0.33 at 2K | 0.25 at 480P · 0.30 at 768P |
-| Grok Video 1.5, 5 s at 480p | 0.06 | 0.41 · 1.25 at 1080p (listed) |
+| Grok Video 1.5, 5 s at 480p | 0.06 · 0.20 at 1080p (listed) | 0.41 · 1.25 at 1080p (listed) |
 | Seedance 2.0 Mini, 5 s, with sound | 0.10 at 480p · **0.21 at 720p** | — |
 | Seedance 2.5, 5 s | 0.70 at 480p · 1.58 at 720p | 0.70 at 480p · 2.37 at 720p (listed) |
 

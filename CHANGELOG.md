@@ -4,6 +4,35 @@ Changes to the skill, its recipes and its prices, newest first. Prices are in
 USD and come from real runs unless marked as listed. To get the latest, run
 `git -C ~/.contentcoach-skill pull`; the no-install route always reads `main`.
 
+## 11 Nov 2026
+
+- **Kling 3.0 on Kie costs more.** Kie raised it by about 8–12 % by 10 Nov
+  2026: 720p 0.0755 USD per second without sound and 0.1135 with, 1080p 0.101
+  and 0.151, 4K 0.3775 (listed, read 11 Nov). Five seconds at 720p is now 0.38
+  USD. Kie is still cheaper than fal at every tier. The recipe's duration row
+  now says string, as the body already sent.
+- **Kling 3.0 start frames go to Kie as JPG.** A 1080×1920 PNG failed with
+  `failCode 400` "omni input upload failed" (not billed); the same frame as
+  JPG ran, 10 s at 720p for 0.70 USD at the old price.
+- **Grok Video 1.5 on Kie gained fields:** `enable_audio` (sound off),
+  `1080p` at 0.04 USD per second (listed — Kie fixed the label that read
+  "720p"), and `first_frame_url`, `last_frame_url`, `loop_url` and
+  `keyframes`. First and last frame are measured: the clip opens on one and
+  lands on the other, in the pictures' own shape. **Kie bills an empty frame
+  URL as a text-to-video**, so the recipe checks both URLs before submitting.
+  `image_urls` on Kie did not keep a person from a selfie frame; for a person
+  who must survive, use Seedance 2.0 Mini or Kling 3.0. fal still always adds
+  sound and has no end frame.
+- **Seedance 2.0 Mini:** `first_frame_url` and `reference_image_urls` exclude
+  each other on Kie (422, not billed). A selfie clip is written as "The camera
+  itself is the phone; never show a phone in the frame" — describing the phone
+  made Seedance draw one.
+- **GPT Image 2.6 tried, not used.** One edit with two references: 2.6 cost
+  about 1.6–1.7 times 2.5 and was faster on fal, but 2.5 on fal was judged the
+  best, so 2.5 stays and 2.6 has no recipe.
+
+These came from runs by the ContentCoach app between 31 Oct and 11 Nov.
+
 ## 2 Nov 2026
 
 - **Seedance 2.5 on fal moved to `bytedance/seedance-2.5/us/…`.** The old

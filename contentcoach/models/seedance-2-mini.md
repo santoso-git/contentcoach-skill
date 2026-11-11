@@ -63,6 +63,10 @@ jq -n --arg p "PROMPT" --arg u "https://…start-frame.jpg" '{model:"bytedance/s
   images*).
 - Kie ignores fields it does not know, so fal's names (`image_url`,
   `end_image_url`) bill a clip that quietly dropped the picture.
+- **Frames and references exclude each other.** `first_frame_url` together
+  with `reference_image_urls` returns 422 "The reference image and the first
+  and last frames are mutually exclusive" (31 Oct 2026, not billed). Send one
+  or the other.
 
 **Text to video** — no picture, so a fixed ratio:
 
@@ -89,6 +93,10 @@ jq -n --arg p "PROMPT" '{model:"bytedance/seedance-2-mini", input:{
 - Likeness references are cited as `@Image1`, `@Image2` in the order sent,
   each with its role: "@Image1 for her face and red coat".
 - No quality filler (stunning, 8k, masterpiece).
+- **A selfie clip: the camera is the phone.** Write "The camera itself is the
+  phone; never show a phone in the frame." Never describe the phone ("the
+  phone slips from his hand") — Seedance then draws one in his hand (31 Oct
+  2026; 10 s at 720p from a start frame, 0.41 USD, measured twice).
 
 ## Several shots in one clip
 

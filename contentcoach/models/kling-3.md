@@ -11,7 +11,7 @@ SKILL.md, *Running a job*; poll every 10–15 s, a clip takes 1–5 minutes.
 |---|---|---|
 | Model id | `kling-3.0/video` — one id for text and image | `fal-ai/kling-video/v3/pro/text-to-video` · `…/v3/pro/image-to-video` |
 | Resolution | `mode`: `std` = 720p, `pro` = 1080p | 1080p only |
-| Duration | 3–15, **a number** | `"3"`–`"15"`, **a string** |
+| Duration | `"3"`–`"15"`, **a string** | `"3"`–`"15"`, **a string** |
 | Sound | `sound`, **default true** — always send it | `generate_audio`, **default true** — always send it |
 | Frames | `image_urls`: `[first]` or `[first, last]` | `start_image_url`, `end_image_url` |
 | Aspect | `16:9` `9:16` `1:1`; ignored when a frame is given | same; image-to-video has none |
@@ -24,26 +24,34 @@ SKILL.md, *Running a job*; poll every 10–15 s, a clip takes 1–5 minutes.
 **Run on fal, 27 Sep 2026:** text-to-video, 3 s at 1080p without sound →
 1920×1080, 24 fps, no audio track. fal's queue reported no billable units for it,
 so its price is still the published one. fal's image-to-video is unrun.
+**Measured on Kie, 31 Oct 2026:** `std`, 10 s, no sound, one start frame,
+140 credits = 0.70 USD, exactly the quote at the old 0.07 per second.
 
 ## Cost — quote one of these
 
+**Kie raised Kling 3.0 by about 8–12 % by 10 Nov 2026.** The rates below are
+Kie's new list (read 11 Nov 2026), not yet run; the measured clips above were
+billed at the old 0.07 per second.
+
 | Per second | Sound off | Sound on |
 |---|---|---|
-| Kie 720p (`std`) | 0.07 USD | 0.10 USD |
-| Kie 1080p (`pro`) | 0.09 USD | 0.135 USD |
+| Kie 720p (`std`) | 0.0755 USD | 0.1135 USD |
+| Kie 1080p (`pro`) | 0.101 USD | 0.151 USD |
 | fal 1080p | 0.112 USD | 0.168 USD |
 
 | 5 s clip | Sound off | Sound on |
 |---|---|---|
-| Kie 720p | 0.35 USD | 0.50 USD |
-| Kie 1080p | 0.45 USD | 0.675 USD |
+| Kie 720p | 0.38 USD | 0.57 USD |
+| Kie 1080p | 0.505 USD | 0.755 USD |
 | fal 1080p | 0.56 USD | 0.84 USD |
+
+Kie is still cheaper at every tier.
 
 ## Kie AI
 
 ```bash
 NAME="NAME"   # the job name, see SKILL.md, Running a job
-jq -n --arg p "PROMPT" --arg img "https://…first-frame.png" '{model:"kling-3.0/video",input:{
+jq -n --arg p "PROMPT" --arg img "https://…first-frame.jpg" '{model:"kling-3.0/video",input:{
   prompt:$p, duration:"5", mode:"std", sound:false, multi_shots:false, image_urls:[$img]}}' > "/tmp/cc-$NAME.req.json"
 ```
 
@@ -53,6 +61,11 @@ jq -n --arg p "PROMPT" --arg img "https://…first-frame.png" '{model:"kling-3.0
 - Without a frame, send `aspect_ratio` and drop `image_urls`.
 - A last frame alone is not possible: index 0 is always the first frame.
 - Frames must be public URLs — upload local files first (SKILL.md).
+- **Send the start frame as JPG on Kie.** A 1080×1920 PNG failed on 31 Oct
+  2026 with `failCode 400` "omni input upload failed" (no charge); the same
+  frame saved as JPG ran. Convert first: `sips -s format jpeg frame.png --out
+  "/tmp/cc-$NAME.frame.jpg"` on macOS, `magick frame.png -quality 92
+  "/tmp/cc-$NAME.frame.jpg"` on Linux.
 
 ## fal.ai
 
