@@ -1,6 +1,6 @@
-# ContentCoach — an image and video skill for your AI agent
+# ContentCoach 🎬 — an image and video skill for your AI agent
 
-**Homepage, with examples: https://skill.contentcoach.se/**
+[Homepage with examples](https://skill.contentcoach.se/) · [Give it to your agent](#-give-this-to-your-agent) · [Install](#-3-or-install-it-as-a-skill) · [Prices](#-what-it-costs) · [Changelog](CHANGELOG.md) · [Issues](https://github.com/santoso-git/contentcoach-skill/issues)
 
 A lightweight skill specialised in one thing: making images and short videos
 from your AI agent. It is plain text — one `SKILL.md` and a recipe per model —
@@ -21,14 +21,14 @@ Kie AI or fal.ai account, and you pay per image or clip at the provider's price.
 other skills. A design skill builds a landing page, and this one makes the hero
 image, the product shots and a short clip for it, saved straight into the project.
 
-## Short version: give this to your agent
+## 🚀 Give this to your agent
 
 > Install the ContentCoach skill from https://github.com/santoso-git/contentcoach-skill: clone it to ~/.contentcoach-skill and link its contentcoach folder into your skills folder. Then check whether KIE_API_KEY or FAL_KEY is set in my shell, without showing the value. If neither is, tell me where to create one and how to add it to my shell profile. Never ask me to paste a key into the chat.
 
 Paste it into Claude Code, Cursor or Codex. The sections below do the same by
 hand.
 
-## For agents: read the docs before you run
+## 🤖 For agents: read the docs before you run
 
 Everything learned from real runs is written down here, so an agent that reads
 the files knows what we know. Read them; don't call a provider from memory.
@@ -48,7 +48,7 @@ the files knows what we know. Read them; don't call a provider from memory.
 - **When a run disagrees with the docs, the run wins.** Tell the user, and if
   you can, open an issue or a pull request so the recipe can be fixed.
 
-## Things to ask for
+## 💬 Things to ask for
 
 - *Make a 16:9 blog header about remote work: a small desk in a Nordic cabin,
   rain outside.*
@@ -81,7 +81,7 @@ its own in any agent:
 
 For example: `/contentcoach prompt a 15-second ad for a wooden chair`.
 
-## 1. Get a key
+## 🔑 1. Get a key
 
 One is enough. With both, the skill falls back from one to the other.
 
@@ -105,7 +105,7 @@ The skill runs `curl` and `jq`. Both come with most systems; if `jq` is
 missing, install it (`brew install jq` on a Mac, your package manager on
 Linux).
 
-## 2. Use it — no install needed
+## ▶️ 2. Use it — no install needed
 
 Tell your agent:
 
@@ -118,7 +118,7 @@ rest. The image lands in `generations/` in the project you have open, with a
 
 In Codex, allow network access for the `curl` calls.
 
-## 3. Or install it as a skill
+## 📦 3. Or install it as a skill
 
 Installed, the agent knows the tool exists and you never need the link again —
 *"make a blog header about remote work"* is enough.
@@ -157,7 +157,7 @@ new models get a recipe of their own as they come out. Pull to get them. The
 no-install route always reads the latest version.
 What changed, and when, is in [CHANGELOG.md](CHANGELOG.md).
 
-## What it costs
+## 💰 What it costs
 
 You pay Kie and fal at their own prices. A draft image is 0.01–0.08 USD; a
 five-second video clip is 0.06–2.37 USD depending on model and provider. **Video
@@ -171,7 +171,7 @@ price looks stale, the skill can look up the provider's current
 list price and fields in Kie's and fal's free catalogues before it spends
 anything.
 
-## Tips
+## 💡 Tips
 
 - **Logos, products, faces:** give the agent the file and ask it to use it as a
   reference. A logo described in words comes out wrong every time.
@@ -191,7 +191,7 @@ anything.
   prettier picture; for a simple scene the difference is small. Try
   `prompt <what you want>` to see it before paying.
 
-## What goes where
+## 🔒 What goes where
 
 Your prompt and any reference images go straight from your machine to Kie AI or
 fal.ai, under your own account. For Kie, reference images are uploaded to Kie's
@@ -200,7 +200,16 @@ Results are downloaded into your project straight away, because the providers'
 links expire within hours. Your keys stay in your shell; the skill never writes
 them anywhere.
 
-## License
+## 🤝 Help improve it
+
+Models and prices change every month, and the recipes are only as good as the
+last real run. If a run disagrees with the docs — a renamed id, a rejected
+field, a different bill — [open an issue](https://github.com/santoso-git/contentcoach-skill/issues)
+with the model, the provider, the request body (without your key) and what
+came back, or send a pull request that fixes the recipe. Note in it whether
+the figure is measured from a run or read from the provider's list.
+
+## 📄 License
 
 The skill, its recipes and the homepage code are released under the
 [MIT License](LICENSE).
@@ -211,7 +220,7 @@ Not covered by that license:
   use them to present your own fork as this project.
 - **The fonts** in `docs/fonts/` — Sofia Sans, Sofia Sans Extra Condensed and
   JetBrains Mono, under the [SIL Open Font License 1.1](docs/fonts/OFL.txt).
-- **The example images and clip** in `docs/examples/`. They were generated with
+- **The example images and clips** in `docs/examples/`. They were generated with
   the AI models named in their `.json` sidecars and are shown as examples of
   output; reuse them at your own discretion.
 
